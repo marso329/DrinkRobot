@@ -1,0 +1,8 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>images/metal.jpg</file>
+    <file>images/start.png</file>
+    <file>fonts/pixeled.ttf</file>
+    <file>fonts/lcd.ttf</file>
+</qresource>
+</RCC>

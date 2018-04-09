@@ -1,4 +1,4 @@
-QT += core gui widgets sql
+QT += core gui widgets sql multimedia
 
 TARGET = template
 TEMPLATE = app
@@ -15,15 +15,20 @@ DESTDIR = ../bin
 INCLUDEDIR=../include
 SRCDIR=../src
 UI_DIR = ../include
+RESOURCEDIR=../resources
 
 SOURCES +=	$$SRCDIR/main.cpp \
-		$$SRCDIR/mainwindow.cpp 
-			
+		$$SRCDIR/mainwindow.cpp \
+		$$SRCDIR/startscreen.cpp	
 
-HEADERS +=	$$INCLUDEDIR/mainwindow.h
+HEADERS +=	$$INCLUDEDIR/mainwindow.h \
+			$$INCLUDEDIR/startscreen.h
 
 INCLUDEPATH +=./$${INCLUDEDIR}
 
 LIBS += 
 
 FORMS += ../ui/mainwindow.ui
+
+
+RESOURCES = $$RESOURCEDIR/resources.qrc

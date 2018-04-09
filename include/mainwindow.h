@@ -14,6 +14,7 @@ protected:
 Q_SIGNALS:
 
 public Q_SLOTS:
+void startScreenDone();
 
 };
 #endif
