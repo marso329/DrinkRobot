@@ -20,15 +20,17 @@ RESOURCEDIR=../resources
 SOURCES +=	$$SRCDIR/main.cpp \
 		$$SRCDIR/mainwindow.cpp \
 		$$SRCDIR/statemachine.cpp \
+		$$SRCDIR/database.cpp \
 		$$SRCDIR/startscreen.cpp	
 
 HEADERS +=	$$INCLUDEDIR/mainwindow.h \
 			$$INCLUDEDIR/statemachine.h \
+			$$INCLUDEDIR/database.h \
 			$$INCLUDEDIR/startscreen.h
 
 INCLUDEPATH +=./$${INCLUDEDIR}
 
-LIBS += 
+LIBS += -lboost_serialization -lboost_thread -lboost_system  -lboost_filesystem
 
 FORMS += ../ui/mainwindow.ui
 
