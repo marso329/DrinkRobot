@@ -19,9 +19,11 @@ RESOURCEDIR=../resources
 
 SOURCES +=	$$SRCDIR/main.cpp \
 		$$SRCDIR/mainwindow.cpp \
+		$$SRCDIR/statemachine.cpp \
 		$$SRCDIR/startscreen.cpp	
 
 HEADERS +=	$$INCLUDEDIR/mainwindow.h \
+			$$INCLUDEDIR/statemachine.h \
 			$$INCLUDEDIR/startscreen.h
 
 INCLUDEPATH +=./$${INCLUDEDIR}

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -146,10 +146,10 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainWindow", "Make a drink", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Scoreboard", Q_NULLPTR));
-        pushButton_3->setText(QApplication::translate("MainWindow", "Admin", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        pushButton->setText(QApplication::translate("MainWindow", "Make a drink", 0));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Scoreboard", 0));
+        pushButton_3->setText(QApplication::translate("MainWindow", "Admin", 0));
     } // retranslateUi
 
 };
