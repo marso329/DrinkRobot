@@ -147,6 +147,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		template.pro ../include/mainwindow.h \
 		../include/statemachine.h \
 		../include/database.h \
+		../include/tuple.h \
+		../include/type_traits.h \
 		../include/startscreen.h ../src/main.cpp \
 		../src/mainwindow.cpp \
 		../src/statemachine.cpp \
@@ -347,7 +349,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../resources/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../include/mainwindow.h ../include/statemachine.h ../include/database.h ../include/startscreen.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../include/mainwindow.h ../include/statemachine.h ../include/database.h ../include/tuple.h ../include/type_traits.h ../include/startscreen.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../src/main.cpp ../src/mainwindow.cpp ../src/statemachine.cpp ../src/database.cpp ../src/startscreen.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../ui/mainwindow.ui $(DISTDIR)/
 
@@ -396,6 +398,8 @@ compiler_moc_header_clean:
 		../include/startscreen.h \
 		../include/statemachine.h \
 		../include/database.h \
+		../include/tuple.h \
+		../include/type_traits.h \
 		../include/mainwindow.h \
 		../build/moc_predefs.h \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
@@ -406,7 +410,9 @@ compiler_moc_header_clean:
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) --include ../build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/martin/repositories/DrinkRobot/pro -I/home/martin/repositories/DrinkRobot/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../include/statemachine.h -o ../build/moc_statemachine.cpp
 
-../build/moc_database.cpp: ../include/database.h \
+../build/moc_database.cpp: ../include/tuple.h \
+		../include/type_traits.h \
+		../include/database.h \
 		../build/moc_predefs.h \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) --include ../build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/martin/repositories/DrinkRobot/pro -I/home/martin/repositories/DrinkRobot/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../include/database.h -o ../build/moc_database.cpp
@@ -440,20 +446,26 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		../include/ui_mainwindow.h \
 		../include/startscreen.h \
 		../include/statemachine.h \
-		../include/database.h
+		../include/database.h \
+		../include/tuple.h \
+		../include/type_traits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/main.o ../src/main.cpp
 
 ../build/mainwindow.o: ../src/mainwindow.cpp ../include/mainwindow.h \
 		../include/ui_mainwindow.h \
 		../include/startscreen.h \
 		../include/statemachine.h \
-		../include/database.h
+		../include/database.h \
+		../include/tuple.h \
+		../include/type_traits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/mainwindow.o ../src/mainwindow.cpp
 
 ../build/statemachine.o: ../src/statemachine.cpp ../include/statemachine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/statemachine.o ../src/statemachine.cpp
 
-../build/database.o: ../src/database.cpp ../include/database.h
+../build/database.o: ../src/database.cpp ../include/database.h \
+		../include/tuple.h \
+		../include/type_traits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/database.o ../src/database.cpp
 
 ../build/startscreen.o: ../src/startscreen.cpp ../include/startscreen.h

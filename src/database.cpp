@@ -9,24 +9,24 @@
 
 DataBase::DataBase(QObject* _parent) :
 		QObject(_parent) {
-	if (boost::filesystem::exists("users.db")) {
-		std::fstream  afile;
-		afile.open("users.db", std::ios::in );
+	if (boost::filesystem::exists("database.db")) {
+		std::fstream afile;
+		afile.open("database.db", std::ios::in);
 		boost::archive::text_iarchive iarch(afile);
-		iarch >> users;
+		iarch >> *this;
 		afile.close();
 	}
-	for(auto it=users.begin();it!=users.end();it++){
-		std::cout<<it->first<<std::endl;
+	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
+	std::cout<<it->first<<std::endl;
 	}
 }
 
 DataBase::~DataBase() {
 	{
 		std::ofstream outfile;
-		outfile.open("users.db", std::ios::out | std::ios::trunc );
+		outfile.open("database.db", std::ios::out | std::ios::trunc);
 		boost::archive::text_oarchive ar(outfile);
-		ar << users;
+		ar << *this;
 		outfile.close();
 	}
 
@@ -41,5 +41,16 @@ std::vector<std::string> DataBase::getUsers() {
 		users_return.push_back(it->first);
 	}
 	return users_return;
+}
+
+std::vector<std::tuple<std::string,int,int>> DataBase::getIngrediants(){
+	std::vector<std::tuple<std::string,int,int>> ingrediants_return;
+	for(auto it=ingredients.begin();it!=ingredients.end();it++){
+		ingrediants_return.push_back(std::tuple<std::string,int,int>(it->second.name,it->second.alcohol,it->second.price));
+	}
+	return ingrediants_return;
+}
+void DataBase::addIngrediant(std::string& name, int strength, int price){
+	ingredients[name] = Ingredient(name, strength, price);
 }
 

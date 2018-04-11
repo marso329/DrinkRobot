@@ -9,7 +9,7 @@
 #define INCLUDE_STATEMACHINE_H_
 #include <QObject>
 
-enum Widgets { frontpage, mainpage, adminpage,loginpage,drinkpage,adduserpage };
+enum Widgets { frontpage, mainpage, adminpage,loginpage,drinkpage,adduserpage,addingrediantpage };
 
 class StateMachine: public QObject {
 	Q_OBJECT
@@ -19,16 +19,25 @@ public:
 protected:
 private:
 	Q_SIGNALS:
+
+	//buttons
 	void changeWidget(int);
+	void set_add_ingrediant();
 	public Q_SLOTS:
 	void make_a_drink();
 	void admin();
+	void admin_back();
 	void scoreboard();
 	void startpage_pressed();
 	void login_ok();
 	void login_cancel();
 	void drink_back();
 	void add_user();
+	void add_user_ok();
+	void add_ingrediant();
+	void add_ingrediant_back();
+
+	//update something
 };
 
 #endif /* INCLUDE_STATEMACHINE_H_ */

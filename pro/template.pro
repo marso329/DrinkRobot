@@ -26,6 +26,8 @@ SOURCES +=	$$SRCDIR/main.cpp \
 HEADERS +=	$$INCLUDEDIR/mainwindow.h \
 			$$INCLUDEDIR/statemachine.h \
 			$$INCLUDEDIR/database.h \
+			$$INCLUDEDIR/tuple.h \
+			$$INCLUDEDIR/type_traits.h \
 			$$INCLUDEDIR/startscreen.h
 
 INCLUDEPATH +=./$${INCLUDEDIR}

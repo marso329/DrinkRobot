@@ -4,6 +4,7 @@
 #include "ui_mainwindow.h"
 #include "statemachine.h"
 #include "database.h"
+#include <QStandardItemModel>
 
 class MainWindow: public QMainWindow {
 	Q_OBJECT
@@ -14,11 +15,14 @@ private:
 	Ui::MainWindow* ui;
 	StateMachine* statemachine;
 	DataBase* database;
+	QStandardItemModel *ingrediants_model;
 protected:
 Q_SIGNALS:
 
 public Q_SLOTS:
 	void add_user();
+	void set_add_ingrediant();
+	void add_ingrediant_ok();
 
 };
 #endif

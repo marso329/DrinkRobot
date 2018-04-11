@@ -19,11 +19,14 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "startscreen.h"
@@ -87,6 +90,37 @@ public:
     QLineEdit *pass_input;
     QRadioButton *admin_input;
     QPushButton *adduser_ok;
+    QWidget *addingredientpage;
+    QGridLayout *gridLayout_15;
+    QFrame *frame_6;
+    QGridLayout *gridLayout_14;
+    QPushButton *addingrediant_ok;
+    QHBoxLayout *horizontalLayout_13;
+    QHBoxLayout *horizontalLayout_4;
+    QFrame *frame_7;
+    QListView *listView_3;
+    QWidget *layoutWidget_4;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_11;
+    QLineEdit *lineEdit_5;
+    QWidget *layoutWidget_5;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *label_12;
+    QSpinBox *spinBox_5;
+    QWidget *layoutWidget_6;
+    QHBoxLayout *horizontalLayout_12;
+    QLabel *label_13;
+    QSpinBox *spinBox_6;
+    QLabel *label_5;
+    QLineEdit *addingrediant_name;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_6;
+    QSpinBox *addingrediant_strength;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_7;
+    QSpinBox *addingrediant_price;
+    QTableView *addingrediant_list;
+    QPushButton *addingrediant_back;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -363,6 +397,152 @@ public:
         gridLayout_13->addWidget(frame_5, 1, 0, 1, 1);
 
         stackedWidget->addWidget(adduserpage);
+        addingredientpage = new QWidget();
+        addingredientpage->setObjectName(QStringLiteral("addingredientpage"));
+        gridLayout_15 = new QGridLayout(addingredientpage);
+        gridLayout_15->setObjectName(QStringLiteral("gridLayout_15"));
+        frame_6 = new QFrame(addingredientpage);
+        frame_6->setObjectName(QStringLiteral("frame_6"));
+        frame_6->setMaximumSize(QSize(500, 16777215));
+        frame_6->setFrameShape(QFrame::StyledPanel);
+        frame_6->setFrameShadow(QFrame::Raised);
+        gridLayout_14 = new QGridLayout(frame_6);
+        gridLayout_14->setObjectName(QStringLiteral("gridLayout_14"));
+        addingrediant_ok = new QPushButton(frame_6);
+        addingrediant_ok->setObjectName(QStringLiteral("addingrediant_ok"));
+
+        gridLayout_14->addWidget(addingrediant_ok, 1, 0, 1, 1);
+
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        frame_7 = new QFrame(frame_6);
+        frame_7->setObjectName(QStringLiteral("frame_7"));
+        frame_7->setFrameShape(QFrame::StyledPanel);
+        frame_7->setFrameShadow(QFrame::Raised);
+        listView_3 = new QListView(frame_7);
+        listView_3->setObjectName(QStringLiteral("listView_3"));
+        listView_3->setGeometry(QRect(190, 160, 256, 192));
+        listView_3->setGridSize(QSize(0, 0));
+        listView_3->setModelColumn(0);
+        layoutWidget_4 = new QWidget(frame_7);
+        layoutWidget_4->setObjectName(QStringLiteral("layoutWidget_4"));
+        layoutWidget_4->setGeometry(QRect(50, 40, 194, 27));
+        horizontalLayout_10 = new QHBoxLayout(layoutWidget_4);
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
+        label_11 = new QLabel(layoutWidget_4);
+        label_11->setObjectName(QStringLiteral("label_11"));
+
+        horizontalLayout_10->addWidget(label_11);
+
+        lineEdit_5 = new QLineEdit(layoutWidget_4);
+        lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
+
+        horizontalLayout_10->addWidget(lineEdit_5);
+
+        layoutWidget_5 = new QWidget(frame_7);
+        layoutWidget_5->setObjectName(QStringLiteral("layoutWidget_5"));
+        layoutWidget_5->setGeometry(QRect(70, 80, 139, 27));
+        horizontalLayout_11 = new QHBoxLayout(layoutWidget_5);
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
+        horizontalLayout_11->setContentsMargins(0, 0, 0, 0);
+        label_12 = new QLabel(layoutWidget_5);
+        label_12->setObjectName(QStringLiteral("label_12"));
+
+        horizontalLayout_11->addWidget(label_12);
+
+        spinBox_5 = new QSpinBox(layoutWidget_5);
+        spinBox_5->setObjectName(QStringLiteral("spinBox_5"));
+
+        horizontalLayout_11->addWidget(spinBox_5);
+
+        layoutWidget_6 = new QWidget(frame_7);
+        layoutWidget_6->setObjectName(QStringLiteral("layoutWidget_6"));
+        layoutWidget_6->setGeometry(QRect(70, 120, 123, 27));
+        horizontalLayout_12 = new QHBoxLayout(layoutWidget_6);
+        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
+        horizontalLayout_12->setContentsMargins(0, 0, 0, 0);
+        label_13 = new QLabel(layoutWidget_6);
+        label_13->setObjectName(QStringLiteral("label_13"));
+
+        horizontalLayout_12->addWidget(label_13);
+
+        spinBox_6 = new QSpinBox(layoutWidget_6);
+        spinBox_6->setObjectName(QStringLiteral("spinBox_6"));
+
+        horizontalLayout_12->addWidget(spinBox_6);
+
+
+        horizontalLayout_4->addWidget(frame_7);
+
+        label_5 = new QLabel(frame_6);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        horizontalLayout_4->addWidget(label_5);
+
+        addingrediant_name = new QLineEdit(frame_6);
+        addingrediant_name->setObjectName(QStringLiteral("addingrediant_name"));
+
+        horizontalLayout_4->addWidget(addingrediant_name);
+
+
+        horizontalLayout_13->addLayout(horizontalLayout_4);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        label_6 = new QLabel(frame_6);
+        label_6->setObjectName(QStringLiteral("label_6"));
+
+        horizontalLayout_5->addWidget(label_6);
+
+        addingrediant_strength = new QSpinBox(frame_6);
+        addingrediant_strength->setObjectName(QStringLiteral("addingrediant_strength"));
+
+        horizontalLayout_5->addWidget(addingrediant_strength);
+
+
+        horizontalLayout_13->addLayout(horizontalLayout_5);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        label_7 = new QLabel(frame_6);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        horizontalLayout_6->addWidget(label_7);
+
+        addingrediant_price = new QSpinBox(frame_6);
+        addingrediant_price->setObjectName(QStringLiteral("addingrediant_price"));
+        addingrediant_price->setMinimumSize(QSize(0, 0));
+        addingrediant_price->setMaximum(500);
+
+        horizontalLayout_6->addWidget(addingrediant_price);
+
+
+        horizontalLayout_13->addLayout(horizontalLayout_6);
+
+
+        gridLayout_14->addLayout(horizontalLayout_13, 0, 0, 1, 1);
+
+        addingrediant_list = new QTableView(frame_6);
+        addingrediant_list->setObjectName(QStringLiteral("addingrediant_list"));
+        addingrediant_list->setFrameShape(QFrame::NoFrame);
+        addingrediant_list->setFrameShadow(QFrame::Plain);
+        addingrediant_list->setLineWidth(0);
+        addingrediant_list->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+        gridLayout_14->addWidget(addingrediant_list, 2, 0, 1, 1);
+
+        addingrediant_back = new QPushButton(frame_6);
+        addingrediant_back->setObjectName(QStringLiteral("addingrediant_back"));
+
+        gridLayout_14->addWidget(addingrediant_back, 3, 0, 1, 1);
+
+
+        gridLayout_15->addWidget(frame_6, 0, 0, 1, 1);
+
+        stackedWidget->addWidget(addingredientpage);
 
         gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
 
@@ -370,7 +550,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -396,6 +576,15 @@ public:
         label_4->setText(QApplication::translate("MainWindow", "Pass:", Q_NULLPTR));
         admin_input->setText(QApplication::translate("MainWindow", "Admin", Q_NULLPTR));
         adduser_ok->setText(QApplication::translate("MainWindow", "ok", Q_NULLPTR));
+        addingrediant_ok->setText(QApplication::translate("MainWindow", "OK", Q_NULLPTR));
+        label_11->setText(QApplication::translate("MainWindow", "Name:", Q_NULLPTR));
+        label_12->setText(QApplication::translate("MainWindow", "Strength[%]:", Q_NULLPTR));
+        label_13->setText(QApplication::translate("MainWindow", "Price[kr/l]:", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainWindow", "Name:", Q_NULLPTR));
+        label_6->setText(QApplication::translate("MainWindow", "Strength[%]:", Q_NULLPTR));
+        label_7->setText(QApplication::translate("MainWindow", "Price[kr/l]:", Q_NULLPTR));
+        addingrediant_price->setPrefix(QString());
+        addingrediant_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
     } // retranslateUi
 
 };

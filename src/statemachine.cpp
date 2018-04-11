@@ -20,8 +20,12 @@ void StateMachine::make_a_drink(){
 }
 void StateMachine::admin(){
 	Q_EMIT changeWidget(Widgets::adminpage);
-
 }
+
+void StateMachine::admin_back(){
+	Q_EMIT changeWidget(Widgets::mainpage);
+}
+
 void StateMachine::scoreboard(){
 
 }
@@ -41,5 +45,18 @@ void StateMachine::drink_back(){
 
 void StateMachine::add_user(){
 	Q_EMIT changeWidget(Widgets::adduserpage);
+}
+
+void StateMachine::add_user_ok(){
+	Q_EMIT changeWidget(Widgets::adminpage);
+}
+
+void StateMachine::add_ingrediant(){
+	Q_EMIT set_add_ingrediant();
+	Q_EMIT changeWidget(Widgets::addingrediantpage);
+}
+
+void StateMachine::add_ingrediant_back(){
+	Q_EMIT changeWidget(Widgets::adminpage);
 }
 
