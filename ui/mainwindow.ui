@@ -694,7 +694,7 @@
              </item>
             </layout>
            </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <widget class="QTableView" name="addingrediant_list">
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
@@ -705,15 +705,19 @@
              <property name="lineWidth">
               <number>0</number>
              </property>
-             <property name="editTriggers">
-              <set>QAbstractItemView::NoEditTriggers</set>
-             </property>
             </widget>
            </item>
-           <item row="3" column="0">
+           <item row="4" column="0">
             <widget class="QPushButton" name="addingrediant_back">
              <property name="text">
               <string>Back</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="addingrediant_remove">
+             <property name="text">
+              <string>Remove selected</string>
              </property>
             </widget>
            </item>

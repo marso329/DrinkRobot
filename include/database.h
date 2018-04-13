@@ -104,6 +104,8 @@ public:
 	std::vector<std::string> getUsers();
 	std::vector<std::tuple<std::string, int, int>> getIngrediants();
 	void addIngrediant(std::string& name, int strength, int price);
+	void changeIngrediant(std::string& name, int strength, int price);
+	void removeIngrediant(std::string& name);
 protected:
 private:
 private:

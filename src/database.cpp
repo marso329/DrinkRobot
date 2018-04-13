@@ -16,9 +16,6 @@ DataBase::DataBase(QObject* _parent) :
 		iarch >> *this;
 		afile.close();
 	}
-	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
-	std::cout<<it->first<<std::endl;
-	}
 }
 
 DataBase::~DataBase() {
@@ -43,14 +40,31 @@ std::vector<std::string> DataBase::getUsers() {
 	return users_return;
 }
 
-std::vector<std::tuple<std::string,int,int>> DataBase::getIngrediants(){
-	std::vector<std::tuple<std::string,int,int>> ingrediants_return;
-	for(auto it=ingredients.begin();it!=ingredients.end();it++){
-		ingrediants_return.push_back(std::tuple<std::string,int,int>(it->second.name,it->second.alcohol,it->second.price));
+std::vector<std::tuple<std::string, int, int>> DataBase::getIngrediants() {
+	std::vector<std::tuple<std::string, int, int>> ingrediants_return;
+	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
+		ingrediants_return.push_back(
+				std::tuple<std::string, int, int>(it->second.name,
+						it->second.alcohol, it->second.price));
 	}
 	return ingrediants_return;
 }
-void DataBase::addIngrediant(std::string& name, int strength, int price){
+void DataBase::addIngrediant(std::string& name, int strength, int price) {
 	ingredients[name] = Ingredient(name, strength, price);
+}
+void DataBase::changeIngrediant(std::string& name, int strength, int price) {
+	if (price != -1) {
+		ingredients[name].price = price;
+	}
+	if (strength != -1) {
+
+		ingredients[name].alcohol = strength;
+	}
+}
+
+void DataBase::removeIngrediant(std::string& name){
+	if(ingredients.find(name)!=ingredients.end()){
+		ingredients.erase(name);
+	}
 }
 

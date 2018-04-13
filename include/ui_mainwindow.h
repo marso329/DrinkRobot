@@ -121,6 +121,7 @@ public:
     QSpinBox *addingrediant_price;
     QTableView *addingrediant_list;
     QPushButton *addingrediant_back;
+    QPushButton *addingrediant_remove;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -530,14 +531,18 @@ public:
         addingrediant_list->setFrameShape(QFrame::NoFrame);
         addingrediant_list->setFrameShadow(QFrame::Plain);
         addingrediant_list->setLineWidth(0);
-        addingrediant_list->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-        gridLayout_14->addWidget(addingrediant_list, 2, 0, 1, 1);
+        gridLayout_14->addWidget(addingrediant_list, 3, 0, 1, 1);
 
         addingrediant_back = new QPushButton(frame_6);
         addingrediant_back->setObjectName(QStringLiteral("addingrediant_back"));
 
-        gridLayout_14->addWidget(addingrediant_back, 3, 0, 1, 1);
+        gridLayout_14->addWidget(addingrediant_back, 4, 0, 1, 1);
+
+        addingrediant_remove = new QPushButton(frame_6);
+        addingrediant_remove->setObjectName(QStringLiteral("addingrediant_remove"));
+
+        gridLayout_14->addWidget(addingrediant_remove, 2, 0, 1, 1);
 
 
         gridLayout_15->addWidget(frame_6, 0, 0, 1, 1);
@@ -585,6 +590,7 @@ public:
         label_7->setText(QApplication::translate("MainWindow", "Price[kr/l]:", Q_NULLPTR));
         addingrediant_price->setPrefix(QString());
         addingrediant_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
+        addingrediant_remove->setText(QApplication::translate("MainWindow", "Remove selected", Q_NULLPTR));
     } // retranslateUi
 
 };
