@@ -6,7 +6,7 @@ TEMPLATE = app
 CONFIG += qt
 CONFIG += no_keywords
 
-QMAKE_CXXFLAGS += -g -std=c++11 -pedantic -Werror -Wall
+QMAKE_CXXFLAGS += -g -std=c++17 -pedantic -Werror -Wall
 
 OBJ_DIR = ../build
 OBJECTS_DIR = ../build

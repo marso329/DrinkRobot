@@ -98,5 +98,7 @@ public Q_SLOTS:
 	void add_ingrediant_ok();
 	void ingrediantDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles );
 	void remove_ingrediant();
+	void set_levels();
+	void set_levels_done();
 };
 #endif

@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_NO_KEYWORDS -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -O2 -D_REENTRANT -Wall -W -fPIC $(DEFINES)
-CXXFLAGS      = -m64 -pipe -g -std=c++11 -pedantic -Werror -Wall -O2 -D_REENTRANT -Wall -W -fPIC $(DEFINES)
+CXXFLAGS      = -m64 -pipe -g -std=c++17 -pedantic -Werror -Wall -O2 -D_REENTRANT -Wall -W -fPIC $(DEFINES)
 INCPATH       = -I. -I../include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtMultimedia -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I../build -isystem /usr/include/libdrm -I../include -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -389,7 +389,7 @@ compiler_moc_predefs_make_all: ../build/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) ../build/moc_predefs.h
 ../build/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -m64 -pipe -g -std=c++11 -pedantic -Werror -Wall -O2 -dM -E -o ../build/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -m64 -pipe -g -std=c++17 -pedantic -Werror -Wall -O2 -dM -E -o ../build/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: ../build/moc_mainwindow.cpp ../build/moc_statemachine.cpp ../build/moc_database.cpp ../build/moc_startscreen.cpp
 compiler_moc_header_clean:

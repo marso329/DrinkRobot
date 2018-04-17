@@ -9,7 +9,7 @@
 #define INCLUDE_STATEMACHINE_H_
 #include <QObject>
 
-enum Widgets { frontpage, mainpage, adminpage,loginpage,drinkpage,adduserpage,addingrediantpage };
+enum Widgets { frontpage, mainpage, adminpage,loginpage,drinkpage,adduserpage,addingrediantpage,setlevelspage };
 
 class StateMachine: public QObject {
 	Q_OBJECT
@@ -36,6 +36,8 @@ private:
 	void add_user_ok();
 	void add_ingrediant();
 	void add_ingrediant_back();
+	void set_levels_back();
+	void set_levels();
 
 	//update something
 };

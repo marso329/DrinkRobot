@@ -60,6 +60,9 @@ MainWindow::MainWindow(QWidget* parent) :
 			SLOT(add_ingrediant()));
 	connect(ui->addingrediant_back, SIGNAL(clicked()), this->statemachine,
 			SLOT(add_ingrediant_back()));
+	connect(ui->set_levels, SIGNAL(clicked()), this, SLOT(set_levels()));
+	connect(ui->setlevel_back, SIGNAL(clicked()), this,
+			SLOT(set_levels_done()));
 
 	//connected to this class
 
@@ -88,7 +91,8 @@ void MainWindow::set_add_ingrediant() {
 	int counter = 0;
 	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
 		std::tuple<std::string, int, int> ingrediant = (*it);
-		QString name = QString::fromStdString(std::get<0>(ingrediant));
+		QString name = QString::fromStdString(
+				std::get<std::string>(ingrediant));
 		int strength = std::get<1>(ingrediant);
 		int price = std::get<2>(ingrediant);
 		QString strength_str = QString::fromStdString(std::to_string(strength));
@@ -146,18 +150,189 @@ void MainWindow::ingrediantDataChanged(const QModelIndex &topLeft,
 }
 
 void MainWindow::remove_ingrediant() {
-	QItemSelectionModel *select=ui->addingrediant_list->selectionModel();
+	QItemSelectionModel *select = ui->addingrediant_list->selectionModel();
 	if (select->hasSelection()) {
-		QModelIndexList list= select->selectedRows();
-		for (auto it =list.begin();it!=list.end();it++){
-			int row=it->row();
-			QModelIndex index = ingrediants_model->index(row, 0,
-					QModelIndex());
-			std::string name = ingrediants_model->data(index).toString().toStdString();
+		QModelIndexList list = select->selectedRows();
+		for (auto it = list.begin(); it != list.end(); it++) {
+			int row = it->row();
+			QModelIndex index = ingrediants_model->index(row, 0, QModelIndex());
+			std::string name =
+					ingrediants_model->data(index).toString().toStdString();
 			database->removeIngrediant(name);
-			ingrediants_model->removeRow(row,QModelIndex());
+			ingrediants_model->removeRow(row, QModelIndex());
 
 		}
 	}
+}
+
+void MainWindow::set_levels() {
+	std::vector<std::string> ingredients = database->getIngrediantsName();
+	QStandardItemModel* pModel = new QStandardItemModel();
+	QStandardItem* dummy = new QStandardItem("Choose ingredient");
+	dummy->setSelectable(false);
+
+	pModel->appendRow(dummy);
+
+	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
+		pModel->appendRow(new QStandardItem(QString::fromStdString(*it)));
+	}
+	database->print();
+	std::tuple<std::string, int> temp = database->getLevel(0);
+	std::cout<<"settings indicator 0 to "<<std::get<int>(temp)<<" ingred "<<std::get<std::string>(temp)<<std::endl;
+	ui->setlevelindicator0->setValue(std::get<int>(temp));
+	ui->setlevellist0->setModel(pModel);
+	ui->setlevellist0->setEditable(false);
+	ui->setlevellist0->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(1);
+	ui->setlevelindicator1->setValue(std::get<int>(temp));
+	ui->setlevellist1->setModel(pModel);
+	ui->setlevellist1->setEditable(false);
+	ui->setlevellist1->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(2);
+	ui->setlevelindicator2->setValue(std::get<int>(temp));
+	ui->setlevellist2->setModel(pModel);
+	ui->setlevellist2->setEditable(false);
+	ui->setlevellist2->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(3);
+	ui->setlevelindicator3->setValue(std::get<int>(temp));
+	ui->setlevellist3->setModel(pModel);
+	ui->setlevellist3->setEditable(false);
+	ui->setlevellist3->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(4);
+	ui->setlevelindicator4->setValue(std::get<int>(temp));
+	ui->setlevellist4->setModel(pModel);
+	ui->setlevellist4->setEditable(false);
+	ui->setlevellist4->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(5);
+	ui->setlevelindicator5->setValue(std::get<int>(temp));
+	ui->setlevellist5->setModel(pModel);
+	ui->setlevellist5->setEditable(false);
+	ui->setlevellist5->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(6);
+	ui->setlevelindicator6->setValue(std::get<int>(temp));
+	ui->setlevellist6->setModel(pModel);
+	ui->setlevellist6->setEditable(false);
+	ui->setlevellist6->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(7);
+	ui->setlevelindicator7->setValue(std::get<int>(temp));
+	ui->setlevellist7->setModel(pModel);
+	ui->setlevellist7->setEditable(false);
+	ui->setlevellist7->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(8);
+	ui->setlevelindicator8->setValue(std::get<int>(temp));
+	ui->setlevellist8->setModel(pModel);
+	ui->setlevellist8->setEditable(false);
+	ui->setlevellist8->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	temp = database->getLevel(9);
+	ui->setlevelindicator9->setValue(std::get<int>(temp));
+	ui->setlevellist9->setModel(pModel);
+	ui->setlevellist9->setEditable(false);
+	ui->setlevellist9->setCurrentText(
+			QString::fromStdString(std::get<std::string>(temp)));
+
+	statemachine->set_levels();
+}
+
+void MainWindow::set_levels_done() {
+	std::cout<<"current index "<<ui->setlevellist0->currentIndex()<<std::endl;
+	if (ui->setlevellist0->currentIndex() >0) {
+		database->setlevel(0, ui->setlevellist0->currentText().toStdString(),
+				ui->setlevelindicator0->value());
+	}
+	else{
+		database->setlevel(0, "",0);
+	}
+
+	if (ui->setlevellist1->currentIndex() >0) {
+		database->setlevel(1, ui->setlevellist1->currentText().toStdString(),
+				ui->setlevelindicator1->value());
+	}
+	else{
+		database->setlevel(1, "",0);
+	}
+
+	if (ui->setlevellist2->currentIndex() >0) {
+		database->setlevel(2, ui->setlevellist2->currentText().toStdString(),
+				ui->setlevelindicator2->value());
+	}
+	else{
+		database->setlevel(2, "",0);
+	}
+
+	if (ui->setlevellist3->currentIndex() >0) {
+		database->setlevel(3, ui->setlevellist3->currentText().toStdString(),
+				ui->setlevelindicator3->value());
+	}
+	else{
+		database->setlevel(3, "",0);
+	}
+
+	if (ui->setlevellist4->currentIndex() >0) {
+		database->setlevel(4, ui->setlevellist4->currentText().toStdString(),
+				ui->setlevelindicator4->value());
+	}
+	else{
+		database->setlevel(4, "",0);
+	}
+
+	if (ui->setlevellist5->currentIndex() >0) {
+		database->setlevel(5, ui->setlevellist5->currentText().toStdString(),
+				ui->setlevelindicator5->value());
+	}
+	else{
+		database->setlevel(5, "",0);
+	}
+
+	if (ui->setlevellist6->currentIndex() >0) {
+		database->setlevel(6, ui->setlevellist6->currentText().toStdString(),
+				ui->setlevelindicator6->value());
+	}
+	else{
+		database->setlevel(6, "",0);
+	}
+
+	if (ui->setlevellist7->currentIndex() >0) {
+		database->setlevel(7, ui->setlevellist7->currentText().toStdString(),
+				ui->setlevelindicator7->value());
+	}
+	else{
+		database->setlevel(7, "",0);
+	}
+
+	if (ui->setlevellist8->currentIndex() >0) {
+		database->setlevel(8, ui->setlevellist8->currentText().toStdString(),
+				ui->setlevelindicator8->value());
+	}
+	else{
+		database->setlevel(8, "",0);
+	}
+
+	if (ui->setlevellist9->currentIndex() >0) {
+		database->setlevel(9, ui->setlevellist9->currentText().toStdString(),
+				ui->setlevelindicator9->value());
+	}
+	else{
+		database->setlevel(9, "",0);
+	}
+
+	statemachine->set_levels_back();
 }
 

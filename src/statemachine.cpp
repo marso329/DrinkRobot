@@ -59,4 +59,11 @@ void StateMachine::add_ingrediant(){
 void StateMachine::add_ingrediant_back(){
 	Q_EMIT changeWidget(Widgets::adminpage);
 }
+void StateMachine::set_levels_back(){
+	Q_EMIT changeWidget(Widgets::adminpage);
+}
+
+void StateMachine::set_levels(){
+	Q_EMIT changeWidget(Widgets::setlevelspage);
+}
 

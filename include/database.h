@@ -77,13 +77,16 @@ private:
 struct Drink {
 public:
 	Drink(std::string name,
-			std::vector<std::tuple<std::string, float>> ingredients) :
+			std::vector<std::tuple<std::string, int>> ingredients) :
 			name(name), ingredients(ingredients) {
 	}
 	Drink() {
 		name = "";
 	}
+	std::string name;
+	std::vector<std::tuple<std::string, int>> ingredients;
 private:
+
 	friend class boost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int version) {
@@ -91,8 +94,27 @@ private:
 		ar & name;
 		ar & ingredients;
 	}
-	std::string name;
-	std::vector<std::tuple<std::string, float>> ingredients;
+};
+
+struct Level {
+public:
+	Level(std::string ingredient, int vol) :
+			ingredient(ingredient),vol(vol) {
+	}
+	Level() {
+		ingredient = "";
+		vol=0;
+	}
+	std::string ingredient;
+	int vol;
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version) {
+		(void) version;
+		ar & ingredient;
+		ar & vol;
+	}
 };
 
 class DataBase: public QObject {
@@ -103,9 +125,13 @@ public:
 	void addUser(std::string& name, std::string& pass, bool admin);
 	std::vector<std::string> getUsers();
 	std::vector<std::tuple<std::string, int, int>> getIngrediants();
+	std::vector<std::string> getIngrediantsName();
 	void addIngrediant(std::string& name, int strength, int price);
 	void changeIngrediant(std::string& name, int strength, int price);
 	void removeIngrediant(std::string& name);
+	std::tuple<std::string, int> getLevel(int);
+	void setlevel(int tank,std::string ingredient,int vol);
+	void print();
 protected:
 private:
 private:
@@ -116,11 +142,13 @@ private:
 		ar & users;
 		ar & ingredients;
 		ar & drinks;
+		ar & levels;
 	}
 
 	std::map<std::string, User> users;
 	std::map<std::string, Ingredient> ingredients;
 	std::map<std::string, Drink> drinks;
+	std::map<int, Level> levels;
 	std::hash<std::string> hash;
 
 };
