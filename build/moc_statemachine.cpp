@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_StateMachine_t {
     QByteArrayData data[18];
-    char stringdata0[221];
+    char stringdata0[219];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,25 +37,25 @@ QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 18), // "set_add_ingrediant"
 QT_MOC_LITERAL(4, 46, 12), // "make_a_drink"
 QT_MOC_LITERAL(5, 59, 5), // "admin"
-QT_MOC_LITERAL(6, 65, 10), // "admin_back"
-QT_MOC_LITERAL(7, 76, 10), // "scoreboard"
-QT_MOC_LITERAL(8, 87, 17), // "startpage_pressed"
-QT_MOC_LITERAL(9, 105, 8), // "login_ok"
-QT_MOC_LITERAL(10, 114, 12), // "login_cancel"
-QT_MOC_LITERAL(11, 127, 10), // "drink_back"
-QT_MOC_LITERAL(12, 138, 8), // "add_user"
-QT_MOC_LITERAL(13, 147, 11), // "add_user_ok"
-QT_MOC_LITERAL(14, 159, 14), // "add_ingrediant"
-QT_MOC_LITERAL(15, 174, 19), // "add_ingrediant_back"
-QT_MOC_LITERAL(16, 194, 15), // "set_levels_back"
-QT_MOC_LITERAL(17, 210, 10) // "set_levels"
+QT_MOC_LITERAL(6, 65, 5), // "login"
+QT_MOC_LITERAL(7, 71, 10), // "admin_back"
+QT_MOC_LITERAL(8, 82, 10), // "scoreboard"
+QT_MOC_LITERAL(9, 93, 17), // "startpage_pressed"
+QT_MOC_LITERAL(10, 111, 10), // "drink_back"
+QT_MOC_LITERAL(11, 122, 8), // "add_user"
+QT_MOC_LITERAL(12, 131, 11), // "add_user_ok"
+QT_MOC_LITERAL(13, 143, 13), // "add_user_back"
+QT_MOC_LITERAL(14, 157, 14), // "add_ingrediant"
+QT_MOC_LITERAL(15, 172, 19), // "add_ingrediant_back"
+QT_MOC_LITERAL(16, 192, 15), // "set_levels_back"
+QT_MOC_LITERAL(17, 208, 10) // "set_levels"
 
     },
     "StateMachine\0changeWidget\0\0"
     "set_add_ingrediant\0make_a_drink\0admin\0"
-    "admin_back\0scoreboard\0startpage_pressed\0"
-    "login_ok\0login_cancel\0drink_back\0"
-    "add_user\0add_user_ok\0add_ingrediant\0"
+    "login\0admin_back\0scoreboard\0"
+    "startpage_pressed\0drink_back\0add_user\0"
+    "add_user_ok\0add_user_back\0add_ingrediant\0"
     "add_ingrediant_back\0set_levels_back\0"
     "set_levels"
 };
@@ -127,14 +127,14 @@ void StateMachine::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 1: _t->set_add_ingrediant(); break;
         case 2: _t->make_a_drink(); break;
         case 3: _t->admin(); break;
-        case 4: _t->admin_back(); break;
-        case 5: _t->scoreboard(); break;
-        case 6: _t->startpage_pressed(); break;
-        case 7: _t->login_ok(); break;
-        case 8: _t->login_cancel(); break;
-        case 9: _t->drink_back(); break;
-        case 10: _t->add_user(); break;
-        case 11: _t->add_user_ok(); break;
+        case 4: _t->login(); break;
+        case 5: _t->admin_back(); break;
+        case 6: _t->scoreboard(); break;
+        case 7: _t->startpage_pressed(); break;
+        case 8: _t->drink_back(); break;
+        case 9: _t->add_user(); break;
+        case 10: _t->add_user_ok(); break;
+        case 11: _t->add_user_back(); break;
         case 12: _t->add_ingrediant(); break;
         case 13: _t->add_ingrediant_back(); break;
         case 14: _t->set_levels_back(); break;

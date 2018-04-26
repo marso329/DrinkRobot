@@ -66,16 +66,7 @@ public:
     QPushButton *admin_back;
     QWidget *loginpage;
     QGridLayout *gridLayout_9;
-    QFrame *frame_3;
-    QGridLayout *gridLayout_8;
-    QHBoxLayout *horizontalLayout;
-    QLabel *label;
-    QLineEdit *lineEdit;
-    QHBoxLayout *horizontalLayout_2;
-    QLabel *label_2;
-    QLineEdit *lineEdit_2;
-    QPushButton *login_cancel;
-    QPushButton *login_ok;
+    QFrame *login_frame;
     QWidget *drinkpage;
     QGridLayout *gridLayout_11;
     QFrame *frame_4;
@@ -92,7 +83,10 @@ public:
     QLabel *label_4;
     QLineEdit *pass_input;
     QRadioButton *admin_input;
+    QTableView *adduser_list;
     QPushButton *adduser_ok;
+    QPushButton *adduser_remove;
+    QPushButton *adduser_back;
     QWidget *addingredientpage;
     QGridLayout *gridLayout_15;
     QFrame *frame_6;
@@ -419,56 +413,20 @@ public:
         loginpage->setObjectName(QStringLiteral("loginpage"));
         gridLayout_9 = new QGridLayout(loginpage);
         gridLayout_9->setObjectName(QStringLiteral("gridLayout_9"));
-        frame_3 = new QFrame(loginpage);
-        frame_3->setObjectName(QStringLiteral("frame_3"));
-        frame_3->setMinimumSize(QSize(0, 0));
-        frame_3->setMaximumSize(QSize(200, 200));
-        frame_3->setFrameShape(QFrame::StyledPanel);
-        frame_3->setFrameShadow(QFrame::Raised);
-        gridLayout_8 = new QGridLayout(frame_3);
-        gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        label = new QLabel(frame_3);
-        label->setObjectName(QStringLiteral("label"));
+        login_frame = new QFrame(loginpage);
+        login_frame->setObjectName(QStringLiteral("login_frame"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(login_frame->sizePolicy().hasHeightForWidth());
+        login_frame->setSizePolicy(sizePolicy);
+        login_frame->setMinimumSize(QSize(0, 0));
+        login_frame->setMaximumSize(QSize(3000, 3000));
+        login_frame->setFrameShape(QFrame::NoFrame);
+        login_frame->setFrameShadow(QFrame::Plain);
+        login_frame->setLineWidth(0);
 
-        horizontalLayout->addWidget(label);
-
-        lineEdit = new QLineEdit(frame_3);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-
-        horizontalLayout->addWidget(lineEdit);
-
-
-        gridLayout_8->addLayout(horizontalLayout, 0, 0, 1, 2);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        label_2 = new QLabel(frame_3);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        horizontalLayout_2->addWidget(label_2);
-
-        lineEdit_2 = new QLineEdit(frame_3);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-
-        horizontalLayout_2->addWidget(lineEdit_2);
-
-
-        gridLayout_8->addLayout(horizontalLayout_2, 1, 0, 1, 2);
-
-        login_cancel = new QPushButton(frame_3);
-        login_cancel->setObjectName(QStringLiteral("login_cancel"));
-
-        gridLayout_8->addWidget(login_cancel, 2, 0, 1, 1);
-
-        login_ok = new QPushButton(frame_3);
-        login_ok->setObjectName(QStringLiteral("login_ok"));
-
-        gridLayout_8->addWidget(login_ok, 2, 1, 1, 1);
-
-
-        gridLayout_9->addWidget(frame_3, 0, 0, 1, 1);
+        gridLayout_9->addWidget(login_frame, 0, 0, 1, 1);
 
         stackedWidget->addWidget(loginpage);
         drinkpage = new QWidget();
@@ -525,6 +483,7 @@ public:
 
         pass_input = new QLineEdit(frame_5);
         pass_input->setObjectName(QStringLiteral("pass_input"));
+        pass_input->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_3->addWidget(pass_input);
 
@@ -533,16 +492,31 @@ public:
 
         horizontalLayout_3->addWidget(admin_input);
 
-        adduser_ok = new QPushButton(frame_5);
-        adduser_ok->setObjectName(QStringLiteral("adduser_ok"));
-
-        horizontalLayout_3->addWidget(adduser_ok);
-
 
         verticalLayout->addLayout(horizontalLayout_3);
 
 
         gridLayout_12->addLayout(verticalLayout, 0, 0, 1, 1);
+
+        adduser_list = new QTableView(frame_5);
+        adduser_list->setObjectName(QStringLiteral("adduser_list"));
+
+        gridLayout_12->addWidget(adduser_list, 3, 0, 1, 1);
+
+        adduser_ok = new QPushButton(frame_5);
+        adduser_ok->setObjectName(QStringLiteral("adduser_ok"));
+
+        gridLayout_12->addWidget(adduser_ok, 1, 0, 1, 1);
+
+        adduser_remove = new QPushButton(frame_5);
+        adduser_remove->setObjectName(QStringLiteral("adduser_remove"));
+
+        gridLayout_12->addWidget(adduser_remove, 2, 0, 1, 1);
+
+        adduser_back = new QPushButton(frame_5);
+        adduser_back->setObjectName(QStringLiteral("adduser_back"));
+
+        gridLayout_12->addWidget(adduser_back, 4, 0, 1, 1);
 
 
         gridLayout_13->addWidget(frame_5, 1, 0, 1, 1);
@@ -1557,7 +1531,7 @@ public:
         QObject::connect(setlevelindicator9, SIGNAL(valueChanged(int)), progressBar_10, SLOT(setValue(int)));
         QObject::connect(setlevelindicator0, SIGNAL(valueChanged(int)), progressBar, SLOT(setValue(int)));
 
-        stackedWidget->setCurrentIndex(7);
+        stackedWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1574,15 +1548,13 @@ public:
         add_drink->setText(QApplication::translate("MainWindow", "Add drink", Q_NULLPTR));
         set_levels->setText(QApplication::translate("MainWindow", "Set levels and ingredients", Q_NULLPTR));
         admin_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "Username:", Q_NULLPTR));
-        label_2->setText(QApplication::translate("MainWindow", "Password:", Q_NULLPTR));
-        login_cancel->setText(QApplication::translate("MainWindow", "cancel", Q_NULLPTR));
-        login_ok->setText(QApplication::translate("MainWindow", "ok", Q_NULLPTR));
         drink_back->setText(QApplication::translate("MainWindow", "back", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "Name:", Q_NULLPTR));
         label_4->setText(QApplication::translate("MainWindow", "Pass:", Q_NULLPTR));
         admin_input->setText(QApplication::translate("MainWindow", "Admin", Q_NULLPTR));
         adduser_ok->setText(QApplication::translate("MainWindow", "ok", Q_NULLPTR));
+        adduser_remove->setText(QApplication::translate("MainWindow", "Remove selected", Q_NULLPTR));
+        adduser_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
         addingrediant_ok->setText(QApplication::translate("MainWindow", "OK", Q_NULLPTR));
         label_11->setText(QApplication::translate("MainWindow", "Name:", Q_NULLPTR));
         label_12->setText(QApplication::translate("MainWindow", "Strength[%]:", Q_NULLPTR));

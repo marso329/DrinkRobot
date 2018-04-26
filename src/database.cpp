@@ -29,13 +29,36 @@ DataBase::~DataBase() {
 
 }
 
-void DataBase::addUser(std::string& name, std::string& pass, bool admin) {
-	users[name] = User(name, hash(pass), admin);
+bool DataBase::isAdmin(std::string& name){
+	if (users.find(name) != users.end()) {
+		return users[name].admin;
+	}
+	return false;
 }
-std::vector<std::string> DataBase::getUsers() {
-	std::vector<std::string> users_return;
+
+void DataBase::addUser(std::string& name, std::string& pass, bool admin) {
+	if (users.find(name) == users.end()) {
+		users[name] = User(name, hash(pass), admin);
+	}
+}
+
+bool DataBase::checkUser(std::string& name, std::string& pass){
+	if (users.find(name) != users.end()) {
+		return users[name].pass==hash(pass);
+	}
+	return false;
+}
+
+void DataBase::changeAdmin(std::string& name,bool admin){
+	if (users.find(name) != users.end()) {
+		users[name].admin=admin;
+	}
+}
+std::vector<std::tuple<std::string, bool>> DataBase::getUsers() {
+	std::vector<std::tuple<std::string, bool>> users_return;
 	for (auto it = users.begin(); it != users.end(); it++) {
-		users_return.push_back(it->first);
+		users_return.push_back(
+				std::tuple<std::string, bool>(it->first, it->second.admin));
 	}
 	return users_return;
 }
@@ -71,67 +94,72 @@ void DataBase::changeIngrediant(std::string& name, int strength, int price) {
 	}
 }
 
-void DataBase::removeIngrediant(std::string& name){
-	if(ingredients.find(name)!=ingredients.end()){
+void DataBase::removeUser(std::string& name) {
+	if (users.find(name) != users.end()) {
+		users.erase(name);
+	}
+}
+
+void DataBase::removeIngrediant(std::string& name) {
+	if (ingredients.find(name) != ingredients.end()) {
 		ingredients.erase(name);
 	}
-	for(auto it =levels.begin();it!=levels.end();){
-		if(it->second.ingredient==name){
-			it=levels.erase(it);
-		}
-		else{
+	for (auto it = levels.begin(); it != levels.end();) {
+		if (it->second.ingredient == name) {
+			it = levels.erase(it);
+		} else {
 			it++;
 		}
 	}
 
-	for(auto it=drinks.begin();it!=drinks.end();){
-		bool remove=false;
-		for(auto it1=it->second.ingredients.begin();it1!=it->second.ingredients.end();it++){
-			if(std::get<std::string>(*it1)==name){
-				remove=true;
+	for (auto it = drinks.begin(); it != drinks.end();) {
+		bool remove = false;
+		for (auto it1 = it->second.ingredients.begin();
+				it1 != it->second.ingredients.end(); it++) {
+			if (std::get<std::string>(*it1) == name) {
+				remove = true;
 			}
 		}
-		if(remove){
-			it=drinks.erase(it);
-		}
-		else{
+		if (remove) {
+			it = drinks.erase(it);
+		} else {
 			it++;
 		}
 	}
 
 }
 
-std::tuple<std::string, int> DataBase::getLevel(int tank){
-	if(levels.find(tank)!=levels.end()){
-		Level level=levels[tank];
-		return std::tuple<std::string, int>(level.ingredient,level.vol);
-	}
-	else{
-		return std::tuple<std::string, int>("",0);
-	}
-}
-void DataBase::setlevel(int tank,std::string ingredient,int vol){
-	if(levels.find(tank)!=levels.end()){
-		Level level=levels[tank];
-		level.ingredient=ingredient;
-		level.vol=vol;
-		levels[tank]=level;
-	}
-	else{
-		levels[tank]=Level(ingredient,vol);
+std::tuple<std::string, int> DataBase::getLevel(int tank) {
+	if (levels.find(tank) != levels.end()) {
+		Level level = levels[tank];
+		return std::tuple<std::string, int>(level.ingredient, level.vol);
+	} else {
+		return std::tuple<std::string, int>("", 0);
 	}
 }
-void DataBase::print(){
-	std::cout<<"Ingredients:"<<std::endl;
-	for (auto it=ingredients.begin();it!=ingredients.end();it++){
-		std::cout<<"Name: "<<it->second.name<<" strength: "<<it->second.alcohol<<" price "<<it->second.price<<std::endl;
+void DataBase::setlevel(int tank, std::string ingredient, int vol) {
+	if (levels.find(tank) != levels.end()) {
+		Level level = levels[tank];
+		level.ingredient = ingredient;
+		level.vol = vol;
+		levels[tank] = level;
+	} else {
+		levels[tank] = Level(ingredient, vol);
 	}
-	std::cout<<"Levels:"<<std::endl;
-	for(auto it=levels.begin();it!=levels.end();it++){
-		std::cout<<"Tank: "<<it->first<<" Ingredient: "<<it->second.ingredient<<" Vol: "<<it->second.vol<<std::endl;
+}
+void DataBase::print() {
+	std::cout << "Ingredients:" << std::endl;
+	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
+		std::cout << "Name: " << it->second.name << " strength: "
+				<< it->second.alcohol << " price " << it->second.price
+				<< std::endl;
+	}
+	std::cout << "Levels:" << std::endl;
+	for (auto it = levels.begin(); it != levels.end(); it++) {
+		std::cout << "Tank: " << it->first << " Ingredient: "
+				<< it->second.ingredient << " Vol: " << it->second.vol
+				<< std::endl;
 	}
 
 }
-
-
 

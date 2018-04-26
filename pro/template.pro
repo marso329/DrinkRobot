@@ -1,10 +1,16 @@
-QT += core gui widgets sql multimedia
+QT += core gui widgets sql multimedia qml quick
 
 TARGET = template
 TEMPLATE = app
 
 CONFIG += qt
 CONFIG += no_keywords
+CONFIG += disable-desktop
+static {
+    QT += svg
+    QTPLUGIN += qtvirtualkeyboardplugin
+}
+
 
 QMAKE_CXXFLAGS += -g -std=c++17 -pedantic -Werror -Wall
 
@@ -34,7 +40,8 @@ INCLUDEPATH +=./$${INCLUDEDIR}
 
 LIBS += -lboost_serialization -lboost_thread -lboost_system  -lboost_filesystem
 
-FORMS += ../ui/mainwindow.ui
+FORMS += ../ui/mainwindow.ui \
+		../ui/password.ui
 
 
 RESOURCES = $$RESOURCEDIR/resources.qrc

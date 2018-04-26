@@ -32,6 +32,11 @@ public:
 		vol = 0.0;
 		cost = 0.0;
 	}
+	std::string name;
+	unsigned long pass;
+	bool admin;
+	float vol;
+	float cost;
 private:
 	friend class boost::serialization::access;
 	template<class Archive>
@@ -43,11 +48,6 @@ private:
 		ar & vol;
 		ar & cost;
 	}
-	std::string name;
-	unsigned long pass;
-	bool admin;
-	float vol;
-	float cost;
 };
 
 struct Ingredient {
@@ -123,7 +123,11 @@ public:
 	DataBase(QObject* _parent = NULL);
 	~DataBase();
 	void addUser(std::string& name, std::string& pass, bool admin);
-	std::vector<std::string> getUsers();
+	bool checkUser(std::string& name, std::string& pass);
+	void removeUser(std::string& name);
+	bool isAdmin(std::string& name);
+	void changeAdmin(std::string& name,bool);
+	std::vector<std::tuple<std::string,bool>> getUsers();
 	std::vector<std::tuple<std::string, int, int>> getIngrediants();
 	std::vector<std::string> getIngrediantsName();
 	void addIngrediant(std::string& name, int strength, int price);

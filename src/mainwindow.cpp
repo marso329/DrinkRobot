@@ -4,14 +4,22 @@ MainWindow::MainWindow(QWidget* parent) :
 		QMainWindow(parent), ui(new Ui::MainWindow), statemachine(
 				new StateMachine()) {
 	ui->setupUi(this);
+	//QGridLayout* layout = new QGridLayout(ui->login_frame);
 	database = new DataBase();
+	next_stage = NextStage::none;
 	ingrediants_model = new QStandardItemModel(0, 3, this);
 	ingrediants_model->setHorizontalHeaderItem(0,
-			new QStandardItem(QString("Ingrediant")));
+			new QStandardItem(QString("Name")));
 	ingrediants_model->setHorizontalHeaderItem(1,
 			new QStandardItem(QString("Strength[%]")));
 	ingrediants_model->setHorizontalHeaderItem(2,
 			new QStandardItem(QString("Price[kr/l]")));
+
+	user_model = new QStandardItemModel(0, 2, this);
+	user_model->setHorizontalHeaderItem(0, new QStandardItem(QString("Name")));
+	user_model->setHorizontalHeaderItem(1, new QStandardItem(QString("Admin")));
+	ui->adduser_list->setModel(user_model);
+
 	//make sure you can edit the drink name
 	ui->addingrediant_list->setModel(ingrediants_model);
 	ui->addingrediant_list->setItemDelegateForColumn(0,
@@ -36,26 +44,37 @@ MainWindow::MainWindow(QWidget* parent) :
 			this,
 			SLOT(
 					ingrediantDataChanged(const QModelIndex &, const QModelIndex &, const QVector<int> & )));
+
+	connect(user_model,
+			SIGNAL(
+					dataChanged(const QModelIndex &, const QModelIndex &, const QVector<int>&)),
+			this,
+			SLOT(
+					userDataChanged(const QModelIndex &, const QModelIndex &, const QVector<int> & )));
+
 	connect(ui->addingrediant_remove, SIGNAL(clicked()), this,
 			SLOT(remove_ingrediant()));
 
 	//connected to statemachine
 	connect(ui->graphicsView, SIGNAL(clicked()), this->statemachine,
 			SLOT(startpage_pressed()));
-	connect(ui->make_a_drink, SIGNAL(clicked()), this->statemachine,
-			SLOT(make_a_drink()));
-	connect(ui->admin, SIGNAL(clicked()), this->statemachine, SLOT(admin()));
+	connect(ui->make_a_drink, SIGNAL(clicked()), this, SLOT(make_drink()));
+	connect(ui->admin, SIGNAL(clicked()), this, SLOT(admin()));
 	connect(ui->admin_back, SIGNAL(clicked()), this->statemachine,
 			SLOT(admin_back()));
-	connect(ui->login_cancel, SIGNAL(clicked()), this->statemachine,
-			SLOT(login_cancel()));
-	connect(ui->login_ok, SIGNAL(clicked()), this->statemachine,
-			SLOT(login_ok()));
+	//connect(ui->login_cancel, SIGNAL(clicked()), this->statemachine,
+	//		SLOT(login_cancel()));
+	//connect(ui->login_ok, SIGNAL(clicked()), this->statemachine,
+	//		SLOT(login_ok()));
 	connect(ui->drink_back, SIGNAL(clicked()), this->statemachine,
 			SLOT(drink_back()));
-	connect(ui->add_user, SIGNAL(clicked()), this->statemachine,
-			SLOT(add_user()));
+
+	connect(ui->add_user, SIGNAL(clicked()), this, SLOT(set_add_user()));
 	connect(ui->adduser_ok, SIGNAL(clicked()), this, SLOT(add_user()));
+	connect(ui->adduser_back, SIGNAL(clicked()), this->statemachine,
+			SLOT(add_user_back()));
+	connect(ui->adduser_remove, SIGNAL(clicked()), this, SLOT(remove_user()));
+
 	connect(ui->add_ingredient, SIGNAL(clicked()), this->statemachine,
 			SLOT(add_ingrediant()));
 	connect(ui->addingrediant_back, SIGNAL(clicked()), this->statemachine,
@@ -69,16 +88,91 @@ MainWindow::MainWindow(QWidget* parent) :
 }
 void MainWindow::add_user() {
 	std::string name = ui->name_input->text().toStdString();
+	ui->name_input->clear();
 	std::string pass = ui->pass_input->text().toStdString();
+	ui->pass_input->clear();
 	bool admin = ui->admin_input->isChecked();
 	database->addUser(name, pass, admin);
-	statemachine->add_user_ok();
+	this->set_add_user();
 
 }
 
 MainWindow::~MainWindow() {
 	delete database;
 	delete statemachine;
+
+}
+
+void MainWindow::setup_login() {
+	QLayoutItem* item;
+	if (ui->login_frame->layout() != NULL) {
+		while ((item = ui->login_frame->layout()->takeAt(0)) != NULL) {
+			delete item->widget();
+			delete item;
+		}
+		delete ui->login_frame->layout();
+	}
+	//ui->loginpage->la
+	QGridLayout* layout = new QGridLayout(ui->login_frame);
+	std::vector<std::tuple<std::string,bool>> users=database->getUsers();
+	int col=0;
+	int row=0;
+	for(auto it = users.begin();it!=users.end();it++){
+		QPushButton* button = new QPushButton(QString::fromStdString(std::get<std::string>(*it)));
+			button->setFixedSize(200,200);
+			layout->addWidget(button,row , col);
+			connect(button, SIGNAL(clicked()), this, SLOT(user_pressed()));
+			col++;
+			if(col==2){
+				col=0;
+				row++;
+			}
+	}
+}
+
+void MainWindow::user_pressed(){
+	QPushButton *button = (QPushButton *)sender();
+	std::string user= button->text().toStdString();
+
+	Ui_passwordDialog* password = new Ui_passwordDialog();
+    QDialog* temp = new QDialog();
+    password->setupUi(temp);
+    QObject::connect(password->ok, SIGNAL(pressed()), this, SLOT(passwordFunc()));
+    QObject::connect(this, SIGNAL(closeDialog(int)), temp, SLOT(done(int)));
+    temp->exec();
+    std::string pass= password->password->text().toStdString();
+    delete password;
+    delete temp;
+    bool correct_pass=database->checkUser(user,pass);
+    if (correct_pass&&next_stage==NextStage::make_a_drink){
+    	statemachine->make_a_drink();
+    }
+    else if(correct_pass&&next_stage==NextStage::admin&&database->isAdmin(user)){
+    	statemachine->admin();
+    	std::cout<<"adminpage next"<<std::endl;
+    }
+    else{
+    	statemachine->admin_back();
+    }
+
+
+}
+
+void MainWindow::passwordFunc(){
+	Q_EMIT closeDialog(1);
+}
+
+void MainWindow::make_drink() {
+	next_stage = NextStage::make_a_drink;
+	setup_login();
+	statemachine->login();
+
+}
+
+void MainWindow::admin() {
+	next_stage = NextStage::admin;
+	setup_login();
+	statemachine->login();
 
 }
 
@@ -105,7 +199,39 @@ void MainWindow::set_add_ingrediant() {
 	}
 	ingrediants_model->sort(0, Qt::AscendingOrder);
 	settings_up_ingredients = false;
+}
 
+void MainWindow::set_add_user() {
+	settings_up_users = true;
+	std::vector<std::tuple<std::string, bool>> users = database->getUsers();
+	//clear previous data
+	user_model->removeRows(0, user_model->rowCount());
+	int counter = 0;
+	for (auto it = users.begin(); it != users.end(); it++) {
+		std::tuple<std::string, bool> user = (*it);
+		QString name = QString::fromStdString(std::get<std::string>(user));
+		bool admin = std::get<bool>(user);
+		QStandardItem* item0 = new QStandardItem(true);
+		if (name != "Martin") {
+			item0->setCheckable(true);
+		} else {
+			item0->setCheckable(false);
+		}
+		if (admin) {
+			item0->setCheckState(Qt::Checked);
+		} else {
+			item0->setCheckState(Qt::Unchecked);
+		}
+		item0->setText("Admin");
+		item0->setEditable(false);
+		user_model->setItem(counter, 0, new QStandardItem(name));
+		user_model->setItem(counter, 1, item0);
+		counter++;
+
+	}
+	user_model->sort(0, Qt::AscendingOrder);
+	settings_up_users = false;
+	statemachine->add_user();
 }
 
 void MainWindow::add_ingrediant_ok() {
@@ -126,6 +252,30 @@ void MainWindow::add_ingrediant_ok() {
 	this->set_add_ingrediant();
 
 }
+
+void MainWindow::userDataChanged(const QModelIndex &topLeft,
+		const QModelIndex &bottomRight, const QVector<int> &roles) {
+	(void) bottomRight;
+	(void) roles;
+	//name
+	if (topLeft.column() == 0) {
+		return;
+	}
+	if (settings_up_users) {
+		return;
+	}
+	QModelIndex index = user_model->index(topLeft.row(), 0, QModelIndex());
+	std::string name = user_model->data(index).toString().toStdString();
+
+	index = user_model->index(topLeft.row(), 1, QModelIndex());
+	QStandardItem* item = user_model->itemFromIndex(index);
+
+	if (topLeft.column() == 1) {
+		database->changeAdmin(name, item->checkState() == Qt::Checked);
+	}
+
+}
+
 void MainWindow::ingrediantDataChanged(const QModelIndex &topLeft,
 		const QModelIndex &bottomRight, const QVector<int> &roles) {
 	(void) bottomRight;
@@ -165,6 +315,25 @@ void MainWindow::remove_ingrediant() {
 	}
 }
 
+void MainWindow::remove_user() {
+	QItemSelectionModel *select = ui->adduser_list->selectionModel();
+	if (select->hasSelection()) {
+		QModelIndexList list = select->selectedRows();
+		for (auto it = list.begin(); it != list.end(); it++) {
+			int row = it->row();
+			QModelIndex index = user_model->index(row, 0, QModelIndex());
+			std::string name = user_model->data(index).toString().toStdString();
+			if (name == "Martin") {
+				return;
+			}
+			database->removeUser(name);
+			user_model->removeRow(row, QModelIndex());
+
+		}
+	}
+	this->set_add_user();
+}
+
 void MainWindow::set_levels() {
 	std::vector<std::string> ingredients = database->getIngrediantsName();
 	QStandardItemModel* pModel = new QStandardItemModel();
@@ -176,9 +345,7 @@ void MainWindow::set_levels() {
 	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
 		pModel->appendRow(new QStandardItem(QString::fromStdString(*it)));
 	}
-	database->print();
 	std::tuple<std::string, int> temp = database->getLevel(0);
-	std::cout<<"settings indicator 0 to "<<std::get<int>(temp)<<" ingred "<<std::get<std::string>(temp)<<std::endl;
 	ui->setlevelindicator0->setValue(std::get<int>(temp));
 	ui->setlevellist0->setModel(pModel);
 	ui->setlevellist0->setEditable(false);
@@ -252,85 +419,74 @@ void MainWindow::set_levels() {
 }
 
 void MainWindow::set_levels_done() {
-	std::cout<<"current index "<<ui->setlevellist0->currentIndex()<<std::endl;
-	if (ui->setlevellist0->currentIndex() >0) {
+	if (ui->setlevellist0->currentIndex() > 0) {
 		database->setlevel(0, ui->setlevellist0->currentText().toStdString(),
 				ui->setlevelindicator0->value());
-	}
-	else{
-		database->setlevel(0, "",0);
+	} else {
+		database->setlevel(0, "", 0);
 	}
 
-	if (ui->setlevellist1->currentIndex() >0) {
+	if (ui->setlevellist1->currentIndex() > 0) {
 		database->setlevel(1, ui->setlevellist1->currentText().toStdString(),
 				ui->setlevelindicator1->value());
-	}
-	else{
-		database->setlevel(1, "",0);
+	} else {
+		database->setlevel(1, "", 0);
 	}
 
-	if (ui->setlevellist2->currentIndex() >0) {
+	if (ui->setlevellist2->currentIndex() > 0) {
 		database->setlevel(2, ui->setlevellist2->currentText().toStdString(),
 				ui->setlevelindicator2->value());
-	}
-	else{
-		database->setlevel(2, "",0);
+	} else {
+		database->setlevel(2, "", 0);
 	}
 
-	if (ui->setlevellist3->currentIndex() >0) {
+	if (ui->setlevellist3->currentIndex() > 0) {
 		database->setlevel(3, ui->setlevellist3->currentText().toStdString(),
 				ui->setlevelindicator3->value());
-	}
-	else{
-		database->setlevel(3, "",0);
+	} else {
+		database->setlevel(3, "", 0);
 	}
 
-	if (ui->setlevellist4->currentIndex() >0) {
+	if (ui->setlevellist4->currentIndex() > 0) {
 		database->setlevel(4, ui->setlevellist4->currentText().toStdString(),
 				ui->setlevelindicator4->value());
-	}
-	else{
-		database->setlevel(4, "",0);
+	} else {
+		database->setlevel(4, "", 0);
 	}
 
-	if (ui->setlevellist5->currentIndex() >0) {
+	if (ui->setlevellist5->currentIndex() > 0) {
 		database->setlevel(5, ui->setlevellist5->currentText().toStdString(),
 				ui->setlevelindicator5->value());
-	}
-	else{
-		database->setlevel(5, "",0);
+	} else {
+		database->setlevel(5, "", 0);
 	}
 
-	if (ui->setlevellist6->currentIndex() >0) {
+	if (ui->setlevellist6->currentIndex() > 0) {
 		database->setlevel(6, ui->setlevellist6->currentText().toStdString(),
 				ui->setlevelindicator6->value());
-	}
-	else{
-		database->setlevel(6, "",0);
+	} else {
+		database->setlevel(6, "", 0);
 	}
 
-	if (ui->setlevellist7->currentIndex() >0) {
+	if (ui->setlevellist7->currentIndex() > 0) {
 		database->setlevel(7, ui->setlevellist7->currentText().toStdString(),
 				ui->setlevelindicator7->value());
-	}
-	else{
-		database->setlevel(7, "",0);
+	} else {
+		database->setlevel(7, "", 0);
 	}
 
-	if (ui->setlevellist8->currentIndex() >0) {
+	if (ui->setlevellist8->currentIndex() > 0) {
 		database->setlevel(8, ui->setlevellist8->currentText().toStdString(),
 				ui->setlevelindicator8->value());
-	}
-	else{
-		database->setlevel(8, "",0);
+	} else {
+		database->setlevel(8, "", 0);
 	}
 
-	if (ui->setlevellist9->currentIndex() >0) {
+	if (ui->setlevellist9->currentIndex() > 0) {
 		database->setlevel(9, ui->setlevellist9->currentText().toStdString(),
 				ui->setlevelindicator9->value());
-	}
-	else{
-		database->setlevel(9, "",0);
+	} else {
+		database->setlevel(9, "", 0);
 	}
 
 	statemachine->set_levels_back();

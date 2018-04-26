@@ -5,7 +5,10 @@
 #include "database.h"
 #include <QStandardItemModel>
 #include <QItemDelegate>
+#include <QGroupBox>
+#include "ui_password.h"
 
+enum NextStage {make_a_drink,admin,none};
 class IntRangeValidator: public QValidator {
 Q_OBJECT
 public:
@@ -88,16 +91,29 @@ private:
 	StateMachine* statemachine;
 	DataBase* database;
 	QStandardItemModel *ingrediants_model;
+	QStandardItemModel *user_model;
 	bool settings_up_ingredients=false;
+	bool settings_up_users=false;
+	NextStage next_stage;
 protected:
 Q_SIGNALS:
+void closeDialog(int);
 
 public Q_SLOTS:
+	void make_drink();
+	void setup_login();
+	void user_pressed();
+	void admin();
 	void add_user();
 	void set_add_ingrediant();
+	void passwordFunc();
+	void set_add_user();
 	void add_ingrediant_ok();
 	void ingrediantDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles );
+	void userDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles );
+
 	void remove_ingrediant();
+	void remove_user();
 	void set_levels();
 	void set_levels_done();
 };

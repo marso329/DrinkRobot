@@ -26,14 +26,14 @@ private:
 	public Q_SLOTS:
 	void make_a_drink();
 	void admin();
+	void login();
 	void admin_back();
 	void scoreboard();
 	void startpage_pressed();
-	void login_ok();
-	void login_cancel();
 	void drink_back();
 	void add_user();
 	void add_user_ok();
+	void add_user_back();
 	void add_ingrediant();
 	void add_ingrediant_back();
 	void set_levels_back();
