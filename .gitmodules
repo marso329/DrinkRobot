@@ -1,0 +1,3 @@
+[submodule "plugins/keyboard"]
+	path = plugins/keyboard
+	url = https://github.com/KDAB/virtual-keyboard-demo
