@@ -7,6 +7,7 @@
 #include <QItemDelegate>
 #include <QGroupBox>
 #include "ui_password.h"
+#include "itemdelegate.h"
 
 enum NextStage {make_a_drink,admin,none};
 class IntRangeValidator: public QValidator {
@@ -92,6 +93,7 @@ private:
 	DataBase* database;
 	QStandardItemModel *ingrediants_model;
 	QStandardItemModel *user_model;
+	QStandardItemModel *drink_model;
 	bool settings_up_ingredients=false;
 	bool settings_up_users=false;
 	NextStage next_stage;
@@ -116,5 +118,7 @@ public Q_SLOTS:
 	void remove_user();
 	void set_levels();
 	void set_levels_done();
+
+	void set_add_drink();
 };
 #endif

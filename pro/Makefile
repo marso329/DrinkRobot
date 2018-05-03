@@ -54,20 +54,24 @@ SOURCES       = ../src/main.cpp \
 		../src/mainwindow.cpp \
 		../src/statemachine.cpp \
 		../src/database.cpp \
+		../src/itemdelegate.cpp \
 		../src/startscreen.cpp qrc_resources.cpp \
 		../build/moc_mainwindow.cpp \
 		../build/moc_statemachine.cpp \
 		../build/moc_database.cpp \
+		../build/moc_itemdelegate.cpp \
 		../build/moc_startscreen.cpp
 OBJECTS       = ../build/main.o \
 		../build/mainwindow.o \
 		../build/statemachine.o \
 		../build/database.o \
+		../build/itemdelegate.o \
 		../build/startscreen.o \
 		../build/qrc_resources.o \
 		../build/moc_mainwindow.o \
 		../build/moc_statemachine.o \
 		../build/moc_database.o \
+		../build/moc_itemdelegate.o \
 		../build/moc_startscreen.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -152,11 +156,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../include/statemachine.h \
 		../include/database.h \
 		../include/tuple.h \
+		../include/itemdelegate.h \
 		../include/type_traits.h \
 		../include/startscreen.h ../src/main.cpp \
 		../src/mainwindow.cpp \
 		../src/statemachine.cpp \
 		../src/database.cpp \
+		../src/itemdelegate.cpp \
 		../src/startscreen.cpp
 QMAKE_TARGET  = template
 DESTDIR       = ../bin/
@@ -365,8 +371,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../resources/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../include/mainwindow.h ../include/statemachine.h ../include/database.h ../include/tuple.h ../include/type_traits.h ../include/startscreen.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/main.cpp ../src/mainwindow.cpp ../src/statemachine.cpp ../src/database.cpp ../src/startscreen.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../include/mainwindow.h ../include/statemachine.h ../include/database.h ../include/tuple.h ../include/itemdelegate.h ../include/type_traits.h ../include/startscreen.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/main.cpp ../src/mainwindow.cpp ../src/statemachine.cpp ../src/database.cpp ../src/itemdelegate.cpp ../src/startscreen.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../ui/mainwindow.ui ../ui/password.ui $(DISTDIR)/
 
 
@@ -407,9 +413,9 @@ compiler_moc_predefs_clean:
 ../build/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -m64 -pipe -g -std=c++17 -pedantic -Werror -Wall -O2 -dM -E -o ../build/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: ../build/moc_mainwindow.cpp ../build/moc_statemachine.cpp ../build/moc_database.cpp ../build/moc_startscreen.cpp
+compiler_moc_header_make_all: ../build/moc_mainwindow.cpp ../build/moc_statemachine.cpp ../build/moc_database.cpp ../build/moc_itemdelegate.cpp ../build/moc_startscreen.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) ../build/moc_mainwindow.cpp ../build/moc_statemachine.cpp ../build/moc_database.cpp ../build/moc_startscreen.cpp
+	-$(DEL_FILE) ../build/moc_mainwindow.cpp ../build/moc_statemachine.cpp ../build/moc_database.cpp ../build/moc_itemdelegate.cpp ../build/moc_startscreen.cpp
 ../build/moc_mainwindow.cpp: ../include/ui_mainwindow.h \
 		../include/startscreen.h \
 		../include/statemachine.h \
@@ -417,6 +423,7 @@ compiler_moc_header_clean:
 		../include/tuple.h \
 		../include/type_traits.h \
 		../include/ui_password.h \
+		../include/itemdelegate.h \
 		../include/mainwindow.h \
 		../build/moc_predefs.h \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
@@ -433,6 +440,11 @@ compiler_moc_header_clean:
 		../build/moc_predefs.h \
 		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) --include ../build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/martin/repositories/DrinkRobot/pro -I/home/martin/repositories/DrinkRobot/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtQuick -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtQml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../include/database.h -o ../build/moc_database.cpp
+
+../build/moc_itemdelegate.cpp: ../include/itemdelegate.h \
+		../build/moc_predefs.h \
+		/usr/lib/x86_64-linux-gnu/qt5/bin/moc
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) --include ../build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/martin/repositories/DrinkRobot/pro -I/home/martin/repositories/DrinkRobot/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt5/QtQuick -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtQml -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../include/itemdelegate.h -o ../build/moc_itemdelegate.cpp
 
 ../build/moc_startscreen.cpp: ../include/startscreen.h \
 		../build/moc_predefs.h \
@@ -470,7 +482,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		../include/database.h \
 		../include/tuple.h \
 		../include/type_traits.h \
-		../include/ui_password.h
+		../include/ui_password.h \
+		../include/itemdelegate.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/main.o ../src/main.cpp
 
 ../build/mainwindow.o: ../src/mainwindow.cpp ../include/mainwindow.h \
@@ -480,7 +493,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		../include/database.h \
 		../include/tuple.h \
 		../include/type_traits.h \
-		../include/ui_password.h
+		../include/ui_password.h \
+		../include/itemdelegate.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/mainwindow.o ../src/mainwindow.cpp
 
 ../build/statemachine.o: ../src/statemachine.cpp ../include/statemachine.h
@@ -490,6 +504,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		../include/tuple.h \
 		../include/type_traits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/database.o ../src/database.cpp
+
+../build/itemdelegate.o: ../src/itemdelegate.cpp ../include/itemdelegate.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/itemdelegate.o ../src/itemdelegate.cpp
 
 ../build/startscreen.o: ../src/startscreen.cpp ../include/startscreen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/startscreen.o ../src/startscreen.cpp
@@ -505,6 +522,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ../build/moc_database.o: ../build/moc_database.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/moc_database.o ../build/moc_database.cpp
+
+../build/moc_itemdelegate.o: ../build/moc_itemdelegate.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/moc_itemdelegate.o ../build/moc_itemdelegate.cpp
 
 ../build/moc_startscreen.o: ../build/moc_startscreen.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/moc_startscreen.o ../build/moc_startscreen.cpp

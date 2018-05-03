@@ -19,9 +19,27 @@ MainWindow::MainWindow(QWidget* parent) :
 	user_model->setHorizontalHeaderItem(0, new QStandardItem(QString("Name")));
 	user_model->setHorizontalHeaderItem(1, new QStandardItem(QString("Admin")));
 	ui->adduser_list->setModel(user_model);
+	ui->adduser_list->horizontalHeader()->setSectionResizeMode(
+			QHeaderView::Stretch);
+
+	drink_model = new QStandardItemModel(0, 2, this);
+	drink_model->setHorizontalHeaderItem(0,
+			new QStandardItem(QString("Ingredient")));
+	drink_model->setHorizontalHeaderItem(1,
+			new QStandardItem(QString("Amount [ml]")));
+	ui->adddrink_list->setItemDelegateForColumn(1,
+			new IntRangeDelegate(ui->adddrink_list, 0, 100));
+
+
+
+	ui->adddrink_list->setModel(drink_model);
+	ui->adddrink_list->horizontalHeader()->setSectionResizeMode(
+			QHeaderView::Stretch);
 
 	//make sure you can edit the drink name
 	ui->addingrediant_list->setModel(ingrediants_model);
+	ui->addingrediant_list->horizontalHeader()->setSectionResizeMode(
+			QHeaderView::Stretch);
 	ui->addingrediant_list->setItemDelegateForColumn(0,
 			new NotEditableDelegate());
 	ui->addingrediant_list->setItemDelegateForColumn(1,
@@ -83,6 +101,10 @@ MainWindow::MainWindow(QWidget* parent) :
 	connect(ui->setlevel_back, SIGNAL(clicked()), this,
 			SLOT(set_levels_done()));
 
+	connect(ui->add_drink, SIGNAL(clicked()), this, SLOT(set_add_drink()));
+	connect(ui->adddrink_back, SIGNAL(clicked()), this->statemachine,
+			SLOT(add_drink_back()));
+
 	//connected to this class
 
 }
@@ -114,51 +136,65 @@ void MainWindow::setup_login() {
 	}
 	//ui->loginpage->la
 	QGridLayout* layout = new QGridLayout(ui->login_frame);
-	std::vector<std::tuple<std::string,bool>> users=database->getUsers();
-	int col=0;
-	int row=0;
-	for(auto it = users.begin();it!=users.end();it++){
-		QPushButton* button = new QPushButton(QString::fromStdString(std::get<std::string>(*it)));
-			button->setFixedSize(200,200);
-			layout->addWidget(button,row , col);
-			connect(button, SIGNAL(clicked()), this, SLOT(user_pressed()));
-			col++;
-			if(col==2){
-				col=0;
-				row++;
-			}
+	std::vector<std::tuple<std::string, bool>> users = database->getUsers();
+	int col = 0;
+	int row = 0;
+	for (auto it = users.begin(); it != users.end(); it++) {
+		QPushButton* button = new QPushButton(
+				QString::fromStdString(std::get<std::string>(*it)));
+		button->setFixedSize(200, 200);
+		layout->addWidget(button, row, col);
+		connect(button, SIGNAL(clicked()), this, SLOT(user_pressed()));
+		col++;
+		if (col == 2) {
+			col = 0;
+			row++;
+		}
 	}
 }
 
-void MainWindow::user_pressed(){
-	QPushButton *button = (QPushButton *)sender();
-	std::string user= button->text().toStdString();
+void MainWindow::user_pressed() {
+	QPushButton *button = (QPushButton *) sender();
+	std::string user = button->text().toStdString();
 
 	Ui_passwordDialog* password = new Ui_passwordDialog();
-    QDialog* temp = new QDialog();
-    password->setupUi(temp);
-    QObject::connect(password->ok, SIGNAL(pressed()), this, SLOT(passwordFunc()));
-    QObject::connect(this, SIGNAL(closeDialog(int)), temp, SLOT(done(int)));
-    temp->exec();
-    std::string pass= password->password->text().toStdString();
-    delete password;
-    delete temp;
-    bool correct_pass=database->checkUser(user,pass);
-    if (correct_pass&&next_stage==NextStage::make_a_drink){
-    	statemachine->make_a_drink();
-    }
-    else if(correct_pass&&next_stage==NextStage::admin&&database->isAdmin(user)){
-    	statemachine->admin();
-    	std::cout<<"adminpage next"<<std::endl;
-    }
-    else{
-    	statemachine->admin_back();
-    }
-
+	QDialog* temp = new QDialog();
+	password->setupUi(temp);
+	QObject::connect(password->ok, SIGNAL(pressed()), this,
+			SLOT(passwordFunc()));
+	QObject::connect(this, SIGNAL(closeDialog(int)), temp, SLOT(done(int)));
+	temp->exec();
+	std::string pass = password->password->text().toStdString();
+	delete password;
+	delete temp;
+	bool correct_pass = database->checkUser(user, pass);
+	if (correct_pass && next_stage == NextStage::make_a_drink) {
+		statemachine->make_a_drink();
+	} else if (correct_pass && next_stage == NextStage::admin
+			&& database->isAdmin(user)) {
+		statemachine->admin();
+		std::cout << "adminpage next" << std::endl;
+	} else {
+		statemachine->admin_back();
+	}
 
 }
 
-void MainWindow::passwordFunc(){
+void MainWindow::set_add_drink() {
+
+	//setup drink add
+	//drink_model->setItem(0, 0, new QStandardItem(name));
+	//ComboBoxItemDelegate* cbid = new ComboBoxItemDelegate(ui->adddrink_list);
+	//ui->adddrink_list->setItemDelegate(cbid);
+
+	ui->adddrink_list->setItemDelegateForColumn(0, new ComboBoxItemDelegate());
+	drink_model->setItem(0, 1, new QStandardItem("456"));
+	ui->adddrink_list->openPersistentEditor(drink_model->index(0,0));
+	statemachine->set_add_drink();
+
+}
+
+void MainWindow::passwordFunc() {
 	Q_EMIT closeDialog(1);
 }
 

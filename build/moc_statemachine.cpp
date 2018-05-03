@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_StateMachine_t {
-    QByteArrayData data[18];
-    char stringdata0[219];
+    QByteArrayData data[20];
+    char stringdata0[248];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,7 +48,9 @@ QT_MOC_LITERAL(13, 143, 13), // "add_user_back"
 QT_MOC_LITERAL(14, 157, 14), // "add_ingrediant"
 QT_MOC_LITERAL(15, 172, 19), // "add_ingrediant_back"
 QT_MOC_LITERAL(16, 192, 15), // "set_levels_back"
-QT_MOC_LITERAL(17, 208, 10) // "set_levels"
+QT_MOC_LITERAL(17, 208, 10), // "set_levels"
+QT_MOC_LITERAL(18, 219, 13), // "set_add_drink"
+QT_MOC_LITERAL(19, 233, 14) // "add_drink_back"
 
     },
     "StateMachine\0changeWidget\0\0"
@@ -57,7 +59,7 @@ QT_MOC_LITERAL(17, 208, 10) // "set_levels"
     "startpage_pressed\0drink_back\0add_user\0"
     "add_user_ok\0add_user_back\0add_ingrediant\0"
     "add_ingrediant_back\0set_levels_back\0"
-    "set_levels"
+    "set_levels\0set_add_drink\0add_drink_back"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,7 +69,7 @@ static const uint qt_meta_data_StateMachine[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      18,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -75,30 +77,34 @@ static const uint qt_meta_data_StateMachine[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   94,    2, 0x06 /* Public */,
-       3,    0,   97,    2, 0x06 /* Public */,
+       1,    1,  104,    2, 0x06 /* Public */,
+       3,    0,  107,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   98,    2, 0x0a /* Public */,
-       5,    0,   99,    2, 0x0a /* Public */,
-       6,    0,  100,    2, 0x0a /* Public */,
-       7,    0,  101,    2, 0x0a /* Public */,
-       8,    0,  102,    2, 0x0a /* Public */,
-       9,    0,  103,    2, 0x0a /* Public */,
-      10,    0,  104,    2, 0x0a /* Public */,
-      11,    0,  105,    2, 0x0a /* Public */,
-      12,    0,  106,    2, 0x0a /* Public */,
-      13,    0,  107,    2, 0x0a /* Public */,
-      14,    0,  108,    2, 0x0a /* Public */,
-      15,    0,  109,    2, 0x0a /* Public */,
-      16,    0,  110,    2, 0x0a /* Public */,
-      17,    0,  111,    2, 0x0a /* Public */,
+       4,    0,  108,    2, 0x0a /* Public */,
+       5,    0,  109,    2, 0x0a /* Public */,
+       6,    0,  110,    2, 0x0a /* Public */,
+       7,    0,  111,    2, 0x0a /* Public */,
+       8,    0,  112,    2, 0x0a /* Public */,
+       9,    0,  113,    2, 0x0a /* Public */,
+      10,    0,  114,    2, 0x0a /* Public */,
+      11,    0,  115,    2, 0x0a /* Public */,
+      12,    0,  116,    2, 0x0a /* Public */,
+      13,    0,  117,    2, 0x0a /* Public */,
+      14,    0,  118,    2, 0x0a /* Public */,
+      15,    0,  119,    2, 0x0a /* Public */,
+      16,    0,  120,    2, 0x0a /* Public */,
+      17,    0,  121,    2, 0x0a /* Public */,
+      18,    0,  122,    2, 0x0a /* Public */,
+      19,    0,  123,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    2,
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -139,6 +145,8 @@ void StateMachine::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 13: _t->add_ingrediant_back(); break;
         case 14: _t->set_levels_back(); break;
         case 15: _t->set_levels(); break;
+        case 16: _t->set_add_drink(); break;
+        case 17: _t->add_drink_back(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -186,13 +194,13 @@ int StateMachine::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 18)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 18;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 18)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 16;
+        _id -= 18;
     }
     return _id;
 }

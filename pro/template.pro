@@ -27,12 +27,14 @@ SOURCES +=	$$SRCDIR/main.cpp \
 		$$SRCDIR/mainwindow.cpp \
 		$$SRCDIR/statemachine.cpp \
 		$$SRCDIR/database.cpp \
+				$$SRCDIR/itemdelegate.cpp \
 		$$SRCDIR/startscreen.cpp	
 
 HEADERS +=	$$INCLUDEDIR/mainwindow.h \
 			$$INCLUDEDIR/statemachine.h \
 			$$INCLUDEDIR/database.h \
 			$$INCLUDEDIR/tuple.h \
+			$$INCLUDEDIR/itemdelegate.h \
 			$$INCLUDEDIR/type_traits.h \
 			$$INCLUDEDIR/startscreen.h
 

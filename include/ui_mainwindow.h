@@ -264,6 +264,23 @@ public:
     QLabel *label_44;
     QComboBox *setlevellist5;
     QPushButton *setlevel_back;
+    QWidget *adddrinkpage;
+    QGridLayout *gridLayout_8;
+    QFrame *frame_3;
+    QGridLayout *gridLayout_40;
+    QFrame *frame_8;
+    QGridLayout *gridLayout_38;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *adddrink_adddrink;
+    QLineEdit *adddrink_drinkname;
+    QFrame *frame_30;
+    QGridLayout *gridLayout_39;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label;
+    QComboBox *adddrink_drinkselect;
+    QPushButton *adddrink_addingredient;
+    QTableView *adddrink_list;
+    QPushButton *adddrink_back;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -1513,6 +1530,85 @@ public:
         gridLayout_16->addWidget(frame_11, 0, 0, 1, 1);
 
         stackedWidget->addWidget(setlevelspage);
+        adddrinkpage = new QWidget();
+        adddrinkpage->setObjectName(QStringLiteral("adddrinkpage"));
+        gridLayout_8 = new QGridLayout(adddrinkpage);
+        gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
+        frame_3 = new QFrame(adddrinkpage);
+        frame_3->setObjectName(QStringLiteral("frame_3"));
+        frame_3->setMaximumSize(QSize(500, 16777215));
+        frame_3->setFrameShape(QFrame::NoFrame);
+        frame_3->setFrameShadow(QFrame::Plain);
+        frame_3->setLineWidth(0);
+        gridLayout_40 = new QGridLayout(frame_3);
+        gridLayout_40->setObjectName(QStringLiteral("gridLayout_40"));
+        frame_8 = new QFrame(frame_3);
+        frame_8->setObjectName(QStringLiteral("frame_8"));
+        frame_8->setFrameShape(QFrame::StyledPanel);
+        frame_8->setFrameShadow(QFrame::Plain);
+        gridLayout_38 = new QGridLayout(frame_8);
+        gridLayout_38->setObjectName(QStringLiteral("gridLayout_38"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        adddrink_adddrink = new QPushButton(frame_8);
+        adddrink_adddrink->setObjectName(QStringLiteral("adddrink_adddrink"));
+
+        horizontalLayout->addWidget(adddrink_adddrink);
+
+        adddrink_drinkname = new QLineEdit(frame_8);
+        adddrink_drinkname->setObjectName(QStringLiteral("adddrink_drinkname"));
+
+        horizontalLayout->addWidget(adddrink_drinkname);
+
+
+        gridLayout_38->addLayout(horizontalLayout, 0, 0, 1, 1);
+
+
+        gridLayout_40->addWidget(frame_8, 0, 0, 1, 1);
+
+        frame_30 = new QFrame(frame_3);
+        frame_30->setObjectName(QStringLiteral("frame_30"));
+        frame_30->setFrameShape(QFrame::StyledPanel);
+        frame_30->setFrameShadow(QFrame::Plain);
+        gridLayout_39 = new QGridLayout(frame_30);
+        gridLayout_39->setObjectName(QStringLiteral("gridLayout_39"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        label = new QLabel(frame_30);
+        label->setObjectName(QStringLiteral("label"));
+
+        horizontalLayout_2->addWidget(label);
+
+        adddrink_drinkselect = new QComboBox(frame_30);
+        adddrink_drinkselect->setObjectName(QStringLiteral("adddrink_drinkselect"));
+
+        horizontalLayout_2->addWidget(adddrink_drinkselect);
+
+
+        gridLayout_39->addLayout(horizontalLayout_2, 0, 0, 1, 1);
+
+        adddrink_addingredient = new QPushButton(frame_30);
+        adddrink_addingredient->setObjectName(QStringLiteral("adddrink_addingredient"));
+
+        gridLayout_39->addWidget(adddrink_addingredient, 1, 0, 1, 1);
+
+        adddrink_list = new QTableView(frame_30);
+        adddrink_list->setObjectName(QStringLiteral("adddrink_list"));
+
+        gridLayout_39->addWidget(adddrink_list, 2, 0, 1, 1);
+
+        adddrink_back = new QPushButton(frame_30);
+        adddrink_back->setObjectName(QStringLiteral("adddrink_back"));
+
+        gridLayout_39->addWidget(adddrink_back, 3, 0, 1, 1);
+
+
+        gridLayout_40->addWidget(frame_30, 1, 0, 1, 1);
+
+
+        gridLayout_8->addWidget(frame_3, 0, 0, 1, 1);
+
+        stackedWidget->addWidget(adddrinkpage);
 
         gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
 
@@ -1531,7 +1627,7 @@ public:
         QObject::connect(setlevelindicator9, SIGNAL(valueChanged(int)), progressBar_10, SLOT(setValue(int)));
         QObject::connect(setlevelindicator0, SIGNAL(valueChanged(int)), progressBar, SLOT(setValue(int)));
 
-        stackedWidget->setCurrentIndex(5);
+        stackedWidget->setCurrentIndex(8);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1606,6 +1702,10 @@ public:
         label_43->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
         label_44->setText(QApplication::translate("MainWindow", "Tank 5:", Q_NULLPTR));
         setlevel_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
+        adddrink_adddrink->setText(QApplication::translate("MainWindow", "Add drink", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "Drink", Q_NULLPTR));
+        adddrink_addingredient->setText(QApplication::translate("MainWindow", "Add ingredient", Q_NULLPTR));
+        adddrink_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -71,3 +71,11 @@ void StateMachine::set_levels(){
 	Q_EMIT changeWidget(Widgets::setlevelspage);
 }
 
+void StateMachine::set_add_drink(){
+	Q_EMIT changeWidget(Widgets::adddrinkpage);
+}
+
+void StateMachine::add_drink_back(){
+	Q_EMIT changeWidget(Widgets::adminpage);
+}
+
