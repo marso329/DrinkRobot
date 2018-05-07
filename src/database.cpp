@@ -29,6 +29,29 @@ DataBase::~DataBase() {
 
 }
 
+void DataBase::addDrink(std::string& name){
+	if (drinks.find(name) == drinks.end()) {
+		drinks[name] = Drink(name);
+	}
+}
+
+std::vector<std::string> DataBase::getDrinks(){
+	std::vector<std::string> temp;
+	for (auto it=drinks.begin();it!=drinks.end();it++){
+		temp.push_back(it->first);
+	}
+	return temp;
+}
+std::vector<std::tuple<std::string, int>> DataBase::getIngredientsInDrink(std::string& name){
+	std::vector<std::tuple<std::string, int>> temp;
+	if(drinks.find(name)!=drinks.end()){
+		return drinks[name].ingredients;
+	}
+	return temp;
+
+}
+
+
 bool DataBase::isAdmin(std::string& name){
 	if (users.find(name) != users.end()) {
 		return users[name].admin;

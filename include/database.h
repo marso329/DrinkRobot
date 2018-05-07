@@ -83,6 +83,9 @@ public:
 	Drink() {
 		name = "";
 	}
+	Drink(std::string& name):name(name) {
+	}
+
 	std::string name;
 	std::vector<std::tuple<std::string, int>> ingredients;
 private:
@@ -127,6 +130,10 @@ public:
 	void removeUser(std::string& name);
 	bool isAdmin(std::string& name);
 	void changeAdmin(std::string& name,bool);
+	void addDrink(std::string& name);
+	std::vector<std::string> getDrinks();
+	std::vector<std::tuple<std::string, int>> getIngredientsInDrink(std::string& name);
+
 	std::vector<std::tuple<std::string,bool>> getUsers();
 	std::vector<std::tuple<std::string, int, int>> getIngrediants();
 	std::vector<std::string> getIngrediantsName();

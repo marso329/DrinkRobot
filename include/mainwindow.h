@@ -102,6 +102,7 @@ Q_SIGNALS:
 void closeDialog(int);
 
 public Q_SLOTS:
+	void drink_changed(const QString &text);
 	void make_drink();
 	void setup_login();
 	void user_pressed();
@@ -113,12 +114,15 @@ public Q_SLOTS:
 	void add_ingrediant_ok();
 	void ingrediantDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles );
 	void userDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles );
-
 	void remove_ingrediant();
 	void remove_user();
 	void set_levels();
 	void set_levels_done();
-
 	void set_add_drink();
+	void add_drink();
+	void add_ingredient_to_drink();
+	void drinkDataChanged(const QModelIndex &topLeft,
+			const QModelIndex &bottomRight, const QVector<int> &roles);
+
 };
 #endif
