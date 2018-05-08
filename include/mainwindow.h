@@ -96,6 +96,7 @@ private:
 	QStandardItemModel *drink_model;
 	bool settings_up_ingredients=false;
 	bool settings_up_users=false;
+	bool settings_up_drinks=false;
 	NextStage next_stage;
 protected:
 Q_SIGNALS:

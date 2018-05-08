@@ -133,6 +133,8 @@ public:
 	void addDrink(std::string& name);
 	std::vector<std::string> getDrinks();
 	std::vector<std::tuple<std::string, int>> getIngredientsInDrink(std::string& name);
+	void clearDrinkIngredients(std::string& name);
+	void addIngredientToDrink(std::string & name,std::string& ingredient,int amount);
 
 	std::vector<std::tuple<std::string,bool>> getUsers();
 	std::vector<std::tuple<std::string, int, int>> getIngrediants();

@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	drink_model->setHorizontalHeaderItem(0,
 			new QStandardItem(QString("Ingredient")));
 	drink_model->setHorizontalHeaderItem(1,
-			new QStandardItem(QString("Amount [ml]")));
+			new QStandardItem(QString("Amount [cl]")));
 	ui->adddrink_list->setItemDelegateForColumn(1,
 			new IntRangeDelegate(ui->adddrink_list, 0, 100));
 
@@ -194,8 +194,6 @@ void MainWindow::add_ingredient_to_drink(){
 	//QList<QStandardItem *> temp;
 	//drink_model->appendRow(temp);
 	int rows= drink_model->rowCount();
-	//ui->adddrink_list->openPersistentEditor(drink_model->index(rows-1,0));
-	drink_model->setItem(rows, 0, new QStandardItem("0"));
 	drink_model->setItem(rows, 1, new QStandardItem("0"));
 	ui->adddrink_list->openPersistentEditor(drink_model->index(rows,0));
 
@@ -204,25 +202,31 @@ void MainWindow::add_ingredient_to_drink(){
 
 void MainWindow::drinkDataChanged(const QModelIndex &topLeft,
 		const QModelIndex &bottomRight, const QVector<int> &roles) {
-	(void) bottomRight;
-	(void) roles;
-	//name
-	if (topLeft.column() == 0) {
+	if(settings_up_drinks){
 		return;
 	}
-	QModelIndex index = drink_model->index(topLeft.row(), 0, QModelIndex());
-	std::string ingredient = drink_model->data(index).toString().toStdString();
+	std::cout<<"datachanged"<<std::endl;
+	(void) bottomRight;
+	(void) roles;
+	(void) topLeft;
 
-	index = user_model->index(topLeft.row(), 1, QModelIndex());
-	//QStandardItem* item = user_model->itemFromIndex(index);
-	//int amount =item->data().toInt();
 	std::string drink=ui->adddrink_drinkselect->currentText().toStdString();
-	std::cout<<ingredient<<" "<<drink<<std::endl;
-
-//	if (topLeft.column() == 1) {
-	//	database->changeAdmin(name, item->checkState() == Qt::Checked);
-//	}
-
+	database->clearDrinkIngredients(drink);
+	for(int i=0;i<drink_model->rowCount();i++){
+		QModelIndex index = drink_model->index(i, 0, QModelIndex());
+		std::string ingredient = drink_model->data(index).toString().toStdString();
+		index = drink_model->index(i, 1, QModelIndex());
+		std::string amount = drink_model->data(index).toString().toStdString();
+		std::cout<<"amount "<<amount<<std::endl;
+		int amountint=0;
+		try{
+		amountint=std::stoi(amount);
+		}
+		catch(std::invalid_argument& e){
+		}
+		std::cout<<"amountint "<<amountint<<std::endl;
+		database->addIngredientToDrink(drink,ingredient,amountint);
+	}
 }
 
 void MainWindow::add_drink(){
@@ -254,16 +258,17 @@ void MainWindow::set_add_drink() {
 
 //when the drink selector in the add drink page changes
 void MainWindow::drink_changed(const QString &text){
-	std::cout<<"drink changed"<<std::endl;
+	settings_up_drinks=true;
 	std::string name=text.toStdString();
 	std::vector<std::tuple<std::string, int>> ingredients=database->getIngredientsInDrink(name);
 
 	std::vector<std::string> allingredients=database->getIngrediantsName();
 	drink_model->clear();
-	ComboBoxItemDelegate* temp_delegate= new ComboBoxItemDelegate(allingredients,drink_model);
-	connect(temp_delegate,&ComboBoxItemDelegate::drinkDataChanged,this,&MainWindow::drinkDataChanged);
-
-	ui->adddrink_list->setItemDelegateForColumn(0, temp_delegate);
+	drink_model->setHorizontalHeaderItem(0,
+			new QStandardItem(QString("Ingredient")));
+	drink_model->setHorizontalHeaderItem(1,
+			new QStandardItem(QString("Amount [cl]")));
+	ui->adddrink_list->setItemDelegateForColumn(0, new ComboBoxItemDelegate(allingredients));
 	int ind=0;
 	for(auto it=ingredients.begin();it!=ingredients.end();it++){
 		std::tuple<std::string, int> ingrediant = (*it);
@@ -280,6 +285,7 @@ void MainWindow::drink_changed(const QString &text){
 		ui->adddrink_list->openPersistentEditor(drink_model->index(ind,0));
 		ind++;
 	}
+	settings_up_drinks=false;
 
 }
 

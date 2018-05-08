@@ -29,6 +29,19 @@ DataBase::~DataBase() {
 
 }
 
+void DataBase::clearDrinkIngredients(std::string& name){
+	if(drinks.find(name)!=drinks.end()){
+		std::vector<std::tuple<std::string, int>> temp;
+		drinks[name].ingredients= temp;
+	}
+}
+void DataBase::addIngredientToDrink(std::string & name,std::string& ingredient,int amount){
+	if(drinks.find(name)!=drinks.end()){
+		drinks[name].ingredients.push_back(std::tuple<std::string, int>(ingredient,amount));
+	}
+
+}
+
 void DataBase::addDrink(std::string& name){
 	if (drinks.find(name) == drinks.end()) {
 		drinks[name] = Drink(name);
@@ -138,7 +151,7 @@ void DataBase::removeIngrediant(std::string& name) {
 	for (auto it = drinks.begin(); it != drinks.end();) {
 		bool remove = false;
 		for (auto it1 = it->second.ingredients.begin();
-				it1 != it->second.ingredients.end(); it++) {
+				it1 != it->second.ingredients.end(); it1++) {
 			if (std::get<std::string>(*it1) == name) {
 				remove = true;
 			}
