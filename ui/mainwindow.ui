@@ -53,7 +53,7 @@
 QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
       </property>
       <property name="currentIndex">
-       <number>8</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="startpage">
        <property name="styleSheet">
@@ -379,40 +379,99 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
        </layout>
       </widget>
       <widget class="QWidget" name="drinkpage">
-       <layout class="QGridLayout" name="gridLayout_11">
+       <layout class="QGridLayout" name="gridLayout_10">
         <item row="0" column="0">
          <widget class="QFrame" name="frame_4">
-          <property name="maximumSize">
-           <size>
-            <width>250</width>
-            <height>16777215</height>
-           </size>
-          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QGridLayout" name="gridLayout_10">
+          <layout class="QGridLayout" name="gridLayout_42">
            <item row="0" column="0">
-            <widget class="QPushButton" name="drink_back">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>back</string>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QScrollArea" name="drinkpage_scrollArea">
+               <property name="styleSheet">
+                <string notr="true">QScrollArea { background: transparent; }
+QScrollArea &gt; QWidget &gt; QWidget { background: transparent; }
+QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Box</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
+               </property>
+               <property name="lineWidth">
+                <number>2</number>
+               </property>
+               <property name="widgetResizable">
+                <bool>true</bool>
+               </property>
+               <widget class="QWidget" name="scrollAreaWidgetContents">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>756</width>
+                  <height>494</height>
+                 </rect>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_11">
+                 <item row="0" column="0">
+                  <widget class="QFrame" name="drinkpage_frame">
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Plain</enum>
+                   </property>
+                   <property name="lineWidth">
+                    <number>0</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_32">
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
+               </property>
+               <property name="lineWidth">
+                <number>0</number>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_41">
+                <item row="0" column="0">
+                 <widget class="QPushButton" name="drink_back">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>100</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>back</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
@@ -749,13 +808,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_25">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -778,7 +837,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -804,7 +866,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -830,7 +895,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -839,6 +907,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_8">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -859,7 +930,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator7">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -918,13 +989,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_13">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -947,7 +1018,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -973,7 +1047,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -999,7 +1076,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1008,6 +1088,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_2">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -1028,7 +1111,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator1">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1061,13 +1144,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_15">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -1090,7 +1173,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1116,7 +1202,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1142,7 +1231,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1151,6 +1243,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_3">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -1171,7 +1266,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator2">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1217,13 +1312,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_19">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -1246,7 +1341,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1272,7 +1370,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1298,7 +1399,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1307,6 +1411,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_5">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -1327,7 +1434,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator4">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1373,13 +1480,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_23">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -1402,7 +1509,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1428,7 +1538,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1454,7 +1567,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1463,6 +1579,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_7">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -1483,7 +1602,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator6">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1542,13 +1661,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_10">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -1571,7 +1690,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1597,7 +1719,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1623,7 +1748,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1634,6 +1762,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QProgressBar" name="progressBar">
                   <property name="minimum">
                    <number>0</number>
+                  </property>
+                  <property name="maximum">
+                   <number>75</number>
                   </property>
                   <property name="value">
                    <number>0</number>
@@ -1655,7 +1786,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator0">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1688,13 +1819,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_29">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -1717,7 +1848,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1743,7 +1877,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1769,7 +1906,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1778,6 +1918,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_10">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -1798,7 +1941,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator9">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1844,13 +1987,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_17">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -1873,7 +2016,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1899,7 +2045,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1925,7 +2074,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -1934,6 +2086,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_4">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -1954,7 +2109,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator3">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -2000,13 +2155,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_27">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -2029,7 +2184,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -2055,7 +2213,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -2081,7 +2242,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -2090,6 +2254,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_9">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -2110,7 +2277,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator8">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -2156,13 +2323,13 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                  <widget class="QFrame" name="frame_21">
                   <property name="minimumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>40</width>
+                    <width>60</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -2185,7 +2352,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>2L-</string>
+                      <string>75cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -2211,7 +2381,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>1L-</string>
+                      <string>37.5cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -2237,7 +2410,10 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>0L-</string>
+                      <string>0cl</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
                     </widget>
                    </item>
@@ -2246,6 +2422,9 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                 <item>
                  <widget class="QProgressBar" name="progressBar_6">
+                  <property name="maximum">
+                   <number>75</number>
+                  </property>
                   <property name="value">
                    <number>0</number>
                   </property>
@@ -2266,7 +2445,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 <item>
                  <widget class="QSlider" name="setlevelindicator5">
                   <property name="maximum">
-                   <number>100</number>
+                   <number>75</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -2349,19 +2528,7 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                </layout>
               </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QFrame" name="frame_30">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_39">
-              <item row="0" column="0">
+              <item row="1" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_2">
                 <item>
                  <widget class="QLabel" name="label">
@@ -2375,20 +2542,53 @@ QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
                 </item>
                </layout>
               </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
+               <widget class="QPushButton" name="adddrink_remove">
+                <property name="text">
+                 <string>Remove drink</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QFrame" name="frame_30">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_39">
+              <item row="5" column="0">
+               <widget class="QPushButton" name="adddrink_select_icon">
+                <property name="text">
+                 <string>Select icon</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
                <widget class="QPushButton" name="adddrink_addingredient">
                 <property name="text">
                  <string>Add ingredient</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
+              <item row="6" column="0">
                <widget class="QTableView" name="adddrink_list"/>
               </item>
-              <item row="3" column="0">
+              <item row="7" column="0">
                <widget class="QPushButton" name="adddrink_back">
                 <property name="text">
                  <string>Back</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QPushButton" name="adddrink_remove_ingredient">
+                <property name="text">
+                 <string>Remove ingredient</string>
                 </property>
                </widget>
               </item>

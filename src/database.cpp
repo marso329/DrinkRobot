@@ -41,10 +41,58 @@ void DataBase::addIngredientToDrink(std::string & name,std::string& ingredient,i
 	}
 
 }
+//check if it is possible to make a drink
+bool DataBase::drinkFeasible(std::string& name){
+	bool feasible=true;
+	std::vector<std::tuple<std::string, int>> levels=getLevels();
+	if(drinks.find(name)!=drinks.end()){
+		std::vector<std::tuple<std::string, int>> ingredients= drinks[name].ingredients;
+		for(auto it=ingredients.begin();it!=ingredients.end();it++){
+			std::tuple<std::string, int> temp=*it;
+			std::string ingredient_name=std::get<std::string>(temp);
+			int amount=std::get<int>(temp);
+			for(auto it1=levels.begin();it1!=levels.end();it1++){
+				std::tuple<std::string, int> temp_level=*it1;
+				std::string tank_ingredient=std::get<std::string>(temp_level);
+				int tank_amount=std::get<int>(temp_level);
+				if(tank_ingredient==ingredient_name){
+					amount-=tank_amount;
+				}
+			}
+			if(amount>0){
+				feasible=false;
+			}
+
+		}
+		return feasible;
+	}
+	else{
+		return false;
+	}
+}
 
 void DataBase::addDrink(std::string& name){
 	if (drinks.find(name) == drinks.end()) {
 		drinks[name] = Drink(name);
+	}
+}
+void DataBase::setIcon(std::string& name,std::string& icon){
+	if(drinks.find(name)!=drinks.end()){
+		drinks[name].icon=icon;
+	}
+}
+std::string DataBase::getIcon(std::string& name){
+	if(drinks.find(name)!=drinks.end()){
+		std::string temp =drinks[name].icon;
+		if (temp!=""){
+			return temp;
+		}
+		else{
+			return "000";
+		}
+	}
+	else{
+		return "000";
 	}
 }
 
@@ -172,6 +220,17 @@ std::tuple<std::string, int> DataBase::getLevel(int tank) {
 	} else {
 		return std::tuple<std::string, int>("", 0);
 	}
+}
+
+std::vector<std::tuple<std::string, int>> DataBase::getLevels(){
+	std::vector<std::tuple<std::string, int>> temp;
+	for(int i=0;i<10;i++){
+		if(levels.find(i) != levels.end()){
+			Level level = levels[i];
+			temp.push_back(std::tuple<std::string, int>(level.ingredient, level.vol));
+		}
+	}
+	return temp;
 }
 void DataBase::setlevel(int tank, std::string ingredient, int vol) {
 	if (levels.find(tank) != levels.end()) {

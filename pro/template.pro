@@ -43,6 +43,7 @@ INCLUDEPATH +=./$${INCLUDEDIR}
 LIBS += -lboost_serialization -lboost_thread -lboost_system  -lboost_filesystem
 
 FORMS += ../ui/mainwindow.ui \
+		../ui/iconselector.ui \
 		../ui/password.ui
 
 

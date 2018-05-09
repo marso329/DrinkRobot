@@ -25,6 +25,7 @@
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
@@ -68,9 +69,16 @@ public:
     QGridLayout *gridLayout_9;
     QFrame *login_frame;
     QWidget *drinkpage;
-    QGridLayout *gridLayout_11;
-    QFrame *frame_4;
     QGridLayout *gridLayout_10;
+    QFrame *frame_4;
+    QGridLayout *gridLayout_42;
+    QVBoxLayout *verticalLayout_2;
+    QScrollArea *drinkpage_scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QGridLayout *gridLayout_11;
+    QFrame *drinkpage_frame;
+    QFrame *frame_32;
+    QGridLayout *gridLayout_41;
     QPushButton *drink_back;
     QWidget *adduserpage;
     QGridLayout *gridLayout_13;
@@ -273,14 +281,17 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *adddrink_adddrink;
     QLineEdit *adddrink_drinkname;
-    QFrame *frame_30;
-    QGridLayout *gridLayout_39;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QComboBox *adddrink_drinkselect;
+    QPushButton *adddrink_remove;
+    QFrame *frame_30;
+    QGridLayout *gridLayout_39;
+    QPushButton *adddrink_select_icon;
     QPushButton *adddrink_addingredient;
     QTableView *adddrink_list;
     QPushButton *adddrink_back;
+    QPushButton *adddrink_remove_ingredient;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -448,24 +459,64 @@ public:
         stackedWidget->addWidget(loginpage);
         drinkpage = new QWidget();
         drinkpage->setObjectName(QStringLiteral("drinkpage"));
-        gridLayout_11 = new QGridLayout(drinkpage);
-        gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
+        gridLayout_10 = new QGridLayout(drinkpage);
+        gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
         frame_4 = new QFrame(drinkpage);
         frame_4->setObjectName(QStringLiteral("frame_4"));
-        frame_4->setMaximumSize(QSize(250, 16777215));
         frame_4->setFrameShape(QFrame::StyledPanel);
         frame_4->setFrameShadow(QFrame::Raised);
-        gridLayout_10 = new QGridLayout(frame_4);
-        gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
-        drink_back = new QPushButton(frame_4);
+        gridLayout_42 = new QGridLayout(frame_4);
+        gridLayout_42->setObjectName(QStringLiteral("gridLayout_42"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        drinkpage_scrollArea = new QScrollArea(frame_4);
+        drinkpage_scrollArea->setObjectName(QStringLiteral("drinkpage_scrollArea"));
+        drinkpage_scrollArea->setStyleSheet(QLatin1String("QScrollArea { background: transparent; }\n"
+"QScrollArea > QWidget > QWidget { background: transparent; }\n"
+"QScrollArea > QWidget > QScrollBar { background: palette(base); }"));
+        drinkpage_scrollArea->setFrameShape(QFrame::Box);
+        drinkpage_scrollArea->setFrameShadow(QFrame::Plain);
+        drinkpage_scrollArea->setLineWidth(2);
+        drinkpage_scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 756, 494));
+        gridLayout_11 = new QGridLayout(scrollAreaWidgetContents);
+        gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
+        drinkpage_frame = new QFrame(scrollAreaWidgetContents);
+        drinkpage_frame->setObjectName(QStringLiteral("drinkpage_frame"));
+        drinkpage_frame->setFrameShape(QFrame::NoFrame);
+        drinkpage_frame->setFrameShadow(QFrame::Plain);
+        drinkpage_frame->setLineWidth(0);
+
+        gridLayout_11->addWidget(drinkpage_frame, 0, 0, 1, 1);
+
+        drinkpage_scrollArea->setWidget(scrollAreaWidgetContents);
+
+        verticalLayout_2->addWidget(drinkpage_scrollArea);
+
+        frame_32 = new QFrame(frame_4);
+        frame_32->setObjectName(QStringLiteral("frame_32"));
+        frame_32->setFrameShape(QFrame::NoFrame);
+        frame_32->setFrameShadow(QFrame::Plain);
+        frame_32->setLineWidth(0);
+        gridLayout_41 = new QGridLayout(frame_32);
+        gridLayout_41->setObjectName(QStringLiteral("gridLayout_41"));
+        drink_back = new QPushButton(frame_32);
         drink_back->setObjectName(QStringLiteral("drink_back"));
         drink_back->setMinimumSize(QSize(100, 100));
         drink_back->setMaximumSize(QSize(100, 100));
 
-        gridLayout_10->addWidget(drink_back, 0, 0, 1, 1);
+        gridLayout_41->addWidget(drink_back, 0, 0, 1, 1);
 
 
-        gridLayout_11->addWidget(frame_4, 0, 0, 1, 1);
+        verticalLayout_2->addWidget(frame_32);
+
+
+        gridLayout_42->addLayout(verticalLayout_2, 0, 0, 1, 1);
+
+
+        gridLayout_10->addWidget(frame_4, 0, 0, 1, 1);
 
         stackedWidget->addWidget(drinkpage);
         adduserpage = new QWidget();
@@ -711,8 +762,8 @@ public:
         horizontalLayout_18->setObjectName(QStringLiteral("horizontalLayout_18"));
         frame_25 = new QFrame(frame_24);
         frame_25->setObjectName(QStringLiteral("frame_25"));
-        frame_25->setMinimumSize(QSize(40, 0));
-        frame_25->setMaximumSize(QSize(40, 16777215));
+        frame_25->setMinimumSize(QSize(60, 0));
+        frame_25->setMaximumSize(QSize(60, 16777215));
         frame_25->setFrameShape(QFrame::NoFrame);
         frame_25->setFrameShadow(QFrame::Plain);
         frame_25->setLineWidth(0);
@@ -721,6 +772,7 @@ public:
         label_49 = new QLabel(frame_25);
         label_49->setObjectName(QStringLiteral("label_49"));
         label_49->setMaximumSize(QSize(40, 16777215));
+        label_49->setAlignment(Qt::AlignCenter);
 
         gridLayout_32->addWidget(label_49, 0, 0, 1, 1);
 
@@ -731,6 +783,7 @@ public:
         label_50 = new QLabel(frame_25);
         label_50->setObjectName(QStringLiteral("label_50"));
         label_50->setMaximumSize(QSize(40, 16777215));
+        label_50->setAlignment(Qt::AlignCenter);
 
         gridLayout_32->addWidget(label_50, 2, 0, 1, 1);
 
@@ -741,6 +794,7 @@ public:
         label_51 = new QLabel(frame_25);
         label_51->setObjectName(QStringLiteral("label_51"));
         label_51->setMaximumSize(QSize(40, 16777215));
+        label_51->setAlignment(Qt::AlignCenter);
 
         gridLayout_32->addWidget(label_51, 4, 0, 1, 1);
 
@@ -749,6 +803,7 @@ public:
 
         progressBar_8 = new QProgressBar(frame_24);
         progressBar_8->setObjectName(QStringLiteral("progressBar_8"));
+        progressBar_8->setMaximum(75);
         progressBar_8->setValue(0);
         progressBar_8->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_8->setTextVisible(false);
@@ -759,7 +814,7 @@ public:
 
         setlevelindicator7 = new QSlider(frame_24);
         setlevelindicator7->setObjectName(QStringLiteral("setlevelindicator7"));
-        setlevelindicator7->setMaximum(100);
+        setlevelindicator7->setMaximum(75);
         setlevelindicator7->setOrientation(Qt::Vertical);
 
         horizontalLayout_18->addWidget(setlevelindicator7);
@@ -800,8 +855,8 @@ public:
         horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         frame_13 = new QFrame(frame_12);
         frame_13->setObjectName(QStringLiteral("frame_13"));
-        frame_13->setMinimumSize(QSize(40, 0));
-        frame_13->setMaximumSize(QSize(40, 16777215));
+        frame_13->setMinimumSize(QSize(60, 0));
+        frame_13->setMaximumSize(QSize(60, 16777215));
         frame_13->setFrameShape(QFrame::NoFrame);
         frame_13->setFrameShadow(QFrame::Plain);
         frame_13->setLineWidth(0);
@@ -810,6 +865,7 @@ public:
         label_25 = new QLabel(frame_13);
         label_25->setObjectName(QStringLiteral("label_25"));
         label_25->setMaximumSize(QSize(40, 16777215));
+        label_25->setAlignment(Qt::AlignCenter);
 
         gridLayout_20->addWidget(label_25, 0, 0, 1, 1);
 
@@ -820,6 +876,7 @@ public:
         label_26 = new QLabel(frame_13);
         label_26->setObjectName(QStringLiteral("label_26"));
         label_26->setMaximumSize(QSize(40, 16777215));
+        label_26->setAlignment(Qt::AlignCenter);
 
         gridLayout_20->addWidget(label_26, 2, 0, 1, 1);
 
@@ -830,6 +887,7 @@ public:
         label_27 = new QLabel(frame_13);
         label_27->setObjectName(QStringLiteral("label_27"));
         label_27->setMaximumSize(QSize(40, 16777215));
+        label_27->setAlignment(Qt::AlignCenter);
 
         gridLayout_20->addWidget(label_27, 4, 0, 1, 1);
 
@@ -838,6 +896,7 @@ public:
 
         progressBar_2 = new QProgressBar(frame_12);
         progressBar_2->setObjectName(QStringLiteral("progressBar_2"));
+        progressBar_2->setMaximum(75);
         progressBar_2->setValue(0);
         progressBar_2->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_2->setTextVisible(false);
@@ -848,7 +907,7 @@ public:
 
         setlevelindicator1 = new QSlider(frame_12);
         setlevelindicator1->setObjectName(QStringLiteral("setlevelindicator1"));
-        setlevelindicator1->setMaximum(100);
+        setlevelindicator1->setMaximum(75);
         setlevelindicator1->setOrientation(Qt::Vertical);
 
         horizontalLayout_8->addWidget(setlevelindicator1);
@@ -875,8 +934,8 @@ public:
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
         frame_15 = new QFrame(frame_14);
         frame_15->setObjectName(QStringLiteral("frame_15"));
-        frame_15->setMinimumSize(QSize(40, 0));
-        frame_15->setMaximumSize(QSize(40, 16777215));
+        frame_15->setMinimumSize(QSize(60, 0));
+        frame_15->setMaximumSize(QSize(60, 16777215));
         frame_15->setFrameShape(QFrame::NoFrame);
         frame_15->setFrameShadow(QFrame::Plain);
         frame_15->setLineWidth(0);
@@ -885,6 +944,7 @@ public:
         label_29 = new QLabel(frame_15);
         label_29->setObjectName(QStringLiteral("label_29"));
         label_29->setMaximumSize(QSize(40, 16777215));
+        label_29->setAlignment(Qt::AlignCenter);
 
         gridLayout_22->addWidget(label_29, 0, 0, 1, 1);
 
@@ -895,6 +955,7 @@ public:
         label_30 = new QLabel(frame_15);
         label_30->setObjectName(QStringLiteral("label_30"));
         label_30->setMaximumSize(QSize(40, 16777215));
+        label_30->setAlignment(Qt::AlignCenter);
 
         gridLayout_22->addWidget(label_30, 2, 0, 1, 1);
 
@@ -905,6 +966,7 @@ public:
         label_31 = new QLabel(frame_15);
         label_31->setObjectName(QStringLiteral("label_31"));
         label_31->setMaximumSize(QSize(40, 16777215));
+        label_31->setAlignment(Qt::AlignCenter);
 
         gridLayout_22->addWidget(label_31, 4, 0, 1, 1);
 
@@ -913,6 +975,7 @@ public:
 
         progressBar_3 = new QProgressBar(frame_14);
         progressBar_3->setObjectName(QStringLiteral("progressBar_3"));
+        progressBar_3->setMaximum(75);
         progressBar_3->setValue(0);
         progressBar_3->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_3->setTextVisible(false);
@@ -923,7 +986,7 @@ public:
 
         setlevelindicator2 = new QSlider(frame_14);
         setlevelindicator2->setObjectName(QStringLiteral("setlevelindicator2"));
-        setlevelindicator2->setMaximum(100);
+        setlevelindicator2->setMaximum(75);
         setlevelindicator2->setOrientation(Qt::Vertical);
 
         horizontalLayout_9->addWidget(setlevelindicator2);
@@ -957,8 +1020,8 @@ public:
         horizontalLayout_15->setObjectName(QStringLiteral("horizontalLayout_15"));
         frame_19 = new QFrame(frame_18);
         frame_19->setObjectName(QStringLiteral("frame_19"));
-        frame_19->setMinimumSize(QSize(40, 0));
-        frame_19->setMaximumSize(QSize(40, 16777215));
+        frame_19->setMinimumSize(QSize(60, 0));
+        frame_19->setMaximumSize(QSize(60, 16777215));
         frame_19->setFrameShape(QFrame::NoFrame);
         frame_19->setFrameShadow(QFrame::Plain);
         frame_19->setLineWidth(0);
@@ -967,6 +1030,7 @@ public:
         label_37 = new QLabel(frame_19);
         label_37->setObjectName(QStringLiteral("label_37"));
         label_37->setMaximumSize(QSize(40, 16777215));
+        label_37->setAlignment(Qt::AlignCenter);
 
         gridLayout_26->addWidget(label_37, 0, 0, 1, 1);
 
@@ -977,6 +1041,7 @@ public:
         label_38 = new QLabel(frame_19);
         label_38->setObjectName(QStringLiteral("label_38"));
         label_38->setMaximumSize(QSize(40, 16777215));
+        label_38->setAlignment(Qt::AlignCenter);
 
         gridLayout_26->addWidget(label_38, 2, 0, 1, 1);
 
@@ -987,6 +1052,7 @@ public:
         label_39 = new QLabel(frame_19);
         label_39->setObjectName(QStringLiteral("label_39"));
         label_39->setMaximumSize(QSize(40, 16777215));
+        label_39->setAlignment(Qt::AlignCenter);
 
         gridLayout_26->addWidget(label_39, 4, 0, 1, 1);
 
@@ -995,6 +1061,7 @@ public:
 
         progressBar_5 = new QProgressBar(frame_18);
         progressBar_5->setObjectName(QStringLiteral("progressBar_5"));
+        progressBar_5->setMaximum(75);
         progressBar_5->setValue(0);
         progressBar_5->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_5->setTextVisible(false);
@@ -1005,7 +1072,7 @@ public:
 
         setlevelindicator4 = new QSlider(frame_18);
         setlevelindicator4->setObjectName(QStringLiteral("setlevelindicator4"));
-        setlevelindicator4->setMaximum(100);
+        setlevelindicator4->setMaximum(75);
         setlevelindicator4->setOrientation(Qt::Vertical);
 
         horizontalLayout_15->addWidget(setlevelindicator4);
@@ -1039,8 +1106,8 @@ public:
         horizontalLayout_17->setObjectName(QStringLiteral("horizontalLayout_17"));
         frame_23 = new QFrame(frame_22);
         frame_23->setObjectName(QStringLiteral("frame_23"));
-        frame_23->setMinimumSize(QSize(40, 0));
-        frame_23->setMaximumSize(QSize(40, 16777215));
+        frame_23->setMinimumSize(QSize(60, 0));
+        frame_23->setMaximumSize(QSize(60, 16777215));
         frame_23->setFrameShape(QFrame::NoFrame);
         frame_23->setFrameShadow(QFrame::Plain);
         frame_23->setLineWidth(0);
@@ -1049,6 +1116,7 @@ public:
         label_45 = new QLabel(frame_23);
         label_45->setObjectName(QStringLiteral("label_45"));
         label_45->setMaximumSize(QSize(40, 16777215));
+        label_45->setAlignment(Qt::AlignCenter);
 
         gridLayout_30->addWidget(label_45, 0, 0, 1, 1);
 
@@ -1059,6 +1127,7 @@ public:
         label_46 = new QLabel(frame_23);
         label_46->setObjectName(QStringLiteral("label_46"));
         label_46->setMaximumSize(QSize(40, 16777215));
+        label_46->setAlignment(Qt::AlignCenter);
 
         gridLayout_30->addWidget(label_46, 2, 0, 1, 1);
 
@@ -1069,6 +1138,7 @@ public:
         label_47 = new QLabel(frame_23);
         label_47->setObjectName(QStringLiteral("label_47"));
         label_47->setMaximumSize(QSize(40, 16777215));
+        label_47->setAlignment(Qt::AlignCenter);
 
         gridLayout_30->addWidget(label_47, 4, 0, 1, 1);
 
@@ -1077,6 +1147,7 @@ public:
 
         progressBar_7 = new QProgressBar(frame_22);
         progressBar_7->setObjectName(QStringLiteral("progressBar_7"));
+        progressBar_7->setMaximum(75);
         progressBar_7->setValue(0);
         progressBar_7->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_7->setTextVisible(false);
@@ -1087,7 +1158,7 @@ public:
 
         setlevelindicator6 = new QSlider(frame_22);
         setlevelindicator6->setObjectName(QStringLiteral("setlevelindicator6"));
-        setlevelindicator6->setMaximum(100);
+        setlevelindicator6->setMaximum(75);
         setlevelindicator6->setOrientation(Qt::Vertical);
 
         horizontalLayout_17->addWidget(setlevelindicator6);
@@ -1128,8 +1199,8 @@ public:
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         frame_10 = new QFrame(frame_9);
         frame_10->setObjectName(QStringLiteral("frame_10"));
-        frame_10->setMinimumSize(QSize(40, 0));
-        frame_10->setMaximumSize(QSize(40, 16777215));
+        frame_10->setMinimumSize(QSize(60, 0));
+        frame_10->setMaximumSize(QSize(60, 16777215));
         frame_10->setFrameShape(QFrame::NoFrame);
         frame_10->setFrameShadow(QFrame::Plain);
         frame_10->setLineWidth(0);
@@ -1138,6 +1209,7 @@ public:
         label_23 = new QLabel(frame_10);
         label_23->setObjectName(QStringLiteral("label_23"));
         label_23->setMaximumSize(QSize(40, 16777215));
+        label_23->setAlignment(Qt::AlignCenter);
 
         gridLayout_18->addWidget(label_23, 0, 0, 1, 1);
 
@@ -1148,6 +1220,7 @@ public:
         label_22 = new QLabel(frame_10);
         label_22->setObjectName(QStringLiteral("label_22"));
         label_22->setMaximumSize(QSize(40, 16777215));
+        label_22->setAlignment(Qt::AlignCenter);
 
         gridLayout_18->addWidget(label_22, 2, 0, 1, 1);
 
@@ -1158,6 +1231,7 @@ public:
         label_21 = new QLabel(frame_10);
         label_21->setObjectName(QStringLiteral("label_21"));
         label_21->setMaximumSize(QSize(40, 16777215));
+        label_21->setAlignment(Qt::AlignCenter);
 
         gridLayout_18->addWidget(label_21, 4, 0, 1, 1);
 
@@ -1167,6 +1241,7 @@ public:
         progressBar = new QProgressBar(frame_9);
         progressBar->setObjectName(QStringLiteral("progressBar"));
         progressBar->setMinimum(0);
+        progressBar->setMaximum(75);
         progressBar->setValue(0);
         progressBar->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar->setTextVisible(false);
@@ -1177,7 +1252,7 @@ public:
 
         setlevelindicator0 = new QSlider(frame_9);
         setlevelindicator0->setObjectName(QStringLiteral("setlevelindicator0"));
-        setlevelindicator0->setMaximum(100);
+        setlevelindicator0->setMaximum(75);
         setlevelindicator0->setOrientation(Qt::Vertical);
 
         horizontalLayout_7->addWidget(setlevelindicator0);
@@ -1204,8 +1279,8 @@ public:
         horizontalLayout_20->setObjectName(QStringLiteral("horizontalLayout_20"));
         frame_29 = new QFrame(frame_28);
         frame_29->setObjectName(QStringLiteral("frame_29"));
-        frame_29->setMinimumSize(QSize(40, 0));
-        frame_29->setMaximumSize(QSize(40, 16777215));
+        frame_29->setMinimumSize(QSize(60, 0));
+        frame_29->setMaximumSize(QSize(60, 16777215));
         frame_29->setFrameShape(QFrame::NoFrame);
         frame_29->setFrameShadow(QFrame::Plain);
         frame_29->setLineWidth(0);
@@ -1214,6 +1289,7 @@ public:
         label_57 = new QLabel(frame_29);
         label_57->setObjectName(QStringLiteral("label_57"));
         label_57->setMaximumSize(QSize(40, 16777215));
+        label_57->setAlignment(Qt::AlignCenter);
 
         gridLayout_36->addWidget(label_57, 0, 0, 1, 1);
 
@@ -1224,6 +1300,7 @@ public:
         label_58 = new QLabel(frame_29);
         label_58->setObjectName(QStringLiteral("label_58"));
         label_58->setMaximumSize(QSize(40, 16777215));
+        label_58->setAlignment(Qt::AlignCenter);
 
         gridLayout_36->addWidget(label_58, 2, 0, 1, 1);
 
@@ -1234,6 +1311,7 @@ public:
         label_59 = new QLabel(frame_29);
         label_59->setObjectName(QStringLiteral("label_59"));
         label_59->setMaximumSize(QSize(40, 16777215));
+        label_59->setAlignment(Qt::AlignCenter);
 
         gridLayout_36->addWidget(label_59, 4, 0, 1, 1);
 
@@ -1242,6 +1320,7 @@ public:
 
         progressBar_10 = new QProgressBar(frame_28);
         progressBar_10->setObjectName(QStringLiteral("progressBar_10"));
+        progressBar_10->setMaximum(75);
         progressBar_10->setValue(0);
         progressBar_10->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_10->setTextVisible(false);
@@ -1252,7 +1331,7 @@ public:
 
         setlevelindicator9 = new QSlider(frame_28);
         setlevelindicator9->setObjectName(QStringLiteral("setlevelindicator9"));
-        setlevelindicator9->setMaximum(100);
+        setlevelindicator9->setMaximum(75);
         setlevelindicator9->setOrientation(Qt::Vertical);
 
         horizontalLayout_20->addWidget(setlevelindicator9);
@@ -1286,8 +1365,8 @@ public:
         horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
         frame_17 = new QFrame(frame_16);
         frame_17->setObjectName(QStringLiteral("frame_17"));
-        frame_17->setMinimumSize(QSize(40, 0));
-        frame_17->setMaximumSize(QSize(40, 16777215));
+        frame_17->setMinimumSize(QSize(60, 0));
+        frame_17->setMaximumSize(QSize(60, 16777215));
         frame_17->setFrameShape(QFrame::NoFrame);
         frame_17->setFrameShadow(QFrame::Plain);
         frame_17->setLineWidth(0);
@@ -1296,6 +1375,7 @@ public:
         label_33 = new QLabel(frame_17);
         label_33->setObjectName(QStringLiteral("label_33"));
         label_33->setMaximumSize(QSize(40, 16777215));
+        label_33->setAlignment(Qt::AlignCenter);
 
         gridLayout_24->addWidget(label_33, 0, 0, 1, 1);
 
@@ -1306,6 +1386,7 @@ public:
         label_34 = new QLabel(frame_17);
         label_34->setObjectName(QStringLiteral("label_34"));
         label_34->setMaximumSize(QSize(40, 16777215));
+        label_34->setAlignment(Qt::AlignCenter);
 
         gridLayout_24->addWidget(label_34, 2, 0, 1, 1);
 
@@ -1316,6 +1397,7 @@ public:
         label_35 = new QLabel(frame_17);
         label_35->setObjectName(QStringLiteral("label_35"));
         label_35->setMaximumSize(QSize(40, 16777215));
+        label_35->setAlignment(Qt::AlignCenter);
 
         gridLayout_24->addWidget(label_35, 4, 0, 1, 1);
 
@@ -1324,6 +1406,7 @@ public:
 
         progressBar_4 = new QProgressBar(frame_16);
         progressBar_4->setObjectName(QStringLiteral("progressBar_4"));
+        progressBar_4->setMaximum(75);
         progressBar_4->setValue(0);
         progressBar_4->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_4->setTextVisible(false);
@@ -1334,7 +1417,7 @@ public:
 
         setlevelindicator3 = new QSlider(frame_16);
         setlevelindicator3->setObjectName(QStringLiteral("setlevelindicator3"));
-        setlevelindicator3->setMaximum(100);
+        setlevelindicator3->setMaximum(75);
         setlevelindicator3->setOrientation(Qt::Vertical);
 
         horizontalLayout_14->addWidget(setlevelindicator3);
@@ -1368,8 +1451,8 @@ public:
         horizontalLayout_19->setObjectName(QStringLiteral("horizontalLayout_19"));
         frame_27 = new QFrame(frame_26);
         frame_27->setObjectName(QStringLiteral("frame_27"));
-        frame_27->setMinimumSize(QSize(40, 0));
-        frame_27->setMaximumSize(QSize(40, 16777215));
+        frame_27->setMinimumSize(QSize(60, 0));
+        frame_27->setMaximumSize(QSize(60, 16777215));
         frame_27->setFrameShape(QFrame::NoFrame);
         frame_27->setFrameShadow(QFrame::Plain);
         frame_27->setLineWidth(0);
@@ -1378,6 +1461,7 @@ public:
         label_53 = new QLabel(frame_27);
         label_53->setObjectName(QStringLiteral("label_53"));
         label_53->setMaximumSize(QSize(40, 16777215));
+        label_53->setAlignment(Qt::AlignCenter);
 
         gridLayout_34->addWidget(label_53, 0, 0, 1, 1);
 
@@ -1388,6 +1472,7 @@ public:
         label_54 = new QLabel(frame_27);
         label_54->setObjectName(QStringLiteral("label_54"));
         label_54->setMaximumSize(QSize(40, 16777215));
+        label_54->setAlignment(Qt::AlignCenter);
 
         gridLayout_34->addWidget(label_54, 2, 0, 1, 1);
 
@@ -1398,6 +1483,7 @@ public:
         label_55 = new QLabel(frame_27);
         label_55->setObjectName(QStringLiteral("label_55"));
         label_55->setMaximumSize(QSize(40, 16777215));
+        label_55->setAlignment(Qt::AlignCenter);
 
         gridLayout_34->addWidget(label_55, 4, 0, 1, 1);
 
@@ -1406,6 +1492,7 @@ public:
 
         progressBar_9 = new QProgressBar(frame_26);
         progressBar_9->setObjectName(QStringLiteral("progressBar_9"));
+        progressBar_9->setMaximum(75);
         progressBar_9->setValue(0);
         progressBar_9->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_9->setTextVisible(false);
@@ -1416,7 +1503,7 @@ public:
 
         setlevelindicator8 = new QSlider(frame_26);
         setlevelindicator8->setObjectName(QStringLiteral("setlevelindicator8"));
-        setlevelindicator8->setMaximum(100);
+        setlevelindicator8->setMaximum(75);
         setlevelindicator8->setOrientation(Qt::Vertical);
 
         horizontalLayout_19->addWidget(setlevelindicator8);
@@ -1450,8 +1537,8 @@ public:
         horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
         frame_21 = new QFrame(frame_20);
         frame_21->setObjectName(QStringLiteral("frame_21"));
-        frame_21->setMinimumSize(QSize(40, 0));
-        frame_21->setMaximumSize(QSize(40, 16777215));
+        frame_21->setMinimumSize(QSize(60, 0));
+        frame_21->setMaximumSize(QSize(60, 16777215));
         frame_21->setFrameShape(QFrame::NoFrame);
         frame_21->setFrameShadow(QFrame::Plain);
         frame_21->setLineWidth(0);
@@ -1460,6 +1547,7 @@ public:
         label_41 = new QLabel(frame_21);
         label_41->setObjectName(QStringLiteral("label_41"));
         label_41->setMaximumSize(QSize(40, 16777215));
+        label_41->setAlignment(Qt::AlignCenter);
 
         gridLayout_28->addWidget(label_41, 0, 0, 1, 1);
 
@@ -1470,6 +1558,7 @@ public:
         label_42 = new QLabel(frame_21);
         label_42->setObjectName(QStringLiteral("label_42"));
         label_42->setMaximumSize(QSize(40, 16777215));
+        label_42->setAlignment(Qt::AlignCenter);
 
         gridLayout_28->addWidget(label_42, 2, 0, 1, 1);
 
@@ -1480,6 +1569,7 @@ public:
         label_43 = new QLabel(frame_21);
         label_43->setObjectName(QStringLiteral("label_43"));
         label_43->setMaximumSize(QSize(40, 16777215));
+        label_43->setAlignment(Qt::AlignCenter);
 
         gridLayout_28->addWidget(label_43, 4, 0, 1, 1);
 
@@ -1488,6 +1578,7 @@ public:
 
         progressBar_6 = new QProgressBar(frame_20);
         progressBar_6->setObjectName(QStringLiteral("progressBar_6"));
+        progressBar_6->setMaximum(75);
         progressBar_6->setValue(0);
         progressBar_6->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         progressBar_6->setTextVisible(false);
@@ -1498,7 +1589,7 @@ public:
 
         setlevelindicator5 = new QSlider(frame_20);
         setlevelindicator5->setObjectName(QStringLiteral("setlevelindicator5"));
-        setlevelindicator5->setMaximum(100);
+        setlevelindicator5->setMaximum(75);
         setlevelindicator5->setOrientation(Qt::Vertical);
 
         horizontalLayout_16->addWidget(setlevelindicator5);
@@ -1563,6 +1654,26 @@ public:
 
         gridLayout_38->addLayout(horizontalLayout, 0, 0, 1, 1);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        label = new QLabel(frame_8);
+        label->setObjectName(QStringLiteral("label"));
+
+        horizontalLayout_2->addWidget(label);
+
+        adddrink_drinkselect = new QComboBox(frame_8);
+        adddrink_drinkselect->setObjectName(QStringLiteral("adddrink_drinkselect"));
+
+        horizontalLayout_2->addWidget(adddrink_drinkselect);
+
+
+        gridLayout_38->addLayout(horizontalLayout_2, 1, 0, 1, 1);
+
+        adddrink_remove = new QPushButton(frame_8);
+        adddrink_remove->setObjectName(QStringLiteral("adddrink_remove"));
+
+        gridLayout_38->addWidget(adddrink_remove, 2, 0, 1, 1);
+
 
         gridLayout_40->addWidget(frame_8, 0, 0, 1, 1);
 
@@ -1572,35 +1683,30 @@ public:
         frame_30->setFrameShadow(QFrame::Plain);
         gridLayout_39 = new QGridLayout(frame_30);
         gridLayout_39->setObjectName(QStringLiteral("gridLayout_39"));
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        label = new QLabel(frame_30);
-        label->setObjectName(QStringLiteral("label"));
+        adddrink_select_icon = new QPushButton(frame_30);
+        adddrink_select_icon->setObjectName(QStringLiteral("adddrink_select_icon"));
 
-        horizontalLayout_2->addWidget(label);
-
-        adddrink_drinkselect = new QComboBox(frame_30);
-        adddrink_drinkselect->setObjectName(QStringLiteral("adddrink_drinkselect"));
-
-        horizontalLayout_2->addWidget(adddrink_drinkselect);
-
-
-        gridLayout_39->addLayout(horizontalLayout_2, 0, 0, 1, 1);
+        gridLayout_39->addWidget(adddrink_select_icon, 5, 0, 1, 1);
 
         adddrink_addingredient = new QPushButton(frame_30);
         adddrink_addingredient->setObjectName(QStringLiteral("adddrink_addingredient"));
 
-        gridLayout_39->addWidget(adddrink_addingredient, 1, 0, 1, 1);
+        gridLayout_39->addWidget(adddrink_addingredient, 3, 0, 1, 1);
 
         adddrink_list = new QTableView(frame_30);
         adddrink_list->setObjectName(QStringLiteral("adddrink_list"));
 
-        gridLayout_39->addWidget(adddrink_list, 2, 0, 1, 1);
+        gridLayout_39->addWidget(adddrink_list, 6, 0, 1, 1);
 
         adddrink_back = new QPushButton(frame_30);
         adddrink_back->setObjectName(QStringLiteral("adddrink_back"));
 
-        gridLayout_39->addWidget(adddrink_back, 3, 0, 1, 1);
+        gridLayout_39->addWidget(adddrink_back, 7, 0, 1, 1);
+
+        adddrink_remove_ingredient = new QPushButton(frame_30);
+        adddrink_remove_ingredient->setObjectName(QStringLiteral("adddrink_remove_ingredient"));
+
+        gridLayout_39->addWidget(adddrink_remove_ingredient, 4, 0, 1, 1);
 
 
         gridLayout_40->addWidget(frame_30, 1, 0, 1, 1);
@@ -1627,7 +1733,7 @@ public:
         QObject::connect(setlevelindicator9, SIGNAL(valueChanged(int)), progressBar_10, SLOT(setValue(int)));
         QObject::connect(setlevelindicator0, SIGNAL(valueChanged(int)), progressBar, SLOT(setValue(int)));
 
-        stackedWidget->setCurrentIndex(8);
+        stackedWidget->setCurrentIndex(7);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1661,51 +1767,54 @@ public:
         addingrediant_price->setPrefix(QString());
         addingrediant_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
         addingrediant_remove->setText(QApplication::translate("MainWindow", "Remove selected", Q_NULLPTR));
-        label_49->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_50->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_51->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
+        label_49->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_50->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_51->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
         label_52->setText(QApplication::translate("MainWindow", "Tank 7:", Q_NULLPTR));
         label_28->setText(QApplication::translate("MainWindow", "Tank 1:", Q_NULLPTR));
-        label_25->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_26->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_27->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
-        label_29->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_30->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_31->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
+        label_25->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_26->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_27->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
+        label_29->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_30->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_31->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
         label_32->setText(QApplication::translate("MainWindow", "Tank 2:", Q_NULLPTR));
-        label_37->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_38->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_39->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
+        label_37->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_38->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_39->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
         label_40->setText(QApplication::translate("MainWindow", "Tank 4:", Q_NULLPTR));
-        label_45->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_46->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_47->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
+        label_45->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_46->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_47->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
         label_48->setText(QApplication::translate("MainWindow", "Tank 6:", Q_NULLPTR));
         label_24->setText(QApplication::translate("MainWindow", "Tank 0:", Q_NULLPTR));
-        label_23->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_22->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_21->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
-        label_57->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_58->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_59->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
+        label_23->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_22->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_21->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
+        label_57->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_58->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_59->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
         label_60->setText(QApplication::translate("MainWindow", "Tank 9:", Q_NULLPTR));
-        label_33->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_34->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_35->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
+        label_33->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_34->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_35->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
         label_36->setText(QApplication::translate("MainWindow", "Tank 3:", Q_NULLPTR));
-        label_53->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_54->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_55->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
+        label_53->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_54->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_55->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
         label_56->setText(QApplication::translate("MainWindow", "Tank 8:", Q_NULLPTR));
-        label_41->setText(QApplication::translate("MainWindow", "2L-", Q_NULLPTR));
-        label_42->setText(QApplication::translate("MainWindow", "1L-", Q_NULLPTR));
-        label_43->setText(QApplication::translate("MainWindow", "0L-", Q_NULLPTR));
+        label_41->setText(QApplication::translate("MainWindow", "75cl", Q_NULLPTR));
+        label_42->setText(QApplication::translate("MainWindow", "37.5cl", Q_NULLPTR));
+        label_43->setText(QApplication::translate("MainWindow", "0cl", Q_NULLPTR));
         label_44->setText(QApplication::translate("MainWindow", "Tank 5:", Q_NULLPTR));
         setlevel_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
         adddrink_adddrink->setText(QApplication::translate("MainWindow", "Add drink", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Drink", Q_NULLPTR));
+        adddrink_remove->setText(QApplication::translate("MainWindow", "Remove drink", Q_NULLPTR));
+        adddrink_select_icon->setText(QApplication::translate("MainWindow", "Select icon", Q_NULLPTR));
         adddrink_addingredient->setText(QApplication::translate("MainWindow", "Add ingredient", Q_NULLPTR));
         adddrink_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
+        adddrink_remove_ingredient->setText(QApplication::translate("MainWindow", "Remove ingredient", Q_NULLPTR));
     } // retranslateUi
 
 };

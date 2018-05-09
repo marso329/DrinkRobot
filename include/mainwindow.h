@@ -7,7 +7,11 @@
 #include <QItemDelegate>
 #include <QGroupBox>
 #include "ui_password.h"
+#include "ui_iconselector.h"
 #include "itemdelegate.h"
+#include <QDirIterator>
+#include <QDebug>
+#include <QToolButton>
 
 enum NextStage {make_a_drink,admin,none};
 class IntRangeValidator: public QValidator {
@@ -88,12 +92,14 @@ public:
 	MainWindow(QWidget* parent = 0);
 	~MainWindow();
 private:
+	void load_icons();
 	Ui::MainWindow* ui;
 	StateMachine* statemachine;
 	DataBase* database;
 	QStandardItemModel *ingrediants_model;
 	QStandardItemModel *user_model;
 	QStandardItemModel *drink_model;
+	std::map<std::string,QIcon> icons;
 	bool settings_up_ingredients=false;
 	bool settings_up_users=false;
 	bool settings_up_drinks=false;
@@ -103,7 +109,11 @@ Q_SIGNALS:
 void closeDialog(int);
 
 public Q_SLOTS:
+	void select_icon();
+	void select_icon_callback();
 	void drink_changed(const QString &text);
+	void setup_make_drink();
+	void drink_selected();
 	void make_drink();
 	void setup_login();
 	void user_pressed();

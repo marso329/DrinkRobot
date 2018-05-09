@@ -116,7 +116,10 @@ MainWindow::MainWindow(QWidget* parent) :
 	connect(ui->adddrink_addingredient,&QPushButton::clicked,this,&MainWindow::add_ingredient_to_drink);
 
 	connect (drink_model,&QStandardItemModel::dataChanged,this,&MainWindow::drinkDataChanged);
+
+	connect(ui->adddrink_select_icon,&QPushButton::clicked,this,&MainWindow::select_icon);
 	//connected to this class
+	load_icons();
 
 }
 void MainWindow::add_user() {
@@ -134,6 +137,60 @@ MainWindow::~MainWindow() {
 	delete database;
 	delete statemachine;
 
+}
+
+void MainWindow::select_icon(){
+	Ui_iconselector_dialog* icon_selector = new Ui_iconselector_dialog();
+	QDialog* temp = new QDialog();
+	icon_selector->setupUi(temp);
+	QObject::connect(this, SIGNAL(closeDialog(int)), temp, SLOT(done(int)));
+	//icon_selector->
+	QGridLayout* layout = new QGridLayout(icon_selector->frame);
+	int col = 0;
+	int row = 0;
+	for (auto it =icons.begin();it!=icons.end();it++){
+		QToolButton* button = new QToolButton();
+		button->setText(QString::fromStdString(it->first));
+		button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+		button->setIcon(it->second);
+		//button->setIconSize(pixmap.rect().size());
+		button->setFixedSize(200, 200);
+		layout->addWidget(button, row, col);
+		QSize size(200,180);
+		button->setIconSize(size);
+		connect(button, SIGNAL(clicked()), this, SLOT(select_icon_callback()));
+		col++;
+		if (col == 2) {
+			col = 0;
+			row++;
+		}
+
+	}
+	icon_selector->scrollArea->setWidgetResizable(true);
+	//icon_selector->frame->setFixedWidth(icon_selector->scrollArea->width());
+	temp->exec();
+
+}
+void MainWindow::select_icon_callback(){
+	QPushButton *button = (QPushButton *) sender();
+	std::string icon = button->text().toStdString();
+	std::string drink=ui->adddrink_drinkselect->currentText().toStdString();
+	database->setIcon(drink,icon);
+	Q_EMIT closeDialog(1);
+}
+
+//load all icons in resources that has a filename of three digits.png
+void MainWindow::load_icons(){
+	QDirIterator it(":images/", QDirIterator::Subdirectories);
+	QRegExp re("^(\\d{3}).png$");
+	while (it.hasNext()) {
+		if(re.exactMatch(it.fileName())){
+			QPixmap pixmap(it.fileInfo().bundleName());
+			QIcon ButtonIcon(pixmap);
+			icons[it.fileInfo().baseName().toStdString()]=ButtonIcon;
+		}
+	    qDebug() << it.next();
+	}
 }
 
 void MainWindow::setup_login() {
@@ -164,6 +221,50 @@ void MainWindow::setup_login() {
 	}
 }
 
+void MainWindow::setup_make_drink(){
+	std::vector<std::string> drinks=database->getDrinks();
+	QLayoutItem* item;
+	//clear previous drinks
+	if (ui->drinkpage_frame->layout() != NULL) {
+		while ((item = ui->drinkpage_frame->layout()->takeAt(0)) != NULL) {
+			delete item->widget();
+			delete item;
+		}
+		delete ui->drinkpage_frame->layout();
+	}
+	QGridLayout* layout = new QGridLayout(ui->drinkpage_frame);
+	//ui->drinkpage_scrollArea->setStyleSheet("background-color:transparent;");
+	int col = 0;
+	int row = 0;
+	for (auto it =drinks.begin();it!=drinks.end();it++){
+		QToolButton* button = new QToolButton();
+		button->setText(QString::fromStdString(*it));
+		button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+		button->setIcon(icons[database->getIcon(*it)]);
+		button->setFixedSize(200, 200);
+		button->setEnabled(database->drinkFeasible(*it));
+		//button->setStyleSheet("background-color:transparent;");
+		layout->addWidget(button, row, col);
+		QSize size(200,180);
+		button->setIconSize(size);
+		connect(button, SIGNAL(clicked()), this, SLOT(drink_selected()));
+		col++;
+		if (col == 2) {
+			col = 0;
+			row++;
+		}
+
+	}
+	ui->drinkpage_scrollArea->setWidgetResizable(true);
+
+
+
+}
+
+void MainWindow::drink_selected(){
+
+}
+
 void MainWindow::user_pressed() {
 	QPushButton *button = (QPushButton *) sender();
 	std::string user = button->text().toStdString();
@@ -180,6 +281,7 @@ void MainWindow::user_pressed() {
 	delete temp;
 	bool correct_pass = database->checkUser(user, pass);
 	if (correct_pass && next_stage == NextStage::make_a_drink) {
+		setup_make_drink();
 		statemachine->make_a_drink();
 	} else if (correct_pass && next_stage == NextStage::admin
 			&& database->isAdmin(user)) {
@@ -205,7 +307,6 @@ void MainWindow::drinkDataChanged(const QModelIndex &topLeft,
 	if(settings_up_drinks){
 		return;
 	}
-	std::cout<<"datachanged"<<std::endl;
 	(void) bottomRight;
 	(void) roles;
 	(void) topLeft;

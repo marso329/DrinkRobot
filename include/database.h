@@ -87,6 +87,7 @@ public:
 	}
 
 	std::string name;
+	std::string icon;
 	std::vector<std::tuple<std::string, int>> ingredients;
 private:
 
@@ -96,6 +97,9 @@ private:
 		(void) version;
 		ar & name;
 		ar & ingredients;
+		if (version>0){
+			ar&icon;
+		}
 	}
 };
 
@@ -131,6 +135,9 @@ public:
 	bool isAdmin(std::string& name);
 	void changeAdmin(std::string& name,bool);
 	void addDrink(std::string& name);
+	bool drinkFeasible(std::string& name);
+	void setIcon(std::string& name,std::string& icon);
+	std::string getIcon(std::string& name);
 	std::vector<std::string> getDrinks();
 	std::vector<std::tuple<std::string, int>> getIngredientsInDrink(std::string& name);
 	void clearDrinkIngredients(std::string& name);
@@ -143,6 +150,7 @@ public:
 	void changeIngrediant(std::string& name, int strength, int price);
 	void removeIngrediant(std::string& name);
 	std::tuple<std::string, int> getLevel(int);
+	std::vector<std::tuple<std::string, int>> getLevels();
 	void setlevel(int tank,std::string ingredient,int vol);
 	void print();
 protected:
@@ -165,5 +173,6 @@ private:
 	std::hash<std::string> hash;
 
 };
+BOOST_CLASS_VERSION(Drink, 1)
 
 #endif /* INCLUDE_DATABASE_H_ */
