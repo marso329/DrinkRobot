@@ -16,6 +16,11 @@ DataBase::DataBase(QObject* _parent) :
 		iarch >> *this;
 		afile.close();
 	}
+                if (users.find("martin") == users.end()) {
+                    std::string name="martin";
+                    std::string pass="12345";
+                    addUser(name,pass,true);
+                }
 }
 
 DataBase::~DataBase() {

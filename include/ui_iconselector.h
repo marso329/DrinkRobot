@@ -35,9 +35,9 @@ public:
     {
         if (iconselector_dialog->objectName().isEmpty())
             iconselector_dialog->setObjectName(QStringLiteral("iconselector_dialog"));
-        iconselector_dialog->resize(600, 600);
+        iconselector_dialog->resize(480, 600);
         iconselector_dialog->setMinimumSize(QSize(0, 0));
-        iconselector_dialog->setMaximumSize(QSize(16777215, 16777215));
+        iconselector_dialog->setMaximumSize(QSize(480, 800));
         gridLayout = new QGridLayout(iconselector_dialog);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         scrollArea = new QScrollArea(iconselector_dialog);
@@ -46,7 +46,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 580, 580));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 460, 580));
         scrollAreaWidgetContents->setMaximumSize(QSize(16777215, 16777215));
         gridLayout_2 = new QGridLayout(scrollAreaWidgetContents);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
