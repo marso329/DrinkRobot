@@ -120,6 +120,10 @@ void TemperatureController::power_off(int index) {
 
 void TemperatureController::update() {
 	//update temperatures
+	union{
+		short unsigned data;
+		char buf[2];
+	};
 	for (int i = 0; i < 10; i++) {
 		char value = '0';
 		value += i;
@@ -130,11 +134,8 @@ void TemperatureController::update() {
 			std::cout << "writing to temp controller failed" << std::endl;
 		}
 		usleep(2500);
-		char buf[2];
 		int n = read(fd, buf, sizeof(buf));
 		if (n >= 2) {
-			short unsigned data = 0;
-			data = *((short unsigned*) buf);
 			*(actual_temperaturs[i]) = convert((int) data);
 		}
 	}
