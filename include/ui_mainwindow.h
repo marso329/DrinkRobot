@@ -65,6 +65,7 @@ public:
     QPushButton *add_drink;
     QPushButton *set_levels;
     QPushButton *admin_back;
+    QPushButton *admin_temp;
     QWidget *loginpage;
     QGridLayout *gridLayout_9;
     QFrame *login_frame;
@@ -262,6 +263,111 @@ public:
     QTableView *adddrink_list;
     QPushButton *adddrink_back;
     QPushButton *adddrink_remove_ingredient;
+    QWidget *settemp_page;
+    QGridLayout *gridLayout_28;
+    QFrame *frame_10;
+    QGridLayout *gridLayout_29;
+    QFrame *frame_13;
+    QGridLayout *gridLayout_35;
+    QFrame *frame_15;
+    QGridLayout *gridLayout_30;
+    QLabel *label_8;
+    QProgressBar *settemp_tank0_actual;
+    QLabel *label_2;
+    QProgressBar *progressBar_12;
+    QSlider *settemp_tank0_set;
+    QLabel *label_9;
+    QFrame *frame_17;
+    QGridLayout *gridLayout_36;
+    QFrame *frame_19;
+    QGridLayout *gridLayout_31;
+    QLabel *label_10;
+    QProgressBar *settemp_tank1_actual;
+    QLabel *label_14;
+    QProgressBar *progressBar_14;
+    QSlider *settemp_tank1_set;
+    QLabel *label_15;
+    QFrame *frame_21;
+    QGridLayout *gridLayout_37;
+    QLabel *label_18;
+    QFrame *frame_23;
+    QGridLayout *gridLayout_32;
+    QLabel *label_16;
+    QProgressBar *settemp_tank2_actual;
+    QLabel *label_17;
+    QProgressBar *progressBar_16;
+    QSlider *settemp_tank2_set;
+    QFrame *frame_25;
+    QGridLayout *gridLayout_43;
+    QFrame *frame_27;
+    QGridLayout *gridLayout_33;
+    QLabel *label_19;
+    QProgressBar *settemp_tank3_actual;
+    QLabel *label_20;
+    QProgressBar *progressBar_18;
+    QSlider *settemp_tank3_set;
+    QLabel *label_22;
+    QFrame *frame_29;
+    QGridLayout *gridLayout_44;
+    QLabel *label_34;
+    QFrame *frame_31;
+    QGridLayout *gridLayout_34;
+    QLabel *label_26;
+    QProgressBar *settemp_tank4_actual;
+    QLabel *label_30;
+    QProgressBar *progressBar_20;
+    QSlider *settemp_tank4_set;
+    QFrame *frame_33;
+    QGridLayout *gridLayout_45;
+    QFrame *frame_34;
+    QGridLayout *gridLayout_46;
+    QLabel *label_38;
+    QProgressBar *settemp_tank5_actual;
+    QLabel *label_42;
+    QProgressBar *progressBar_22;
+    QSlider *settemp_tank5_set;
+    QLabel *label_46;
+    QFrame *frame_35;
+    QGridLayout *gridLayout_47;
+    QFrame *frame_36;
+    QGridLayout *gridLayout_48;
+    QLabel *label_50;
+    QProgressBar *settemp_tank6_actual;
+    QLabel *label_54;
+    QProgressBar *progressBar_24;
+    QSlider *settemp_tank6_set;
+    QLabel *label_58;
+    QFrame *frame_37;
+    QGridLayout *gridLayout_49;
+    QLabel *label_63;
+    QFrame *frame_38;
+    QGridLayout *gridLayout_50;
+    QProgressBar *settemp_tank7_actual;
+    QLabel *label_61;
+    QLabel *label_62;
+    QSlider *settemp_tank7_set;
+    QProgressBar *progressBar_26;
+    QFrame *frame_39;
+    QGridLayout *gridLayout_51;
+    QLabel *label_66;
+    QFrame *frame_40;
+    QGridLayout *gridLayout_52;
+    QLabel *label_64;
+    QProgressBar *settemp_tank8_actual;
+    QLabel *label_65;
+    QProgressBar *progressBar_28;
+    QSlider *settemp_tank8_set;
+    QFrame *frame_41;
+    QGridLayout *gridLayout_71;
+    QLabel *label_94;
+    QFrame *frame_60;
+    QGridLayout *gridLayout_72;
+    QLabel *label_95;
+    QProgressBar *settemp_tank9_actual;
+    QLabel *label_96;
+    QProgressBar *progressBar_48;
+    QSlider *settemp_tank9_set;
+    QPushButton *settemp_back;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -276,9 +382,9 @@ public:
         centralwidget->setStyleSheet(QStringLiteral(""));
         gridLayout = new QGridLayout(centralwidget);
         gridLayout->setSpacing(0);
-        gridLayout->setContentsMargins(0, 0, 0, 0);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setSizeConstraint(QLayout::SetMaximumSize);
+        gridLayout->setContentsMargins(0, 0, 0, 0);
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
         stackedWidget->setMaximumSize(QSize(3000, 3000));
@@ -290,8 +396,8 @@ public:
         startpage->setStyleSheet(QStringLiteral(""));
         gridLayout_2 = new QGridLayout(startpage);
         gridLayout_2->setSpacing(0);
-        gridLayout_2->setContentsMargins(0, 0, 0, 0);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_2->setContentsMargins(0, 0, 0, 0);
         graphicsView = new StartScreen(startpage);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setStyleSheet(QStringLiteral("StartScreen {border-image: url(:images/metal.jpg) 0 0 0 0 stretch stretch;}"));
@@ -405,6 +511,13 @@ public:
 
         gridLayout_5->addWidget(admin_back, 2, 1, 1, 1);
 
+        admin_temp = new QPushButton(frame_2);
+        admin_temp->setObjectName(QStringLiteral("admin_temp"));
+        admin_temp->setMinimumSize(QSize(200, 200));
+        admin_temp->setMaximumSize(QSize(200, 200));
+
+        gridLayout_5->addWidget(admin_temp, 2, 0, 1, 1);
+
 
         gridLayout_6->addWidget(frame_2, 0, 0, 1, 1);
 
@@ -452,7 +565,7 @@ public:
         drinkpage_scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 436, 632));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 42, 28));
         gridLayout_11 = new QGridLayout(scrollAreaWidgetContents);
         gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
         drinkpage_frame = new QFrame(scrollAreaWidgetContents);
@@ -1517,6 +1630,653 @@ public:
         gridLayout_8->addWidget(frame_3, 0, 0, 1, 1);
 
         stackedWidget->addWidget(adddrinkpage);
+        settemp_page = new QWidget();
+        settemp_page->setObjectName(QStringLiteral("settemp_page"));
+        gridLayout_28 = new QGridLayout(settemp_page);
+        gridLayout_28->setObjectName(QStringLiteral("gridLayout_28"));
+        frame_10 = new QFrame(settemp_page);
+        frame_10->setObjectName(QStringLiteral("frame_10"));
+        frame_10->setFrameShape(QFrame::NoFrame);
+        frame_10->setFrameShadow(QFrame::Plain);
+        frame_10->setLineWidth(0);
+        gridLayout_29 = new QGridLayout(frame_10);
+        gridLayout_29->setSpacing(0);
+        gridLayout_29->setObjectName(QStringLiteral("gridLayout_29"));
+        gridLayout_29->setContentsMargins(0, 0, 0, 0);
+        frame_13 = new QFrame(frame_10);
+        frame_13->setObjectName(QStringLiteral("frame_13"));
+        frame_13->setFrameShape(QFrame::StyledPanel);
+        frame_13->setFrameShadow(QFrame::Raised);
+        gridLayout_35 = new QGridLayout(frame_13);
+        gridLayout_35->setSpacing(0);
+        gridLayout_35->setObjectName(QStringLiteral("gridLayout_35"));
+        gridLayout_35->setContentsMargins(0, 0, 0, 0);
+        frame_15 = new QFrame(frame_13);
+        frame_15->setObjectName(QStringLiteral("frame_15"));
+        frame_15->setFrameShape(QFrame::NoFrame);
+        frame_15->setFrameShadow(QFrame::Plain);
+        frame_15->setLineWidth(0);
+        gridLayout_30 = new QGridLayout(frame_15);
+        gridLayout_30->setSpacing(0);
+        gridLayout_30->setObjectName(QStringLiteral("gridLayout_30"));
+        gridLayout_30->setContentsMargins(-1, 0, -1, 0);
+        label_8 = new QLabel(frame_15);
+        label_8->setObjectName(QStringLiteral("label_8"));
+
+        gridLayout_30->addWidget(label_8, 1, 0, 1, 1);
+
+        settemp_tank0_actual = new QProgressBar(frame_15);
+        settemp_tank0_actual->setObjectName(QStringLiteral("settemp_tank0_actual"));
+        settemp_tank0_actual->setMinimum(-50);
+        settemp_tank0_actual->setMaximum(50);
+        settemp_tank0_actual->setValue(-50);
+
+        gridLayout_30->addWidget(settemp_tank0_actual, 0, 1, 1, 1);
+
+        label_2 = new QLabel(frame_15);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        gridLayout_30->addWidget(label_2, 0, 0, 1, 1);
+
+        progressBar_12 = new QProgressBar(frame_15);
+        progressBar_12->setObjectName(QStringLiteral("progressBar_12"));
+        progressBar_12->setMinimum(-50);
+        progressBar_12->setMaximum(50);
+        progressBar_12->setValue(0);
+
+        gridLayout_30->addWidget(progressBar_12, 1, 1, 1, 1);
+
+        settemp_tank0_set = new QSlider(frame_15);
+        settemp_tank0_set->setObjectName(QStringLiteral("settemp_tank0_set"));
+        settemp_tank0_set->setMinimum(-50);
+        settemp_tank0_set->setMaximum(50);
+        settemp_tank0_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_30->addWidget(settemp_tank0_set, 2, 1, 1, 1);
+
+
+        gridLayout_35->addWidget(frame_15, 0, 1, 1, 1);
+
+        label_9 = new QLabel(frame_13);
+        label_9->setObjectName(QStringLiteral("label_9"));
+
+        gridLayout_35->addWidget(label_9, 0, 0, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_13, 0, 0, 1, 1);
+
+        frame_17 = new QFrame(frame_10);
+        frame_17->setObjectName(QStringLiteral("frame_17"));
+        frame_17->setFrameShape(QFrame::StyledPanel);
+        frame_17->setFrameShadow(QFrame::Raised);
+        gridLayout_36 = new QGridLayout(frame_17);
+        gridLayout_36->setSpacing(0);
+        gridLayout_36->setObjectName(QStringLiteral("gridLayout_36"));
+        gridLayout_36->setContentsMargins(0, 0, 0, 0);
+        frame_19 = new QFrame(frame_17);
+        frame_19->setObjectName(QStringLiteral("frame_19"));
+        frame_19->setFrameShape(QFrame::NoFrame);
+        frame_19->setFrameShadow(QFrame::Plain);
+        frame_19->setLineWidth(0);
+        gridLayout_31 = new QGridLayout(frame_19);
+        gridLayout_31->setObjectName(QStringLiteral("gridLayout_31"));
+        gridLayout_31->setContentsMargins(-1, 0, -1, 0);
+        label_10 = new QLabel(frame_19);
+        label_10->setObjectName(QStringLiteral("label_10"));
+
+        gridLayout_31->addWidget(label_10, 1, 0, 1, 1);
+
+        settemp_tank1_actual = new QProgressBar(frame_19);
+        settemp_tank1_actual->setObjectName(QStringLiteral("settemp_tank1_actual"));
+        settemp_tank1_actual->setMinimum(-50);
+        settemp_tank1_actual->setMaximum(50);
+        settemp_tank1_actual->setValue(-50);
+
+        gridLayout_31->addWidget(settemp_tank1_actual, 0, 1, 1, 1);
+
+        label_14 = new QLabel(frame_19);
+        label_14->setObjectName(QStringLiteral("label_14"));
+
+        gridLayout_31->addWidget(label_14, 0, 0, 1, 1);
+
+        progressBar_14 = new QProgressBar(frame_19);
+        progressBar_14->setObjectName(QStringLiteral("progressBar_14"));
+        progressBar_14->setMinimum(-50);
+        progressBar_14->setMaximum(50);
+        progressBar_14->setValue(0);
+
+        gridLayout_31->addWidget(progressBar_14, 1, 1, 1, 1);
+
+        settemp_tank1_set = new QSlider(frame_19);
+        settemp_tank1_set->setObjectName(QStringLiteral("settemp_tank1_set"));
+        settemp_tank1_set->setMinimum(-50);
+        settemp_tank1_set->setMaximum(50);
+        settemp_tank1_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_31->addWidget(settemp_tank1_set, 2, 1, 1, 1);
+
+
+        gridLayout_36->addWidget(frame_19, 0, 1, 1, 1);
+
+        label_15 = new QLabel(frame_17);
+        label_15->setObjectName(QStringLiteral("label_15"));
+
+        gridLayout_36->addWidget(label_15, 0, 0, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_17, 1, 0, 1, 1);
+
+        frame_21 = new QFrame(frame_10);
+        frame_21->setObjectName(QStringLiteral("frame_21"));
+        frame_21->setFrameShape(QFrame::StyledPanel);
+        frame_21->setFrameShadow(QFrame::Raised);
+        gridLayout_37 = new QGridLayout(frame_21);
+        gridLayout_37->setSpacing(0);
+        gridLayout_37->setObjectName(QStringLiteral("gridLayout_37"));
+        gridLayout_37->setContentsMargins(0, 0, 0, 0);
+        label_18 = new QLabel(frame_21);
+        label_18->setObjectName(QStringLiteral("label_18"));
+
+        gridLayout_37->addWidget(label_18, 0, 0, 1, 1);
+
+        frame_23 = new QFrame(frame_21);
+        frame_23->setObjectName(QStringLiteral("frame_23"));
+        frame_23->setFrameShape(QFrame::NoFrame);
+        frame_23->setFrameShadow(QFrame::Plain);
+        frame_23->setLineWidth(0);
+        gridLayout_32 = new QGridLayout(frame_23);
+        gridLayout_32->setObjectName(QStringLiteral("gridLayout_32"));
+        gridLayout_32->setContentsMargins(-1, 0, -1, 0);
+        label_16 = new QLabel(frame_23);
+        label_16->setObjectName(QStringLiteral("label_16"));
+
+        gridLayout_32->addWidget(label_16, 1, 0, 1, 1);
+
+        settemp_tank2_actual = new QProgressBar(frame_23);
+        settemp_tank2_actual->setObjectName(QStringLiteral("settemp_tank2_actual"));
+        settemp_tank2_actual->setMinimum(-50);
+        settemp_tank2_actual->setMaximum(50);
+        settemp_tank2_actual->setValue(-50);
+
+        gridLayout_32->addWidget(settemp_tank2_actual, 0, 1, 1, 1);
+
+        label_17 = new QLabel(frame_23);
+        label_17->setObjectName(QStringLiteral("label_17"));
+
+        gridLayout_32->addWidget(label_17, 0, 0, 1, 1);
+
+        progressBar_16 = new QProgressBar(frame_23);
+        progressBar_16->setObjectName(QStringLiteral("progressBar_16"));
+        progressBar_16->setMinimum(-50);
+        progressBar_16->setMaximum(50);
+        progressBar_16->setValue(0);
+
+        gridLayout_32->addWidget(progressBar_16, 1, 1, 1, 1);
+
+        settemp_tank2_set = new QSlider(frame_23);
+        settemp_tank2_set->setObjectName(QStringLiteral("settemp_tank2_set"));
+        settemp_tank2_set->setMinimum(-50);
+        settemp_tank2_set->setMaximum(50);
+        settemp_tank2_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_32->addWidget(settemp_tank2_set, 2, 1, 1, 1);
+
+
+        gridLayout_37->addWidget(frame_23, 0, 1, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_21, 2, 0, 1, 1);
+
+        frame_25 = new QFrame(frame_10);
+        frame_25->setObjectName(QStringLiteral("frame_25"));
+        frame_25->setFrameShape(QFrame::StyledPanel);
+        frame_25->setFrameShadow(QFrame::Raised);
+        gridLayout_43 = new QGridLayout(frame_25);
+        gridLayout_43->setSpacing(0);
+        gridLayout_43->setObjectName(QStringLiteral("gridLayout_43"));
+        gridLayout_43->setContentsMargins(0, 0, 0, 0);
+        frame_27 = new QFrame(frame_25);
+        frame_27->setObjectName(QStringLiteral("frame_27"));
+        frame_27->setFrameShape(QFrame::NoFrame);
+        frame_27->setFrameShadow(QFrame::Plain);
+        frame_27->setLineWidth(0);
+        gridLayout_33 = new QGridLayout(frame_27);
+        gridLayout_33->setObjectName(QStringLiteral("gridLayout_33"));
+        gridLayout_33->setContentsMargins(-1, 0, -1, 0);
+        label_19 = new QLabel(frame_27);
+        label_19->setObjectName(QStringLiteral("label_19"));
+
+        gridLayout_33->addWidget(label_19, 1, 0, 1, 1);
+
+        settemp_tank3_actual = new QProgressBar(frame_27);
+        settemp_tank3_actual->setObjectName(QStringLiteral("settemp_tank3_actual"));
+        settemp_tank3_actual->setMinimum(-50);
+        settemp_tank3_actual->setMaximum(50);
+        settemp_tank3_actual->setValue(-50);
+
+        gridLayout_33->addWidget(settemp_tank3_actual, 0, 1, 1, 1);
+
+        label_20 = new QLabel(frame_27);
+        label_20->setObjectName(QStringLiteral("label_20"));
+
+        gridLayout_33->addWidget(label_20, 0, 0, 1, 1);
+
+        progressBar_18 = new QProgressBar(frame_27);
+        progressBar_18->setObjectName(QStringLiteral("progressBar_18"));
+        progressBar_18->setMinimum(-50);
+        progressBar_18->setMaximum(50);
+        progressBar_18->setValue(0);
+
+        gridLayout_33->addWidget(progressBar_18, 1, 1, 1, 1);
+
+        settemp_tank3_set = new QSlider(frame_27);
+        settemp_tank3_set->setObjectName(QStringLiteral("settemp_tank3_set"));
+        settemp_tank3_set->setMinimum(-50);
+        settemp_tank3_set->setMaximum(50);
+        settemp_tank3_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_33->addWidget(settemp_tank3_set, 2, 1, 1, 1);
+
+
+        gridLayout_43->addWidget(frame_27, 0, 1, 1, 1);
+
+        label_22 = new QLabel(frame_25);
+        label_22->setObjectName(QStringLiteral("label_22"));
+
+        gridLayout_43->addWidget(label_22, 0, 0, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_25, 3, 0, 1, 1);
+
+        frame_29 = new QFrame(frame_10);
+        frame_29->setObjectName(QStringLiteral("frame_29"));
+        frame_29->setFrameShape(QFrame::StyledPanel);
+        frame_29->setFrameShadow(QFrame::Raised);
+        gridLayout_44 = new QGridLayout(frame_29);
+        gridLayout_44->setSpacing(0);
+        gridLayout_44->setObjectName(QStringLiteral("gridLayout_44"));
+        gridLayout_44->setContentsMargins(0, 0, 0, 0);
+        label_34 = new QLabel(frame_29);
+        label_34->setObjectName(QStringLiteral("label_34"));
+
+        gridLayout_44->addWidget(label_34, 0, 0, 1, 1);
+
+        frame_31 = new QFrame(frame_29);
+        frame_31->setObjectName(QStringLiteral("frame_31"));
+        frame_31->setFrameShape(QFrame::NoFrame);
+        frame_31->setFrameShadow(QFrame::Plain);
+        frame_31->setLineWidth(0);
+        gridLayout_34 = new QGridLayout(frame_31);
+        gridLayout_34->setObjectName(QStringLiteral("gridLayout_34"));
+        gridLayout_34->setContentsMargins(-1, 0, -1, 0);
+        label_26 = new QLabel(frame_31);
+        label_26->setObjectName(QStringLiteral("label_26"));
+
+        gridLayout_34->addWidget(label_26, 1, 0, 1, 1);
+
+        settemp_tank4_actual = new QProgressBar(frame_31);
+        settemp_tank4_actual->setObjectName(QStringLiteral("settemp_tank4_actual"));
+        settemp_tank4_actual->setMinimum(-50);
+        settemp_tank4_actual->setMaximum(50);
+        settemp_tank4_actual->setValue(-50);
+
+        gridLayout_34->addWidget(settemp_tank4_actual, 0, 1, 1, 1);
+
+        label_30 = new QLabel(frame_31);
+        label_30->setObjectName(QStringLiteral("label_30"));
+
+        gridLayout_34->addWidget(label_30, 0, 0, 1, 1);
+
+        progressBar_20 = new QProgressBar(frame_31);
+        progressBar_20->setObjectName(QStringLiteral("progressBar_20"));
+        progressBar_20->setMinimum(-50);
+        progressBar_20->setMaximum(50);
+        progressBar_20->setValue(0);
+
+        gridLayout_34->addWidget(progressBar_20, 1, 1, 1, 1);
+
+        settemp_tank4_set = new QSlider(frame_31);
+        settemp_tank4_set->setObjectName(QStringLiteral("settemp_tank4_set"));
+        settemp_tank4_set->setMinimum(-50);
+        settemp_tank4_set->setMaximum(50);
+        settemp_tank4_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_34->addWidget(settemp_tank4_set, 2, 1, 1, 1);
+
+
+        gridLayout_44->addWidget(frame_31, 0, 1, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_29, 4, 0, 1, 1);
+
+        frame_33 = new QFrame(frame_10);
+        frame_33->setObjectName(QStringLiteral("frame_33"));
+        frame_33->setFrameShape(QFrame::StyledPanel);
+        frame_33->setFrameShadow(QFrame::Raised);
+        gridLayout_45 = new QGridLayout(frame_33);
+        gridLayout_45->setSpacing(0);
+        gridLayout_45->setObjectName(QStringLiteral("gridLayout_45"));
+        gridLayout_45->setContentsMargins(0, 0, 0, 0);
+        frame_34 = new QFrame(frame_33);
+        frame_34->setObjectName(QStringLiteral("frame_34"));
+        frame_34->setFrameShape(QFrame::NoFrame);
+        frame_34->setFrameShadow(QFrame::Plain);
+        frame_34->setLineWidth(0);
+        gridLayout_46 = new QGridLayout(frame_34);
+        gridLayout_46->setObjectName(QStringLiteral("gridLayout_46"));
+        gridLayout_46->setContentsMargins(-1, 0, -1, 0);
+        label_38 = new QLabel(frame_34);
+        label_38->setObjectName(QStringLiteral("label_38"));
+
+        gridLayout_46->addWidget(label_38, 1, 0, 1, 1);
+
+        settemp_tank5_actual = new QProgressBar(frame_34);
+        settemp_tank5_actual->setObjectName(QStringLiteral("settemp_tank5_actual"));
+        settemp_tank5_actual->setMinimum(-50);
+        settemp_tank5_actual->setMaximum(50);
+        settemp_tank5_actual->setValue(-50);
+
+        gridLayout_46->addWidget(settemp_tank5_actual, 0, 1, 1, 1);
+
+        label_42 = new QLabel(frame_34);
+        label_42->setObjectName(QStringLiteral("label_42"));
+
+        gridLayout_46->addWidget(label_42, 0, 0, 1, 1);
+
+        progressBar_22 = new QProgressBar(frame_34);
+        progressBar_22->setObjectName(QStringLiteral("progressBar_22"));
+        progressBar_22->setMinimum(-50);
+        progressBar_22->setMaximum(50);
+        progressBar_22->setValue(0);
+
+        gridLayout_46->addWidget(progressBar_22, 1, 1, 1, 1);
+
+        settemp_tank5_set = new QSlider(frame_34);
+        settemp_tank5_set->setObjectName(QStringLiteral("settemp_tank5_set"));
+        settemp_tank5_set->setMinimum(-50);
+        settemp_tank5_set->setMaximum(50);
+        settemp_tank5_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_46->addWidget(settemp_tank5_set, 2, 1, 1, 1);
+
+
+        gridLayout_45->addWidget(frame_34, 0, 1, 1, 1);
+
+        label_46 = new QLabel(frame_33);
+        label_46->setObjectName(QStringLiteral("label_46"));
+
+        gridLayout_45->addWidget(label_46, 0, 0, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_33, 5, 0, 1, 1);
+
+        frame_35 = new QFrame(frame_10);
+        frame_35->setObjectName(QStringLiteral("frame_35"));
+        frame_35->setFrameShape(QFrame::StyledPanel);
+        frame_35->setFrameShadow(QFrame::Raised);
+        gridLayout_47 = new QGridLayout(frame_35);
+        gridLayout_47->setSpacing(0);
+        gridLayout_47->setObjectName(QStringLiteral("gridLayout_47"));
+        gridLayout_47->setContentsMargins(0, 0, 0, 0);
+        frame_36 = new QFrame(frame_35);
+        frame_36->setObjectName(QStringLiteral("frame_36"));
+        frame_36->setFrameShape(QFrame::NoFrame);
+        frame_36->setFrameShadow(QFrame::Plain);
+        frame_36->setLineWidth(0);
+        gridLayout_48 = new QGridLayout(frame_36);
+        gridLayout_48->setObjectName(QStringLiteral("gridLayout_48"));
+        gridLayout_48->setContentsMargins(-1, 0, -1, 0);
+        label_50 = new QLabel(frame_36);
+        label_50->setObjectName(QStringLiteral("label_50"));
+
+        gridLayout_48->addWidget(label_50, 1, 0, 1, 1);
+
+        settemp_tank6_actual = new QProgressBar(frame_36);
+        settemp_tank6_actual->setObjectName(QStringLiteral("settemp_tank6_actual"));
+        settemp_tank6_actual->setMinimum(-50);
+        settemp_tank6_actual->setMaximum(50);
+        settemp_tank6_actual->setValue(-50);
+
+        gridLayout_48->addWidget(settemp_tank6_actual, 0, 1, 1, 1);
+
+        label_54 = new QLabel(frame_36);
+        label_54->setObjectName(QStringLiteral("label_54"));
+
+        gridLayout_48->addWidget(label_54, 0, 0, 1, 1);
+
+        progressBar_24 = new QProgressBar(frame_36);
+        progressBar_24->setObjectName(QStringLiteral("progressBar_24"));
+        progressBar_24->setMinimum(-50);
+        progressBar_24->setMaximum(50);
+        progressBar_24->setValue(0);
+
+        gridLayout_48->addWidget(progressBar_24, 1, 1, 1, 1);
+
+        settemp_tank6_set = new QSlider(frame_36);
+        settemp_tank6_set->setObjectName(QStringLiteral("settemp_tank6_set"));
+        settemp_tank6_set->setMinimum(-50);
+        settemp_tank6_set->setMaximum(50);
+        settemp_tank6_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_48->addWidget(settemp_tank6_set, 2, 1, 1, 1);
+
+
+        gridLayout_47->addWidget(frame_36, 0, 1, 1, 1);
+
+        label_58 = new QLabel(frame_35);
+        label_58->setObjectName(QStringLiteral("label_58"));
+
+        gridLayout_47->addWidget(label_58, 0, 0, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_35, 6, 0, 1, 1);
+
+        frame_37 = new QFrame(frame_10);
+        frame_37->setObjectName(QStringLiteral("frame_37"));
+        frame_37->setFrameShape(QFrame::StyledPanel);
+        frame_37->setFrameShadow(QFrame::Raised);
+        gridLayout_49 = new QGridLayout(frame_37);
+        gridLayout_49->setSpacing(0);
+        gridLayout_49->setObjectName(QStringLiteral("gridLayout_49"));
+        gridLayout_49->setContentsMargins(0, 0, 0, 0);
+        label_63 = new QLabel(frame_37);
+        label_63->setObjectName(QStringLiteral("label_63"));
+
+        gridLayout_49->addWidget(label_63, 0, 0, 1, 1);
+
+        frame_38 = new QFrame(frame_37);
+        frame_38->setObjectName(QStringLiteral("frame_38"));
+        frame_38->setFrameShape(QFrame::NoFrame);
+        frame_38->setFrameShadow(QFrame::Plain);
+        frame_38->setLineWidth(0);
+        gridLayout_50 = new QGridLayout(frame_38);
+        gridLayout_50->setObjectName(QStringLiteral("gridLayout_50"));
+        gridLayout_50->setContentsMargins(-1, 0, -1, 0);
+        settemp_tank7_actual = new QProgressBar(frame_38);
+        settemp_tank7_actual->setObjectName(QStringLiteral("settemp_tank7_actual"));
+        settemp_tank7_actual->setMinimum(-50);
+        settemp_tank7_actual->setMaximum(50);
+        settemp_tank7_actual->setValue(-50);
+
+        gridLayout_50->addWidget(settemp_tank7_actual, 0, 1, 1, 1);
+
+        label_61 = new QLabel(frame_38);
+        label_61->setObjectName(QStringLiteral("label_61"));
+
+        gridLayout_50->addWidget(label_61, 1, 0, 1, 1);
+
+        label_62 = new QLabel(frame_38);
+        label_62->setObjectName(QStringLiteral("label_62"));
+
+        gridLayout_50->addWidget(label_62, 0, 0, 1, 1);
+
+        settemp_tank7_set = new QSlider(frame_38);
+        settemp_tank7_set->setObjectName(QStringLiteral("settemp_tank7_set"));
+        settemp_tank7_set->setMinimum(-50);
+        settemp_tank7_set->setMaximum(50);
+        settemp_tank7_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_50->addWidget(settemp_tank7_set, 2, 1, 1, 1);
+
+        progressBar_26 = new QProgressBar(frame_38);
+        progressBar_26->setObjectName(QStringLiteral("progressBar_26"));
+        progressBar_26->setMinimum(-50);
+        progressBar_26->setMaximum(50);
+        progressBar_26->setValue(0);
+
+        gridLayout_50->addWidget(progressBar_26, 1, 1, 1, 1);
+
+
+        gridLayout_49->addWidget(frame_38, 0, 1, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_37, 7, 0, 1, 1);
+
+        frame_39 = new QFrame(frame_10);
+        frame_39->setObjectName(QStringLiteral("frame_39"));
+        frame_39->setFrameShape(QFrame::StyledPanel);
+        frame_39->setFrameShadow(QFrame::Raised);
+        gridLayout_51 = new QGridLayout(frame_39);
+        gridLayout_51->setSpacing(0);
+        gridLayout_51->setObjectName(QStringLiteral("gridLayout_51"));
+        gridLayout_51->setContentsMargins(0, 0, 0, 0);
+        label_66 = new QLabel(frame_39);
+        label_66->setObjectName(QStringLiteral("label_66"));
+
+        gridLayout_51->addWidget(label_66, 0, 0, 1, 1);
+
+        frame_40 = new QFrame(frame_39);
+        frame_40->setObjectName(QStringLiteral("frame_40"));
+        frame_40->setFrameShape(QFrame::NoFrame);
+        frame_40->setFrameShadow(QFrame::Plain);
+        frame_40->setLineWidth(0);
+        gridLayout_52 = new QGridLayout(frame_40);
+        gridLayout_52->setObjectName(QStringLiteral("gridLayout_52"));
+        gridLayout_52->setContentsMargins(-1, 0, -1, 0);
+        label_64 = new QLabel(frame_40);
+        label_64->setObjectName(QStringLiteral("label_64"));
+
+        gridLayout_52->addWidget(label_64, 1, 0, 1, 1);
+
+        settemp_tank8_actual = new QProgressBar(frame_40);
+        settemp_tank8_actual->setObjectName(QStringLiteral("settemp_tank8_actual"));
+        settemp_tank8_actual->setMinimum(-50);
+        settemp_tank8_actual->setMaximum(50);
+        settemp_tank8_actual->setValue(-50);
+
+        gridLayout_52->addWidget(settemp_tank8_actual, 0, 1, 1, 1);
+
+        label_65 = new QLabel(frame_40);
+        label_65->setObjectName(QStringLiteral("label_65"));
+
+        gridLayout_52->addWidget(label_65, 0, 0, 1, 1);
+
+        progressBar_28 = new QProgressBar(frame_40);
+        progressBar_28->setObjectName(QStringLiteral("progressBar_28"));
+        progressBar_28->setMinimum(-50);
+        progressBar_28->setMaximum(50);
+        progressBar_28->setValue(0);
+
+        gridLayout_52->addWidget(progressBar_28, 1, 1, 1, 1);
+
+        settemp_tank8_set = new QSlider(frame_40);
+        settemp_tank8_set->setObjectName(QStringLiteral("settemp_tank8_set"));
+        settemp_tank8_set->setMinimum(-50);
+        settemp_tank8_set->setMaximum(50);
+        settemp_tank8_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_52->addWidget(settemp_tank8_set, 2, 1, 1, 1);
+
+
+        gridLayout_51->addWidget(frame_40, 0, 1, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_39, 8, 0, 1, 1);
+
+        frame_41 = new QFrame(frame_10);
+        frame_41->setObjectName(QStringLiteral("frame_41"));
+        frame_41->setFrameShape(QFrame::StyledPanel);
+        frame_41->setFrameShadow(QFrame::Raised);
+        gridLayout_71 = new QGridLayout(frame_41);
+        gridLayout_71->setSpacing(0);
+        gridLayout_71->setObjectName(QStringLiteral("gridLayout_71"));
+        gridLayout_71->setContentsMargins(0, 0, 0, 0);
+        label_94 = new QLabel(frame_41);
+        label_94->setObjectName(QStringLiteral("label_94"));
+
+        gridLayout_71->addWidget(label_94, 0, 0, 1, 1);
+
+        frame_60 = new QFrame(frame_41);
+        frame_60->setObjectName(QStringLiteral("frame_60"));
+        frame_60->setFrameShape(QFrame::NoFrame);
+        frame_60->setFrameShadow(QFrame::Plain);
+        frame_60->setLineWidth(0);
+        gridLayout_72 = new QGridLayout(frame_60);
+        gridLayout_72->setObjectName(QStringLiteral("gridLayout_72"));
+        gridLayout_72->setContentsMargins(-1, 0, -1, 0);
+        label_95 = new QLabel(frame_60);
+        label_95->setObjectName(QStringLiteral("label_95"));
+
+        gridLayout_72->addWidget(label_95, 1, 0, 1, 1);
+
+        settemp_tank9_actual = new QProgressBar(frame_60);
+        settemp_tank9_actual->setObjectName(QStringLiteral("settemp_tank9_actual"));
+        settemp_tank9_actual->setMinimum(-50);
+        settemp_tank9_actual->setMaximum(50);
+        settemp_tank9_actual->setValue(-50);
+
+        gridLayout_72->addWidget(settemp_tank9_actual, 0, 1, 1, 1);
+
+        label_96 = new QLabel(frame_60);
+        label_96->setObjectName(QStringLiteral("label_96"));
+
+        gridLayout_72->addWidget(label_96, 0, 0, 1, 1);
+
+        progressBar_48 = new QProgressBar(frame_60);
+        progressBar_48->setObjectName(QStringLiteral("progressBar_48"));
+        progressBar_48->setMinimum(-50);
+        progressBar_48->setMaximum(50);
+        progressBar_48->setValue(0);
+
+        gridLayout_72->addWidget(progressBar_48, 1, 1, 1, 1);
+
+        settemp_tank9_set = new QSlider(frame_60);
+        settemp_tank9_set->setObjectName(QStringLiteral("settemp_tank9_set"));
+        settemp_tank9_set->setMinimum(-50);
+        settemp_tank9_set->setMaximum(50);
+        settemp_tank9_set->setOrientation(Qt::Horizontal);
+
+        gridLayout_72->addWidget(settemp_tank9_set, 2, 1, 1, 1);
+
+
+        gridLayout_71->addWidget(frame_60, 0, 1, 1, 1);
+
+
+        gridLayout_29->addWidget(frame_41, 9, 0, 1, 1);
+
+        frame_13->raise();
+        frame_17->raise();
+        frame_21->raise();
+        frame_25->raise();
+        frame_29->raise();
+        frame_33->raise();
+        frame_35->raise();
+        frame_37->raise();
+        frame_39->raise();
+        frame_23->raise();
+        frame_31->raise();
+        frame_38->raise();
+        frame_40->raise();
+        frame_41->raise();
+
+        gridLayout_28->addWidget(frame_10, 0, 0, 1, 1);
+
+        settemp_back = new QPushButton(settemp_page);
+        settemp_back->setObjectName(QStringLiteral("settemp_back"));
+
+        gridLayout_28->addWidget(settemp_back, 1, 0, 1, 1);
+
+        stackedWidget->addWidget(settemp_page);
 
         gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
 
@@ -1534,6 +2294,16 @@ public:
         QObject::connect(setlevelindicator8, SIGNAL(valueChanged(int)), progressBar_9, SLOT(setValue(int)));
         QObject::connect(setlevelindicator9, SIGNAL(valueChanged(int)), progressBar_10, SLOT(setValue(int)));
         QObject::connect(setlevelindicator0, SIGNAL(valueChanged(int)), progressBar, SLOT(setValue(int)));
+        QObject::connect(settemp_tank0_set, SIGNAL(valueChanged(int)), progressBar_12, SLOT(setValue(int)));
+        QObject::connect(settemp_tank1_set, SIGNAL(valueChanged(int)), progressBar_14, SLOT(setValue(int)));
+        QObject::connect(settemp_tank2_set, SIGNAL(valueChanged(int)), progressBar_16, SLOT(setValue(int)));
+        QObject::connect(settemp_tank3_set, SIGNAL(valueChanged(int)), progressBar_18, SLOT(setValue(int)));
+        QObject::connect(settemp_tank4_set, SIGNAL(valueChanged(int)), progressBar_20, SLOT(setValue(int)));
+        QObject::connect(settemp_tank5_set, SIGNAL(valueChanged(int)), progressBar_22, SLOT(setValue(int)));
+        QObject::connect(settemp_tank6_set, SIGNAL(valueChanged(int)), progressBar_24, SLOT(setValue(int)));
+        QObject::connect(settemp_tank7_set, SIGNAL(valueChanged(int)), progressBar_26, SLOT(setValue(int)));
+        QObject::connect(settemp_tank8_set, SIGNAL(valueChanged(int)), progressBar_28, SLOT(setValue(int)));
+        QObject::connect(settemp_tank9_set, SIGNAL(valueChanged(int)), progressBar_48, SLOT(setValue(int)));
 
         stackedWidget->setCurrentIndex(2);
 
@@ -1552,6 +2322,7 @@ public:
         add_drink->setText(QApplication::translate("MainWindow", "Add drink", Q_NULLPTR));
         set_levels->setText(QApplication::translate("MainWindow", "Set levels and ingredients", Q_NULLPTR));
         admin_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
+        admin_temp->setText(QApplication::translate("MainWindow", "Set temperatures", Q_NULLPTR));
         drink_back->setText(QApplication::translate("MainWindow", "back", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "Name:", Q_NULLPTR));
         label_4->setText(QApplication::translate("MainWindow", "Pass:", Q_NULLPTR));
@@ -1607,6 +2378,57 @@ public:
         adddrink_addingredient->setText(QApplication::translate("MainWindow", "Add ingredient", Q_NULLPTR));
         adddrink_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
         adddrink_remove_ingredient->setText(QApplication::translate("MainWindow", "Remove ingredient", Q_NULLPTR));
+        label_8->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank0_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_2->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_12->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_9->setText(QApplication::translate("MainWindow", "Tank0", Q_NULLPTR));
+        label_10->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank1_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_14->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_14->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_15->setText(QApplication::translate("MainWindow", "Tank1", Q_NULLPTR));
+        label_18->setText(QApplication::translate("MainWindow", "Tank2", Q_NULLPTR));
+        label_16->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank2_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_17->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_16->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_19->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank3_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_20->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_18->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_22->setText(QApplication::translate("MainWindow", "Tank3", Q_NULLPTR));
+        label_34->setText(QApplication::translate("MainWindow", "Tank4", Q_NULLPTR));
+        label_26->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank4_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_30->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_20->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_38->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank5_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_42->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_22->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_46->setText(QApplication::translate("MainWindow", "Tank5", Q_NULLPTR));
+        label_50->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank6_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_54->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_24->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_58->setText(QApplication::translate("MainWindow", "Tank6", Q_NULLPTR));
+        label_63->setText(QApplication::translate("MainWindow", "Tank7", Q_NULLPTR));
+        settemp_tank7_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_61->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        label_62->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_26->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_66->setText(QApplication::translate("MainWindow", "Tank8", Q_NULLPTR));
+        label_64->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank8_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_65->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_28->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_94->setText(QApplication::translate("MainWindow", "Tank9", Q_NULLPTR));
+        label_95->setText(QApplication::translate("MainWindow", "Set:", Q_NULLPTR));
+        settemp_tank9_actual->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        label_96->setText(QApplication::translate("MainWindow", "Current", Q_NULLPTR));
+        progressBar_48->setFormat(QApplication::translate("MainWindow", "%vC", Q_NULLPTR));
+        settemp_back->setText(QApplication::translate("MainWindow", "Back", Q_NULLPTR));
     } // retranslateUi
 
 };

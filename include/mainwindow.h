@@ -3,6 +3,8 @@
 #include "ui_mainwindow.h"
 #include "statemachine.h"
 #include "database.h"
+#include "temperature_controller.h"
+
 #include <QStandardItemModel>
 #include <QItemDelegate>
 #include <QGroupBox>
@@ -95,6 +97,7 @@ private:
 	void load_icons();
 	Ui::MainWindow* ui;
 	StateMachine* statemachine;
+	TemperatureController* tempcontroller;
 	DataBase* database;
 	QStandardItemModel *ingrediants_model;
 	QStandardItemModel *user_model;
@@ -131,9 +134,11 @@ public Q_SLOTS:
 	void set_levels_done();
 	void set_add_drink();
 	void add_drink();
+	void set_temp_changed(int value);
 	void add_ingredient_to_drink();
 	void drinkDataChanged(const QModelIndex &topLeft,
 			const QModelIndex &bottomRight, const QVector<int> &roles);
+	void update_temperatures();
 
 };
 #endif

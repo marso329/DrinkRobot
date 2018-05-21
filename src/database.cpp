@@ -227,6 +227,12 @@ std::tuple<std::string, int> DataBase::getLevel(int tank) {
 	}
 }
 
+void DataBase::setTemp(int tank,int temp){
+	if (levels.find(tank) != levels.end()) {
+		levels[tank].temp=temp;
+	}
+}
+
 std::vector<std::tuple<std::string, int>> DataBase::getLevels(){
 	std::vector<std::tuple<std::string, int>> temp;
 	for(int i=0;i<10;i++){

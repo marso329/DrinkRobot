@@ -107,13 +107,16 @@ struct Level {
 public:
 	Level(std::string ingredient, int vol) :
 			ingredient(ingredient),vol(vol) {
+		temp=0;
 	}
 	Level() {
 		ingredient = "";
 		vol=0;
+		temp=0;
 	}
 	std::string ingredient;
 	int vol;
+	int temp;
 private:
 	friend class boost::serialization::access;
 	template<class Archive>
@@ -121,6 +124,7 @@ private:
 		(void) version;
 		ar & ingredient;
 		ar & vol;
+		ar & temp;
 	}
 };
 
@@ -151,6 +155,7 @@ public:
 	void removeIngrediant(std::string& name);
 	std::tuple<std::string, int> getLevel(int);
 	std::vector<std::tuple<std::string, int>> getLevels();
+	void setTemp(int tank,int temp);
 	void setlevel(int tank,std::string ingredient,int vol);
 	void print();
 protected:

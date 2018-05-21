@@ -28,6 +28,7 @@ SOURCES +=	$$SRCDIR/main.cpp \
 		$$SRCDIR/statemachine.cpp \
 		$$SRCDIR/database.cpp \
 				$$SRCDIR/itemdelegate.cpp \
+		$$SRCDIR/temperature_controller.cpp \
 		$$SRCDIR/startscreen.cpp	
 
 HEADERS +=	$$INCLUDEDIR/mainwindow.h \
@@ -36,6 +37,7 @@ HEADERS +=	$$INCLUDEDIR/mainwindow.h \
 			$$INCLUDEDIR/tuple.h \
 			$$INCLUDEDIR/itemdelegate.h \
 			$$INCLUDEDIR/type_traits.h \
+			$$INCLUDEDIR/temperature_controller.h \
 			$$INCLUDEDIR/startscreen.h
 
 INCLUDEPATH +=./$${INCLUDEDIR}

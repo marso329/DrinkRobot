@@ -79,3 +79,11 @@ void StateMachine::add_drink_back(){
 	Q_EMIT changeWidget(Widgets::adminpage);
 }
 
+void StateMachine::set_temp_back(){
+	Q_EMIT changeWidget(Widgets::adminpage);
+}
+void StateMachine::set_temp(){
+	Q_EMIT changeWidget(Widgets::settemppage);
+}
+
+

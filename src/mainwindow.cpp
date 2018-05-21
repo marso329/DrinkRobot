@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	ui->setupUi(this);
 	//QGridLayout* layout = new QGridLayout(ui->login_frame);
 	database = new DataBase();
+	tempcontroller=new TemperatureController();
 	next_stage = NextStage::none;
 	ingrediants_model = new QStandardItemModel(0, 3, this);
 	ingrediants_model->setHorizontalHeaderItem(0,
@@ -121,6 +122,26 @@ MainWindow::MainWindow(QWidget* parent) :
 	//connected to this class
 	load_icons();
 
+	connect(ui->admin_temp, SIGNAL(clicked()), this->statemachine,
+			SLOT(set_temp()));
+
+	connect(ui->settemp_back, SIGNAL(clicked()), this->statemachine,
+				SLOT(set_temp_back()));
+
+	connect(tempcontroller, SIGNAL(updated()), this,
+				SLOT(update_temperatures()));
+
+	connect(ui->settemp_tank0_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank1_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank2_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank3_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank4_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank5_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank6_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank7_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank8_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+	connect(ui->settemp_tank9_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
+
 }
 void MainWindow::add_user() {
 	std::string name = ui->name_input->text().toStdString();
@@ -137,6 +158,44 @@ MainWindow::~MainWindow() {
 	delete database;
 	delete statemachine;
 
+}
+
+void MainWindow::update_temperatures(){
+	std::vector<int> temp= tempcontroller->get_temperaturs();
+	ui->settemp_tank0_actual->setValue(temp[0]);
+	ui->settemp_tank1_actual->setValue(temp[1]);
+	ui->settemp_tank2_actual->setValue(temp[2]);
+	ui->settemp_tank3_actual->setValue(temp[3]);
+	ui->settemp_tank4_actual->setValue(temp[4]);
+	ui->settemp_tank5_actual->setValue(temp[5]);
+	ui->settemp_tank6_actual->setValue(temp[6]);
+	ui->settemp_tank7_actual->setValue(temp[7]);
+	ui->settemp_tank8_actual->setValue(temp[8]);
+	ui->settemp_tank9_actual->setValue(temp[9]);
+}
+
+void MainWindow::set_temp_changed(int value){
+	(void)value;
+	database->setTemp(0,ui->settemp_tank0_set->value());
+	database->setTemp(1,ui->settemp_tank1_set->value());
+	database->setTemp(2,ui->settemp_tank2_set->value());
+	database->setTemp(3,ui->settemp_tank3_set->value());
+	database->setTemp(4,ui->settemp_tank4_set->value());
+	database->setTemp(5,ui->settemp_tank5_set->value());
+	database->setTemp(6,ui->settemp_tank6_set->value());
+	database->setTemp(7,ui->settemp_tank7_set->value());
+	database->setTemp(8,ui->settemp_tank8_set->value());
+	database->setTemp(9,ui->settemp_tank9_set->value());
+	tempcontroller->set_temperature(0,ui->settemp_tank0_set->value());
+	tempcontroller->set_temperature(1,ui->settemp_tank1_set->value());
+	tempcontroller->set_temperature(2,ui->settemp_tank2_set->value());
+	tempcontroller->set_temperature(3,ui->settemp_tank3_set->value());
+	tempcontroller->set_temperature(4,ui->settemp_tank4_set->value());
+	tempcontroller->set_temperature(5,ui->settemp_tank5_set->value());
+	tempcontroller->set_temperature(6,ui->settemp_tank6_set->value());
+	tempcontroller->set_temperature(7,ui->settemp_tank7_set->value());
+	tempcontroller->set_temperature(8,ui->settemp_tank8_set->value());
+	tempcontroller->set_temperature(9,ui->settemp_tank9_set->value());
 }
 
 void MainWindow::select_icon(){
