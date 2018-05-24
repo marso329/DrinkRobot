@@ -33,7 +33,7 @@ void StateMachine::admin_back(){
 }
 
 void StateMachine::scoreboard(){
-
+	Q_EMIT changeWidget(Widgets::scoreboardpage);
 }
 void StateMachine::startpage_pressed(){
 	Q_EMIT changeWidget(Widgets::mainpage);
@@ -84,6 +84,10 @@ void StateMachine::set_temp_back(){
 }
 void StateMachine::set_temp(){
 	Q_EMIT changeWidget(Widgets::settemppage);
+}
+
+void StateMachine::scoreboard_back(){
+	Q_EMIT changeWidget(Widgets::mainpage);
 }
 
 

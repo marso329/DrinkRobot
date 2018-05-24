@@ -32,6 +32,17 @@
     <file>images/027.png</file>
     <file>images/028.png</file>
     <file>images/029.png</file>
+
+<file>images/pour001.gif</file>
+<file>images/pour002.gif</file>
+<file>images/pour004.gif</file>
+<file>images/pour005.gif</file>
+<file>images/pour006.gif</file>
+<file>images/pour007.gif</file>
+<file>images/pour010.gif</file>
+<file>images/pour011.gif</file>
+<file>images/pour012.gif</file>
+<file>images/pour013.gif</file>
     <file>fonts/pixeled.ttf</file>
     <file>fonts/lcd.ttf</file>
 </qresource>

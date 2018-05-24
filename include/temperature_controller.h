@@ -30,6 +30,12 @@ public:
 	~TemperatureController();
 	std::vector<int> get_temperaturs();
 	void set_temperature(int,int);
+	void enable(){
+		enabled=true;
+	}
+	void disable(){
+		enabled=false;
+	}
 private:
 	int set_interface_attribs(int fd, int speed, int parity);
 	void set_blocking(int fd, int should_block);
@@ -40,6 +46,7 @@ private:
 	std::vector<std::atomic_int*> set_temperaturs;
 	std::vector<std::atomic_int*> actual_temperaturs;
 	QTimer *timer;
+	bool enabled=true;
 	int fd;
 	public Q_SLOTS:
 	void update();

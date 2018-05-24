@@ -1,4 +1,4 @@
-QT += core gui widgets sql multimedia qml quick
+QT += core gui widgets sql multimedia qml quick  
 
 TARGET = template
 TEMPLATE = app
@@ -29,6 +29,7 @@ SOURCES +=	$$SRCDIR/main.cpp \
 		$$SRCDIR/database.cpp \
 				$$SRCDIR/itemdelegate.cpp \
 		$$SRCDIR/temperature_controller.cpp \
+				$$SRCDIR/hardware.cpp \
 		$$SRCDIR/startscreen.cpp	
 
 HEADERS +=	$$INCLUDEDIR/mainwindow.h \
@@ -38,6 +39,7 @@ HEADERS +=	$$INCLUDEDIR/mainwindow.h \
 			$$INCLUDEDIR/itemdelegate.h \
 			$$INCLUDEDIR/type_traits.h \
 			$$INCLUDEDIR/temperature_controller.h \
+			$$INCLUDEDIR/hardware.h \
 			$$INCLUDEDIR/startscreen.h
 
 INCLUDEPATH +=./$${INCLUDEDIR}
@@ -46,6 +48,7 @@ LIBS += -lboost_serialization -lboost_thread -lboost_system  -lboost_filesystem
 
 FORMS += ../ui/mainwindow.ui \
 		../ui/iconselector.ui \
+				../ui/loading.ui \
 		../ui/password.ui
 
 

@@ -41,11 +41,66 @@ void DataBase::clearDrinkIngredients(std::string& name){
 	}
 }
 void DataBase::addIngredientToDrink(std::string & name,std::string& ingredient,int amount){
-	if(drinks.find(name)!=drinks.end()){
+	if(drinks.find(name)!=drinks.end()&&ingredient!=""){
 		drinks[name].ingredients.push_back(std::tuple<std::string, int>(ingredient,amount));
 	}
 
 }
+
+std::vector<std::tuple<int,int>> DataBase::getTanksAndAmountForDrink(std::string name){
+	std::vector<std::tuple<int,int>> tanksAmount;
+	std::vector<std::tuple<int,std::string, int>> levels=getLevelsWithTank();
+	if(drinks.find(name)!=drinks.end()){
+		//get ingredients
+		std::vector<std::tuple<std::string, int>> ingredients= drinks[name].ingredients;
+		for(auto it=ingredients.begin();it!=ingredients.end();it++){
+			std::tuple<std::string, int> temp=*it;
+			std::string ingredient_name=std::get<std::string>(temp);
+			int amount=std::get<int>(temp);
+			for(auto it1=levels.begin();it1!=levels.end();it1++){
+				std::tuple<int,std::string, int> temp_level=*it1;
+				std::string tank_ingredient=std::get<std::string>(temp_level);
+				int tank_amount=std::get<2>(temp_level);
+				int tank=std::get<0>(temp_level);
+				if(tank_ingredient==ingredient_name){
+					if(tank_amount>=amount){
+						tanksAmount.push_back(std::tuple<int,int>(tank,amount));
+						reducelevel(tank,amount);
+						break;
+					}
+					amount-=tank_amount;
+				}
+			}
+
+		}
+
+}
+	return tanksAmount;
+}
+
+float DataBase::getStrength(std::string&name){
+	float strength=0.0;
+	std::vector<std::tuple<std::string, int>> ingred= drinks[name].ingredients;
+	for(auto it=ingred.begin();it!=ingred.end();it++){
+		std::tuple<std::string, int> temp=*it;
+		int amount=std::get<int>(temp);
+		std::string ingredient_name=std::get<std::string>(temp);
+		int percent=0;
+		if(ingredients.find(ingredient_name)!=ingredients.end()){
+			percent=ingredients[ingredient_name].alcohol;
+		}
+		strength+=((float)percent/100.0)*(float)amount;
+	}
+	return strength;
+}
+std::string DataBase::getIngredientFromTank(int tank){
+	std::string name="";
+	if (levels.find(tank)!=levels.end()){
+		name=levels[tank].ingredient;
+	}
+	return name;
+}
+
 //check if it is possible to make a drink
 bool DataBase::drinkFeasible(std::string& name){
 	bool feasible=true;
@@ -55,12 +110,14 @@ bool DataBase::drinkFeasible(std::string& name){
 		for(auto it=ingredients.begin();it!=ingredients.end();it++){
 			std::tuple<std::string, int> temp=*it;
 			std::string ingredient_name=std::get<std::string>(temp);
+			std::cout<<"ingredient "<<ingredient_name<<std::endl;
 			int amount=std::get<int>(temp);
 			for(auto it1=levels.begin();it1!=levels.end();it1++){
 				std::tuple<std::string, int> temp_level=*it1;
 				std::string tank_ingredient=std::get<std::string>(temp_level);
 				int tank_amount=std::get<int>(temp_level);
 				if(tank_ingredient==ingredient_name){
+					std::cout<<"found tank with correct ingredient and it has amount "<<tank_amount<<std::endl;
 					amount-=tank_amount;
 				}
 			}
@@ -68,6 +125,12 @@ bool DataBase::drinkFeasible(std::string& name){
 				feasible=false;
 			}
 
+		}
+		if(feasible){
+			std::cout<<"drink "<<name<<" is feasible"<<std::endl;
+		}
+		else{
+			std::cout<<"drink "<<name<<" is not feasible"<<std::endl;
 		}
 		return feasible;
 	}
@@ -124,6 +187,95 @@ bool DataBase::isAdmin(std::string& name){
 	}
 	return false;
 }
+
+bool DataBase::getMale(std::string& name){
+	if (users.find(name) != users.end()) {
+		return users[name].male;
+	}
+	return false;
+
+}
+float DataBase::getTotalAmount(std::string& name){
+	float amount=0.0;
+	if (users.find(name) != users.end()) {
+		User user =users[name];
+		std::vector<std::tuple<long int,float>> amounts=user.amount;
+		for(auto it =amounts.begin();it!=amounts.end();it++){
+			amount+=std::get<float>(*it);
+		}
+	}
+	return amount;
+}
+
+float DataBase::getPromille(std::string& name){
+		float promille=0.0;
+	    time_t t = std::time(0);
+	    long int now = static_cast<long int> (t);
+		if (users.find(name) != users.end()) {
+			User user =users[name];
+			if(user.weight==0){
+				return 0.0;
+			}
+			std::vector<std::tuple<long int,float>> amounts=user.amount;
+			for(auto it =amounts.begin();it!=amounts.end();it++){
+				long int time=std::get<long int>(*it);
+				//in CL
+				float amount=std::get<float>(*it)*7.89;
+				float percent=0;
+				if(user.male){
+					percent=(amount*100.0)/((float)user.weight*680.0);
+				}else{
+					percent=(amount*100.0)/((float)user.weight*550.0);
+				}
+				float hours=((float)now-(float)time)/3600.0;
+				float burned =hours*0.016;
+				percent-=burned;
+				if(percent<0.0){
+					percent=0.0;
+				}
+				promille+=percent*10.0;
+
+			}
+
+		}
+
+		return promille;
+}
+void DataBase::setMale(std::string& name,bool male){
+	std::cout<<"settings male for "<<name<<std::endl;
+	if (users.find(name) != users.end()) {
+		users[name].male=male;
+	}
+}
+int DataBase::getWeight(std::string& name){
+	if (users.find(name) != users.end()) {
+		return users[name].weight;
+	}
+	return 0;
+}
+void DataBase::setWeight(std::string& name,int weight){
+	std::cout<<"settings weight for "<<name<<" to "<<weight<<std::endl;
+	if (users.find(name) != users.end()) {
+		users[name].weight=weight;
+	}
+}
+std::vector<std::tuple<long int,float>> DataBase::getAmount(std::string& name){
+	if (users.find(name) != users.end()) {
+		return users[name].amount;
+	}
+	std::vector<std::tuple<long int,float>> temp;
+	return temp;
+}
+//AMOUNT IN GRAMS
+void DataBase::addAmountToUser(std::string& name,float amount){
+    time_t t = std::time(0);
+    long int now = static_cast<long int> (t);
+	if (users.find(name) != users.end()) {
+		users[name].amount.push_back(std::tuple<long int,float>(now,amount));
+	}
+
+}
+
 
 void DataBase::addUser(std::string& name, std::string& pass, bool admin) {
 	if (users.find(name) == users.end()) {
@@ -227,10 +379,28 @@ std::tuple<std::string, int> DataBase::getLevel(int tank) {
 	}
 }
 
+void DataBase::reducelevel(int tank,int amount){
+	if (levels.find(tank) != levels.end()) {
+		levels[tank].vol-=amount;
+	}
+}
+
+
 void DataBase::setTemp(int tank,int temp){
 	if (levels.find(tank) != levels.end()) {
 		levels[tank].temp=temp;
 	}
+}
+
+std::vector<std::tuple<int,std::string, int>> DataBase::getLevelsWithTank(){
+	std::vector<std::tuple<int,std::string, int>> temp;
+	for(int i=0;i<10;i++){
+		if(levels.find(i) != levels.end()){
+			Level level = levels[i];
+			temp.push_back(std::tuple<int,std::string, int>(i,level.ingredient, level.vol));
+		}
+	}
+	return temp;
 }
 
 std::vector<std::tuple<std::string, int>> DataBase::getLevels(){

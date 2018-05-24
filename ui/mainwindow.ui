@@ -65,7 +65,7 @@
 QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>8</number>
       </property>
       <widget class="QWidget" name="startpage">
        <property name="styleSheet">
@@ -446,8 +446,8 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>42</width>
-                  <height>28</height>
+                  <width>436</width>
+                  <height>632</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_11">
@@ -3215,6 +3215,62 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
           <property name="text">
            <string>Back</string>
           </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="scoreboard_page">
+       <layout class="QGridLayout" name="gridLayout_73">
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame_61">
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_76">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>Drinking most</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_75">
+              <item row="0" column="0">
+               <widget class="QTableView" name="scoreboard_drinkmost_list"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="title">
+              <string>Highest promille</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_74">
+              <item row="0" column="0">
+               <widget class="QTableView" name="scoreboard_heighest_list"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="scoreboard_back">
+             <property name="text">
+              <string>back</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

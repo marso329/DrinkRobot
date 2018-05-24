@@ -20,10 +20,13 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <ctime>
 struct User {
 public:
 	User(std::string name, unsigned long pass, bool admin) :
 			name(name), pass(pass), admin(admin), vol(0.0), cost(0.0) {
+	weight=0;
+	male=true;
 	}
 	User() {
 		name = "";
@@ -31,12 +34,17 @@ public:
 		admin = false;
 		vol = 0.0;
 		cost = 0.0;
+		weight=0;
+		male=true;
 	}
 	std::string name;
 	unsigned long pass;
 	bool admin;
 	float vol;
 	float cost;
+	bool male;
+	int weight;
+	std::vector<std::tuple<long int,float>> amount;
 private:
 	friend class boost::serialization::access;
 	template<class Archive>
@@ -47,6 +55,9 @@ private:
 		ar & admin;
 		ar & vol;
 		ar & cost;
+		ar & weight;
+		ar & male;
+		ar & amount;
 	}
 };
 
@@ -138,8 +149,19 @@ public:
 	void removeUser(std::string& name);
 	bool isAdmin(std::string& name);
 	void changeAdmin(std::string& name,bool);
+	bool getMale(std::string& name);
+	void setMale(std::string& name,bool);
+	int getWeight(std::string& name);
+	float getPromille(std::string& name);
+	float getStrength(std::string&name);
+	float getTotalAmount(std::string& name);
+	void setWeight(std::string& name,int);
+	std::vector<std::tuple<long int,float>> getAmount(std::string& name);
+	//AMOUNT IN CL
+	void addAmountToUser(std::string& name,float);
 	void addDrink(std::string& name);
 	bool drinkFeasible(std::string& name);
+	std::vector<std::tuple<int,int>> getTanksAndAmountForDrink(std::string drink);
 	void setIcon(std::string& name,std::string& icon);
 	std::string getIcon(std::string& name);
 	std::vector<std::string> getDrinks();
@@ -155,8 +177,11 @@ public:
 	void removeIngrediant(std::string& name);
 	std::tuple<std::string, int> getLevel(int);
 	std::vector<std::tuple<std::string, int>> getLevels();
+	std::string getIngredientFromTank(int);
+	std::vector<std::tuple<int,std::string, int>> getLevelsWithTank();
 	void setTemp(int tank,int temp);
 	void setlevel(int tank,std::string ingredient,int vol);
+	void reducelevel(int tank,int amount);
 	void print();
 protected:
 private:

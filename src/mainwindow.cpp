@@ -4,9 +4,12 @@ MainWindow::MainWindow(QWidget* parent) :
 		QMainWindow(parent), ui(new Ui::MainWindow), statemachine(
 				new StateMachine()) {
 	ui->setupUi(this);
+	srand (time(NULL));
 	//QGridLayout* layout = new QGridLayout(ui->login_frame);
 	database = new DataBase();
 	tempcontroller=new TemperatureController();
+	tempcontroller->disable();
+	hardware= new Hardware();
 	next_stage = NextStage::none;
 	ingrediants_model = new QStandardItemModel(0, 3, this);
 	ingrediants_model->setHorizontalHeaderItem(0,
@@ -16,12 +19,41 @@ MainWindow::MainWindow(QWidget* parent) :
 	ingrediants_model->setHorizontalHeaderItem(2,
 			new QStandardItem(QString("Price[kr/l]")));
 
-	user_model = new QStandardItemModel(0, 2, this);
+	scoreboard_heighest_model = new QStandardItemModel(0, 2, this);
+	scoreboard_heighest_model->setHorizontalHeaderItem(0,
+			new QStandardItem(QString("Name")));
+	scoreboard_heighest_model->setHorizontalHeaderItem(1,
+				new QStandardItem(QString("Promille")));
+	ui->scoreboard_heighest_list->setModel(scoreboard_heighest_model);
+	ui->scoreboard_heighest_list->horizontalHeader()->setSectionResizeMode(
+			QHeaderView::Stretch);
+	ui->scoreboard_heighest_list->setItemDelegate(
+			new NotEditableDelegate());
+
+	scoreboard_most_model = new QStandardItemModel(0, 2, this);
+	scoreboard_most_model->setHorizontalHeaderItem(0,
+			new QStandardItem(QString("Name")));
+	scoreboard_most_model->setHorizontalHeaderItem(1,
+				new QStandardItem(QString("Amount[cl pure alchol]")));
+	ui->scoreboard_drinkmost_list->setModel(scoreboard_most_model);
+	ui->scoreboard_drinkmost_list->horizontalHeader()->setSectionResizeMode(
+			QHeaderView::Stretch);
+	ui->scoreboard_drinkmost_list->setItemDelegate(
+			new NotEditableDelegate());
+
+
+	user_model = new QStandardItemModel(0, 4, this);
 	user_model->setHorizontalHeaderItem(0, new QStandardItem(QString("Name")));
 	user_model->setHorizontalHeaderItem(1, new QStandardItem(QString("Admin")));
+	user_model->setHorizontalHeaderItem(2, new QStandardItem(QString("Weight[kg]")));
+	user_model->setHorizontalHeaderItem(3, new QStandardItem(QString("Male")));
 	ui->adduser_list->setModel(user_model);
 	ui->adduser_list->horizontalHeader()->setSectionResizeMode(
 			QHeaderView::Stretch);
+	ui->adduser_list->setItemDelegateForColumn(2,
+			new IntRangeDelegate(ui->adduser_list, 0, 200));
+	ui->adduser_list->setItemDelegateForColumn(0,
+			new NotEditableDelegate());
 
 	drink_model = new QStandardItemModel(0, 2, this);
 	drink_model->setHorizontalHeaderItem(0,
@@ -121,6 +153,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	connect(ui->adddrink_select_icon,&QPushButton::clicked,this,&MainWindow::select_icon);
 	//connected to this class
 	load_icons();
+	load_gifs();
 
 	connect(ui->admin_temp, SIGNAL(clicked()), this->statemachine,
 			SLOT(set_temp()));
@@ -142,7 +175,17 @@ MainWindow::MainWindow(QWidget* parent) :
 	connect(ui->settemp_tank8_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
 	connect(ui->settemp_tank9_set,SIGNAL(valueChanged(int)),this,SLOT(set_temp_changed(int)));
 
+	connect(ui->scoreboard, SIGNAL(clicked()), this,
+				SLOT(setup_scoreboard()));
+	connect(ui->scoreboard_back, SIGNAL(clicked()), this->statemachine,
+				SLOT(scoreboard_back()));
+
+	connect(hardware, SIGNAL(updated()), this,
+				SLOT(update_loading()));
+
 }
+
+
 void MainWindow::add_user() {
 	std::string name = ui->name_input->text().toStdString();
 	ui->name_input->clear();
@@ -251,6 +294,25 @@ void MainWindow::load_icons(){
 	    qDebug() << it.next();
 	}
 }
+void MainWindow::load_gifs(){
+	QDirIterator it(":images/", QDirIterator::Subdirectories);
+	QRegExp re("^.*gif$");
+	while (it.hasNext()) {
+		std::cout<<it.fileName().toStdString()<<std::endl;
+		if(re.exactMatch(it.fileName())){
+			QMovie* movie = new QMovie(it.fileInfo().bundleName());
+			if (movie->isValid())
+			{
+				std::cout<<"valid"<<std::endl;
+				gifs.push_back(movie);
+			}
+
+
+		}
+		qDebug() << it.next();
+		}
+}
+
 
 void MainWindow::setup_login() {
 	QLayoutItem* item;
@@ -304,7 +366,7 @@ void MainWindow::setup_make_drink(){
 		button->setEnabled(database->drinkFeasible(*it));
 		//button->setStyleSheet("background-color:transparent;");
 		layout->addWidget(button, row, col);
-		QSize size(200,180);
+		QSize size(200,170);
 		button->setIconSize(size);
 		connect(button, SIGNAL(clicked()), this, SLOT(drink_selected()));
 		col++;
@@ -319,14 +381,57 @@ void MainWindow::setup_make_drink(){
 
 
 }
+void MainWindow::update_loading(){
+	std::cout<<"update called"<<std::endl;
+	if (tanksAmount.size()==0){
+		std::cout<<"closed winow"<<std::endl;
+		Q_EMIT(closeLoading(1));
+		return;
+	}
+	std::tuple<int,int> currenTankAmount=tanksAmount[0];
+	tanksAmount.erase(tanksAmount.begin());
+	int tank=std::get<0>(currenTankAmount);
+	int amount =std::get<1>(currenTankAmount);
+	std::ostringstream infotext;
+	infotext<<"Pouring "<<amount<<" cl of"<<database->getIngredientFromTank(tank);
+	loading->info_label->setText(QString::fromStdString(infotext.str()));
+	 hardware->pour(tank,amount);
+}
 
 void MainWindow::drink_selected(){
+	QPushButton *button = (QPushButton *) sender();
+	std::string drink = button->text().toStdString();
+	tanksAmount=database->getTanksAndAmountForDrink(drink);
+	loading = new Ui_Loading();
+	QDialog* temp = new QDialog();
+	QObject::connect(this, SIGNAL(closeLoading(int)), temp, SLOT(done(int)));
+	loading->setupUi(temp);
+	temp->setModal(true);
+	float promille=database->getPromille(current_user);
+	float amount=database->getStrength(drink);
+	database->addAmountToUser(current_user,amount);
+	float new_promille=database->getPromille(current_user);
+	std::ostringstream promilletext;
+	promilletext<<"Hello "<<current_user<<" your promille level before this drink was \n"<<promille<<" and after this drink it will be "<<new_promille;
+	loading->promille_label->setText(QString::fromStdString(promilletext.str()));
+	int random=rand()%gifs.size();
+	QMovie* movie=gifs[random];
+	loading->gif_label->setMovie(movie);
+	 loading->gif_label->show();
+	    movie->start();
+	    update_loading();
+	    temp->exec();
+	    delete loading;
+	    delete temp;
+
+
 
 }
 
 void MainWindow::user_pressed() {
 	QPushButton *button = (QPushButton *) sender();
 	std::string user = button->text().toStdString();
+	current_user=user;
 
 	Ui_passwordDialog* password = new Ui_passwordDialog();
 	QDialog* temp = new QDialog();
@@ -466,6 +571,28 @@ void MainWindow::admin() {
 	statemachine->login();
 
 }
+void MainWindow::setup_scoreboard(){
+	scoreboard_heighest_model->removeRows(0, scoreboard_heighest_model->rowCount());
+	scoreboard_most_model->removeRows(0, scoreboard_most_model->rowCount());
+	std::vector<std::tuple<std::string,bool>> users= database->getUsers();
+	int counter = 0;
+	for(auto it  =users.begin();it!=users.end();it++){
+		std::string name =std::get<std::string>(*it);
+		scoreboard_heighest_model->setItem(counter, 0, new QStandardItem(QString::fromStdString(name)));
+		QStandardItem* item0=new QStandardItem(QString::number(database->getPromille(name)));
+		item0->setData(database->getPromille(name));
+
+		scoreboard_heighest_model->setItem(counter, 1, item0);
+		scoreboard_most_model->setItem(counter, 0, new QStandardItem(QString::fromStdString(name)));
+		QStandardItem* item1 =new QStandardItem(QString::number(database->getTotalAmount(name)));
+		item1->setData(database->getTotalAmount(name));
+		scoreboard_most_model->setItem(counter, 1, item1);
+		scoreboard_heighest_model->sort(1, Qt::AscendingOrder);
+		scoreboard_most_model->sort(1, Qt::AscendingOrder);
+	}
+
+	statemachine->scoreboard();
+}
 
 void MainWindow::set_add_ingrediant() {
 	settings_up_ingredients = true;
@@ -500,10 +627,11 @@ void MainWindow::set_add_user() {
 	int counter = 0;
 	for (auto it = users.begin(); it != users.end(); it++) {
 		std::tuple<std::string, bool> user = (*it);
+		std::string name_std=std::get<std::string>(user);
 		QString name = QString::fromStdString(std::get<std::string>(user));
 		bool admin = std::get<bool>(user);
 		QStandardItem* item0 = new QStandardItem(true);
-		if (name != "Martin") {
+		if (name != "martin") {
 			item0->setCheckable(true);
 		} else {
 			item0->setCheckable(false);
@@ -517,6 +645,22 @@ void MainWindow::set_add_user() {
 		item0->setEditable(false);
 		user_model->setItem(counter, 0, new QStandardItem(name));
 		user_model->setItem(counter, 1, item0);
+		//newly added
+		QString weight_str = QString::fromStdString(std::to_string(database->getWeight(name_std)));
+		QStandardItem* item1 = new QStandardItem(weight_str);
+		QStandardItem* item2 = new QStandardItem(true);
+		item2->setCheckable(true);
+		if (database->getMale(name_std)) {
+			item2->setCheckState(Qt::Checked);
+		} else {
+			item2->setCheckState(Qt::Unchecked);
+		}
+		item2->setText("Male");
+		item2->setEditable(false);
+
+		user_model->setItem(counter, 2, item1);
+		user_model->setItem(counter, 3, item2);
+
 		counter++;
 
 	}
@@ -561,9 +705,19 @@ void MainWindow::userDataChanged(const QModelIndex &topLeft,
 	index = user_model->index(topLeft.row(), 1, QModelIndex());
 	QStandardItem* item = user_model->itemFromIndex(index);
 
+	index = user_model->index(topLeft.row(), 3, QModelIndex());
+	QStandardItem* item0 = user_model->itemFromIndex(index);
+
 	if (topLeft.column() == 1) {
 		database->changeAdmin(name, item->checkState() == Qt::Checked);
 	}
+	if (topLeft.column() == 2) {
+		database->setWeight(name, topLeft.data().toInt());
+	}
+	if (topLeft.column() == 3) {
+			database->setMale(name, item0->checkState() == Qt::Checked);
+		}
+
 
 }
 

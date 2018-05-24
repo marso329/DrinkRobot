@@ -119,6 +119,9 @@ void TemperatureController::power_off(int index) {
 }
 
 void TemperatureController::update() {
+	if(!enabled){
+		return;
+	}
 	//update temperatures
 	union{
 		short unsigned data;

@@ -10,10 +10,14 @@
 #include <QGroupBox>
 #include "ui_password.h"
 #include "ui_iconselector.h"
+#include "ui_loading.h"
 #include "itemdelegate.h"
 #include <QDirIterator>
 #include <QDebug>
 #include <QToolButton>
+#include <QMovie>
+#include "hardware.h"
+#include <cstdlib>
 
 enum NextStage {make_a_drink,admin,none};
 class IntRangeValidator: public QValidator {
@@ -95,21 +99,30 @@ public:
 	~MainWindow();
 private:
 	void load_icons();
+	void load_gifs();
 	Ui::MainWindow* ui;
 	StateMachine* statemachine;
 	TemperatureController* tempcontroller;
+	Hardware* hardware;
 	DataBase* database;
 	QStandardItemModel *ingrediants_model;
+	std::string current_user;
 	QStandardItemModel *user_model;
 	QStandardItemModel *drink_model;
+	QStandardItemModel *scoreboard_most_model;
+	QStandardItemModel *scoreboard_heighest_model;
 	std::map<std::string,QIcon> icons;
+	std::vector<QMovie*> gifs;
 	bool settings_up_ingredients=false;
 	bool settings_up_users=false;
 	bool settings_up_drinks=false;
 	NextStage next_stage;
+	std::vector<std::tuple<int,int>> tanksAmount;
+	Ui_Loading* loading;
 protected:
 Q_SIGNALS:
 void closeDialog(int);
+void closeLoading(int);
 
 public Q_SLOTS:
 	void select_icon();
@@ -139,6 +152,7 @@ public Q_SLOTS:
 	void drinkDataChanged(const QModelIndex &topLeft,
 			const QModelIndex &bottomRight, const QVector<int> &roles);
 	void update_temperatures();
-
+	void setup_scoreboard();
+	void update_loading();
 };
 #endif
