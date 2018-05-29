@@ -148,14 +148,17 @@ void TemperatureController::update() {
 
 	//set peltier element on or off
 	for (int i = 0; i < 10; i++) {
-		if (actual_temperaturs[i]->load() > set_temperaturs[i]->load() && !on[i]) {
+		if (actual_temperaturs[i]->load() > set_temperaturs[i]->load()) {
 			//just so we dont start all at the same time
+			if (on[i]){
+				continue;
+			}
 			power_on(i);
-			Q_EMIT(updated());
 			on[i]=true;
+			Q_EMIT(updated());
 			return;
 		} else {
-			on[i]=true;
+			on[i]=false;
 			power_off(i);
 		}
 	}

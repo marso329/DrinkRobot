@@ -1,4 +1,6 @@
 bin/
+bin/template
+database.db
 
 # C++ objects and libs
 *.slo
