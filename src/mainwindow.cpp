@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	//QGridLayout* layout = new QGridLayout(ui->login_frame);
 	database = new DataBase();
 	tempcontroller=new TemperatureController();
-	tempcontroller->disable();
+	//tempcontroller->disable();
 	hardware= new Hardware();
 	next_stage = NextStage::none;
 	ingrediants_model = new QStandardItemModel(0, 3, this);

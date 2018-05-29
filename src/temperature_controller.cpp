@@ -55,38 +55,8 @@ int TemperatureController::convert(int value) {
 	return value / 30;
 }
 
+
 void TemperatureController::power_on(int index) {
-	if (index < 8) {
-		char value = 'A';
-		value += index;
-		char to_send[1];
-		to_send[0] = value;
-		int written = write(fd, to_send, 1);
-		if (written < 1) {
-			std::cout << "writing to temp controller failed" << std::endl;
-		}
-	}
-	else if(index==8){
-		char to_send[2];
-		to_send[0] = 'I';
-		to_send[1] = 'J';
-		int written = write(fd, to_send, 2);
-		if (written < 1) {
-			std::cout << "writing to temp controller failed" << std::endl;
-		}
-	}
-	else if(index==9){
-		char to_send[2];
-		to_send[0] = 'K';
-		to_send[1] = 'L';
-		int written = write(fd, to_send, 2);
-		if (written < 1) {
-			std::cout << "writing to temp controller failed" << std::endl;
-		}
-	}
-	usleep(2500);
-}
-void TemperatureController::power_off(int index) {
 	if (index < 8) {
 		char value = 'a';
 		value += index;
@@ -110,6 +80,38 @@ void TemperatureController::power_off(int index) {
 		char to_send[2];
 		to_send[0] = 'k';
 		to_send[1] = 'l';
+		int written = write(fd, to_send, 2);
+		if (written < 1) {
+			std::cout << "writing to temp controller failed" << std::endl;
+		}
+	}
+	usleep(2500);
+}
+
+void TemperatureController::power_off(int index) {
+	if (index < 8) {
+		char value = 'A';
+		value += index;
+		char to_send[1];
+		to_send[0] = value;
+		int written = write(fd, to_send, 1);
+		if (written < 1) {
+			std::cout << "writing to temp controller failed" << std::endl;
+		}
+	}
+	else if(index==8){
+		char to_send[2];
+		to_send[0] = 'I';
+		to_send[1] = 'J';
+		int written = write(fd, to_send, 2);
+		if (written < 1) {
+			std::cout << "writing to temp controller failed" << std::endl;
+		}
+	}
+	else if(index==9){
+		char to_send[2];
+		to_send[0] = 'K';
+		to_send[1] = 'L';
 		int written = write(fd, to_send, 2);
 		if (written < 1) {
 			std::cout << "writing to temp controller failed" << std::endl;
@@ -146,7 +148,10 @@ void TemperatureController::update() {
 	//set peltier element on or off
 	for (int i = 0; i < 10; i++) {
 		if (actual_temperaturs[i]->load() > set_temperaturs[i]->load()) {
+			//just so we dont start all at the same time
 			power_on(i);
+			Q_EMIT(updated());
+			return;
 		} else {
 			power_off(i);
 		}

@@ -21,6 +21,19 @@ pinMode(30, OUTPUT);
 pinMode(31, OUTPUT);
 pinMode(32, OUTPUT);
 pinMode(33, OUTPUT);
+digitalWrite(22, HIGH);
+digitalWrite(23, HIGH);
+digitalWrite(24, HIGH);
+digitalWrite(25, HIGH);
+digitalWrite(26, HIGH);
+digitalWrite(27, HIGH);
+digitalWrite(28, HIGH);
+digitalWrite(29, HIGH);
+digitalWrite(30, HIGH);
+digitalWrite(31, HIGH);
+digitalWrite(32, HIGH);
+digitalWrite(33, HIGH);
+
 }
 
 // the loop routine runs over and over again forever:
