@@ -52,4 +52,5 @@ FORMS += ../ui/mainwindow.ui \
 		../ui/password.ui
 
 
-RESOURCES = $$RESOURCEDIR/resources.qrc
+RESOURCES += $$RESOURCEDIR/resources.qrc \
+		$$RESOURCEDIR/resources1.qrc
