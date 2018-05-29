@@ -16,6 +16,7 @@ TemperatureController::TemperatureController(QObject* _parent) :
 		set_temperaturs[i]->store(0);
 		actual_temperaturs[i] = new std::atomic_int;
 		actual_temperaturs[i]->store(0);
+		on.push_back(false);
 	}
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
@@ -147,12 +148,14 @@ void TemperatureController::update() {
 
 	//set peltier element on or off
 	for (int i = 0; i < 10; i++) {
-		if (actual_temperaturs[i]->load() > set_temperaturs[i]->load()) {
+		if (actual_temperaturs[i]->load() > set_temperaturs[i]->load() && !on[i]) {
 			//just so we dont start all at the same time
 			power_on(i);
 			Q_EMIT(updated());
+			on[i]=true;
 			return;
 		} else {
+			on[i]=true;
 			power_off(i);
 		}
 	}

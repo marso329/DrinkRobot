@@ -45,6 +45,7 @@ private:
 
 	std::vector<std::atomic_int*> set_temperaturs;
 	std::vector<std::atomic_int*> actual_temperaturs;
+	std::vector<bool> on;
 	QTimer *timer;
 	bool enabled=true;
 	int fd;
