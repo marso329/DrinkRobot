@@ -34,6 +34,10 @@ digitalWrite(31, HIGH);
 digitalWrite(32, HIGH);
 digitalWrite(33, HIGH);
 
+//pwm
+pinMode(2, OUTPUT); 
+analogWrite(2, 127);
+
 }
 
 // the loop routine runs over and over again forever:
