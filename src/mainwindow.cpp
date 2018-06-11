@@ -182,7 +182,8 @@ MainWindow::MainWindow(QWidget* parent) :
 
 	connect(hardware, SIGNAL(updated()), this,
 				SLOT(update_loading()));
-
+	//so everything is set to max at start
+	set_temp_changed(0);
 }
 
 
