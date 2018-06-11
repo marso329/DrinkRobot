@@ -65,7 +65,7 @@
 QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
       </property>
       <property name="currentIndex">
-       <number>8</number>
+       <number>9</number>
       </property>
       <widget class="QWidget" name="startpage">
        <property name="styleSheet">
@@ -446,8 +446,8 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>436</width>
-                  <height>632</height>
+                  <width>98</width>
+                  <height>28</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_11">
@@ -2134,7 +2134,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -2147,6 +2147,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>-50</number>
                    </property>
                    <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
                     <number>50</number>
                    </property>
                    <property name="orientation">
@@ -2248,7 +2251,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -2261,6 +2264,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>-50</number>
                    </property>
                    <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
                     <number>50</number>
                    </property>
                    <property name="orientation">
@@ -2369,7 +2375,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -2382,6 +2388,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>-50</number>
                    </property>
                    <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
                     <number>50</number>
                    </property>
                    <property name="orientation">
@@ -2476,7 +2485,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -2489,6 +2498,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>-50</number>
                    </property>
                    <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
                     <number>50</number>
                    </property>
                    <property name="orientation">
@@ -2597,7 +2609,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -2610,6 +2622,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>-50</number>
                    </property>
                    <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
                     <number>50</number>
                    </property>
                    <property name="orientation">
@@ -2704,7 +2719,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -2717,6 +2732,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>-50</number>
                    </property>
                    <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
                     <number>50</number>
                    </property>
                    <property name="orientation">
@@ -2818,7 +2836,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -2831,6 +2849,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>-50</number>
                    </property>
                    <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
                     <number>50</number>
                    </property>
                    <property name="orientation">
@@ -2938,6 +2959,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                    <property name="maximum">
                     <number>50</number>
                    </property>
+                   <property name="value">
+                    <number>50</number>
+                   </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -2952,7 +2976,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -3053,7 +3077,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -3066,6 +3090,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>-50</number>
                    </property>
                    <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
                     <number>50</number>
                    </property>
                    <property name="orientation">
@@ -3167,7 +3194,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                     <number>50</number>
                    </property>
                    <property name="value">
-                    <number>0</number>
+                    <number>50</number>
                    </property>
                    <property name="format">
                     <string>%vC</string>
@@ -3182,6 +3209,9 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                    <property name="maximum">
                     <number>50</number>
                    </property>
+                   <property name="value">
+                    <number>50</number>
+                   </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -3194,20 +3224,6 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
             </widget>
            </item>
           </layout>
-          <zorder>frame_13</zorder>
-          <zorder>frame_17</zorder>
-          <zorder>frame_21</zorder>
-          <zorder>frame_25</zorder>
-          <zorder>frame_29</zorder>
-          <zorder>frame_33</zorder>
-          <zorder>frame_35</zorder>
-          <zorder>frame_37</zorder>
-          <zorder>frame_39</zorder>
-          <zorder>frame_23</zorder>
-          <zorder>frame_31</zorder>
-          <zorder>frame_38</zorder>
-          <zorder>frame_40</zorder>
-          <zorder>frame_41</zorder>
          </widget>
         </item>
         <item row="1" column="0">
