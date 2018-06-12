@@ -65,7 +65,7 @@
 QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
       </property>
       <property name="currentIndex">
-       <number>9</number>
+       <number>10</number>
       </property>
       <widget class="QWidget" name="startpage">
        <property name="styleSheet">
@@ -446,7 +446,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
+                  <width>42</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -3279,11 +3279,23 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
              </layout>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <widget class="QPushButton" name="scoreboard_back">
              <property name="text">
               <string>back</string>
              </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="title">
+              <string>Spent most</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_53">
+              <item row="0" column="0">
+               <widget class="QTableView" name="scoreboard_spentmost_list"/>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>

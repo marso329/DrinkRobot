@@ -150,15 +150,18 @@ public:
 	bool isAdmin(std::string& name);
 	void changeAdmin(std::string& name,bool);
 	bool getMale(std::string& name);
+	float getUserSpent(std::string& name);
 	void setMale(std::string& name,bool);
 	int getWeight(std::string& name);
 	float getPromille(std::string& name);
 	float getStrength(std::string&name);
+	float getCost(std::string&name);
 	float getTotalAmount(std::string& name);
 	void setWeight(std::string& name,int);
 	std::vector<std::tuple<long int,float>> getAmount(std::string& name);
 	//AMOUNT IN CL
 	void addAmountToUser(std::string& name,float);
+	void addCostToUser(std::string& name,float);
 	void addDrink(std::string& name);
 	bool drinkFeasible(std::string& name);
 	std::vector<std::tuple<int,int>> getTanksAndAmountForDrink(std::string drink);

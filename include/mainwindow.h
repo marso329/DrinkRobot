@@ -111,6 +111,7 @@ private:
 	QStandardItemModel *drink_model;
 	QStandardItemModel *scoreboard_most_model;
 	QStandardItemModel *scoreboard_heighest_model;
+	QStandardItemModel *scoreboard_spent_model;
 	std::map<std::string,QIcon> icons;
 	std::vector<QMovie*> gifs;
 	bool settings_up_ingredients=false;

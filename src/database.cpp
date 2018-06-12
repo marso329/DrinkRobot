@@ -93,6 +93,23 @@ float DataBase::getStrength(std::string&name){
 	}
 	return strength;
 }
+
+float DataBase::getCost(std::string&name){
+	float cost=0.0;
+	std::vector<std::tuple<std::string, int>> ingred= drinks[name].ingredients;
+	for(auto it=ingred.begin();it!=ingred.end();it++){
+		std::tuple<std::string, int> temp=*it;
+		int amount=std::get<int>(temp);
+		std::string ingredient_name=std::get<std::string>(temp);
+		int costPerLiter=0;
+		if(ingredients.find(ingredient_name)!=ingredients.end()){
+			costPerLiter=ingredients[ingredient_name].price;
+		}
+		cost+=((float)costPerLiter/100.0)*(float)amount;
+	}
+	return cost;
+}
+
 std::string DataBase::getIngredientFromTank(int tank){
 	std::string name="";
 	if (levels.find(tank)!=levels.end()){
@@ -195,6 +212,13 @@ bool DataBase::getMale(std::string& name){
 	return false;
 
 }
+float DataBase::getUserSpent(std::string& name){
+	if (users.find(name) != users.end()) {
+		return users[name].cost;
+	}
+	return 0;
+
+}
 float DataBase::getTotalAmount(std::string& name){
 	float amount=0.0;
 	if (users.find(name) != users.end()) {
@@ -274,6 +298,12 @@ void DataBase::addAmountToUser(std::string& name,float amount){
 		users[name].amount.push_back(std::tuple<long int,float>(now,amount));
 	}
 
+}
+
+void DataBase::addCostToUser(std::string& name,float cost){
+	if (users.find(name) != users.end()) {
+		users[name].cost+=cost;
+	}
 }
 
 

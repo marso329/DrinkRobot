@@ -41,6 +41,17 @@ MainWindow::MainWindow(QWidget* parent) :
 	ui->scoreboard_drinkmost_list->setItemDelegate(
 			new NotEditableDelegate());
 
+	scoreboard_spent_model = new QStandardItemModel(0, 2, this);
+	scoreboard_spent_model->setHorizontalHeaderItem(0,
+			new QStandardItem(QString("Name")));
+	scoreboard_spent_model->setHorizontalHeaderItem(1,
+				new QStandardItem(QString("kr")));
+	ui->scoreboard_spentmost_list->setModel(scoreboard_spent_model);
+	ui->scoreboard_spentmost_list->horizontalHeader()->setSectionResizeMode(
+			QHeaderView::Stretch);
+	ui->scoreboard_spentmost_list->setItemDelegate(
+			new NotEditableDelegate());
+
 
 	user_model = new QStandardItemModel(0, 4, this);
 	user_model->setHorizontalHeaderItem(0, new QStandardItem(QString("Name")));
@@ -411,6 +422,7 @@ void MainWindow::drink_selected(){
 	float promille=database->getPromille(current_user);
 	float amount=database->getStrength(drink);
 	database->addAmountToUser(current_user,amount);
+	database->addCostToUser(current_user,database->getCost(drink));
 	float new_promille=database->getPromille(current_user);
 	std::ostringstream promilletext;
 	promilletext<<"Hello "<<current_user<<" your promille level before this drink was \n"<<promille<<" and after this drink it will be "<<new_promille;
@@ -579,17 +591,25 @@ void MainWindow::setup_scoreboard(){
 	int counter = 0;
 	for(auto it  =users.begin();it!=users.end();it++){
 		std::string name =std::get<std::string>(*it);
+
 		scoreboard_heighest_model->setItem(counter, 0, new QStandardItem(QString::fromStdString(name)));
 		QStandardItem* item0=new QStandardItem(QString::number(database->getPromille(name)));
 		item0->setData(database->getPromille(name));
-
 		scoreboard_heighest_model->setItem(counter, 1, item0);
+
 		scoreboard_most_model->setItem(counter, 0, new QStandardItem(QString::fromStdString(name)));
 		QStandardItem* item1 =new QStandardItem(QString::number(database->getTotalAmount(name)));
 		item1->setData(database->getTotalAmount(name));
 		scoreboard_most_model->setItem(counter, 1, item1);
+
+		scoreboard_spent_model->setItem(counter, 0, new QStandardItem(QString::fromStdString(name)));
+		QStandardItem* item2 =new QStandardItem(QString::number(database->getUserSpent(name)));
+		item2->setData(database->getUserSpent(name));
+		scoreboard_spent_model->setItem(counter, 1, item2);
+
 		scoreboard_heighest_model->sort(1, Qt::AscendingOrder);
 		scoreboard_most_model->sort(1, Qt::AscendingOrder);
+		scoreboard_spent_model->sort(1, Qt::AscendingOrder);
 	}
 
 	statemachine->scoreboard();
