@@ -14,10 +14,9 @@ Hardware::Hardware(QObject* _parent) :
 		std::cout << " OPERATION FAILED: Unable to open export file" << std::endl;
 		return;
 	}
-	std::cout<<"hello from hardware2"<<std::endl;
 	for (auto it : gpios) {
-		std::cout<<it<<std::endl;
 		exportgpio << it;
+		exportgpio.flush();
 	}
 	exportgpio.close();
 
@@ -32,6 +31,7 @@ Hardware::Hardware(QObject* _parent) :
 		}
 
 		setdirgpio << "out"; //write direction to direction file
+		setdirgpio.flush();
 		setdirgpio.close(); // close direction file
 
 	}
@@ -46,6 +46,7 @@ Hardware::Hardware(QObject* _parent) :
 		}
 
 		setdirgpio << "in"; //write direction to direction file
+		setdirgpio.flush();
 		setdirgpio.close(); // close direction file
 
 	}
@@ -93,6 +94,7 @@ void Hardware::goToPos(int _pos) {
 		return;
 	}
 	dirgpio << direction;
+	dirgpio.flush();
 	dirgpio.close();
 	stepsFromCurrentPos=abs(stepsFromCurrentPos);
 	std::ofstream stepgpio((stepStr + "/value").c_str()); // open value file for gpio
@@ -102,9 +104,11 @@ void Hardware::goToPos(int _pos) {
 		return;
 	}
 	for (int i =0;i<stepsFromCurrentPos;i++){
-		stepgpio<<true;
+		stepgpio<<"1";
+		stepgpio.flush();
 		usleep(100);
-		stepgpio<<false;
+		stepgpio<<"0";
+		stepgpio.flush();
 		usleep(100);
 	}
 	stepgpio.close();
@@ -129,12 +133,15 @@ void Hardware::calibrate(){
 	}
 	//go in
 	dirgpio<<0;
+	dirgpio.flush();
 	dirgpio.close();
 	while (true){
 		for (int i =0;i<10;i++){
-			stepgpio<<1;
+			stepgpio<<"1";
+			stepgpio.flush();
 			usleep(100);
-			stepgpio<<0;
+			stepgpio<<"0";
+			stepgpio.flush();
 			usleep(100);
 		}
 		if(calButtonPressed()){
