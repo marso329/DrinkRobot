@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	database = new DataBase();
 	tempcontroller=new TemperatureController();
 	//tempcontroller->disable();
-	hardware= new Hardware();
+	hardware= new Hardware(this);
 	next_stage = NextStage::none;
 	ingrediants_model = new QStandardItemModel(0, 3, this);
 	ingrediants_model->setHorizontalHeaderItem(0,
@@ -303,25 +303,23 @@ void MainWindow::load_icons(){
 			QIcon ButtonIcon(pixmap);
 			icons[it.fileInfo().baseName().toStdString()]=ButtonIcon;
 		}
-	    qDebug() << it.next();
+	    it.next();
 	}
 }
 void MainWindow::load_gifs(){
 	QDirIterator it(":images/", QDirIterator::Subdirectories);
 	QRegExp re("^.*gif$");
 	while (it.hasNext()) {
-		std::cout<<it.fileName().toStdString()<<std::endl;
 		if(re.exactMatch(it.fileName())){
 			QMovie* movie = new QMovie(it.fileInfo().bundleName());
 			if (movie->isValid())
 			{
-				std::cout<<"valid"<<std::endl;
 				gifs.push_back(movie);
 			}
 
 
 		}
-		qDebug() << it.next();
+		 it.next();
 		}
 }
 
@@ -394,9 +392,7 @@ void MainWindow::setup_make_drink(){
 
 }
 void MainWindow::update_loading(){
-	std::cout<<"update called"<<std::endl;
 	if (tanksAmount.size()==0){
-		std::cout<<"closed winow"<<std::endl;
 		Q_EMIT(closeLoading(1));
 		return;
 	}
@@ -495,14 +491,12 @@ void MainWindow::drinkDataChanged(const QModelIndex &topLeft,
 		std::string ingredient = drink_model->data(index).toString().toStdString();
 		index = drink_model->index(i, 1, QModelIndex());
 		std::string amount = drink_model->data(index).toString().toStdString();
-		std::cout<<"amount "<<amount<<std::endl;
 		int amountint=0;
 		try{
 		amountint=std::stoi(amount);
 		}
 		catch(std::invalid_argument& e){
 		}
-		std::cout<<"amountint "<<amountint<<std::endl;
 		database->addIngredientToDrink(drink,ingredient,amountint);
 	}
 }

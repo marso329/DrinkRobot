@@ -8,14 +8,15 @@
 
 Hardware::Hardware(QObject* _parent) :
 		QObject(_parent) {
-
 	//export all gpios
 	std::ofstream exportgpio(export_str.c_str()); //Open export file
 	if (!exportgpio.is_open()) {
 		std::cout << " OPERATION FAILED: Unable to open export file" << std::endl;
 		return;
 	}
+	std::cout<<"hello from hardware2"<<std::endl;
 	for (auto it : gpios) {
+		std::cout<<it<<std::endl;
 		exportgpio << it;
 	}
 	exportgpio.close();
@@ -66,11 +67,11 @@ void Hardware::openValve() {
 		return;
 	}
 
-	setvalgpio << 1; //write value to value file
-	setvalgpio0 << 1; //write value to value file
+	setvalgpio << "1"; //write value to value file
+	setvalgpio0 << "1"; //write value to value file
 	usleep(usecondsToChangeValve);
-	setvalgpio << 0;
-	setvalgpio0 << 0;
+	setvalgpio << "0";
+	setvalgpio0 << "0";
 	setvalgpio.close(); // close value file
 	setvalgpio0.close();
 }
@@ -156,11 +157,11 @@ void Hardware::closeValve() {
 		return;
 	}
 
-	setvalgpio << 1; //write value to value file
-	setvalgpio0 << 1; //write value to value file
+	setvalgpio << "1"; //write value to value file
+	setvalgpio0 << "1"; //write value to value file
 	usleep(usecondsToChangeValve);
-	setvalgpio << 0;
-	setvalgpio0 << 0;
+	setvalgpio << "0";
+	setvalgpio0 << "0";
 	setvalgpio.close(); // close value file
 	setvalgpio0.close();
 }
