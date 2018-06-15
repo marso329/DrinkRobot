@@ -68,10 +68,14 @@ void Hardware::openValve() {
 	}
 
 	setvalgpio << "1"; //write value to value file
+	setvalgpio.flush();
 	setvalgpio0 << "1"; //write value to value file
+	setvalgpio0.flush();
 	usleep(usecondsToChangeValve);
 	setvalgpio << "0";
+	setvalgpio.flush();
 	setvalgpio0 << "0";
+	setvalgpio0.flush();
 	setvalgpio.close(); // close value file
 	setvalgpio0.close();
 }
@@ -158,10 +162,14 @@ void Hardware::closeValve() {
 	}
 
 	setvalgpio << "1"; //write value to value file
+	setvalgpio.flush();
 	setvalgpio0 << "1"; //write value to value file
+	setvalgpio0.flush();
 	usleep(usecondsToChangeValve);
 	setvalgpio << "0";
+	setvalgpio.flush();
 	setvalgpio0 << "0";
+	setvalgpio0.flush();
 	setvalgpio.close(); // close value file
 	setvalgpio0.close();
 }
