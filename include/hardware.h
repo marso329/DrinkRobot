@@ -11,7 +11,21 @@
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>
 #include <boost/thread.hpp>
+#include <string>
+#include <fstream>
+#include <string>
+#include <iostream>
+#include <sstream>
 
+/**
+ * GPIO21: in1 on h bridge
+ * GPIO20: in2 on h bridge
+ * GPIO16: in3 on h bridge
+ * GPIO26: in4 on h bridge
+ * GPIO19: step
+ * GPIO13: dir
+ * GPIO6 : calibration button, pulled down, high when pressed
+ */
 class Hardware : public QObject  {
 Q_OBJECT
 public:
@@ -20,12 +34,45 @@ public:
 	//will pour amount cl from tank
 	void pour(int tank, int amount);
 private:
+	bool calButtonPressed();
+	void openValve();
+	void closeValve();
+	void goToPos(int _pos);
+	void calibrate();
 	boost::thread* thr=NULL;
+	std::string export_str = "/sys/class/gpio/export";
+	std::string unexport_str = "/sys/class/gpio/unexport";
+	int in1_hbridge=21;
+	std::string in1_hbridgeStr="/sys/class/gpio/gpio21";
+	int in2_hbridge=20;
+	std::string in2_hbridgeStr="/sys/class/gpio/gpio20";
+	int in3_hbridge=16;
+	std::string in3_hbridgeStr="/sys/class/gpio/gpio16";
+	int in4_hbridge=26;
+	std::string in4_hbridgeStr="/sys/class/gpio/gpio26";
+	int step=19;
+	std::string stepStr="/sys/class/gpio/gpio19";
+	int dir =13;
+	std::string dirStr="/sys/class/gpio/gpio13";
+	int cal_button=6;
+
+	int usecondsToChangeValve =1000000;
+	std::string cal_buttonStr="/sys/class/gpio/gpio6";
+	std::vector<int> gpios={in1_hbridge,in2_hbridge,in3_hbridge,in4_hbridge,step,dir,cal_button};
+	std::vector<std::string> outputs={in1_hbridgeStr,in2_hbridgeStr,in3_hbridgeStr,in4_hbridgeStr,stepStr,dirStr};
+	std::vector<std::string> inputs={cal_buttonStr};
+
+	//stepper
+	std::vector<int> stepsToTake={1000,2000,3000,4000,5000,6000,7000,8000,9000,10000};
+	int currentPos=0;
+	int runs=0;
+	int runsPerCalibration=10;
+	int clperusec=1000000;
+	int tank=0;
+	int amount=0;
 	void run();
 	Q_SIGNALS:
 	void updated();
-
-
 };
 
 
