@@ -198,7 +198,12 @@ Hardware::~Hardware() {
 }
 
 void Hardware::run() {
-	//std::this_thread::sleep_for(std::chrono::seconds(3));
+	if(calButtonPressed()){
+		std::cout<<"button pressed"<<std::endl;
+	}
+	else{
+		std::cout<<"button not pressed"<<std::endl;
+	}
 	goToPos(tank);
 	openValve();
 	usleep(clperusec*amount);
