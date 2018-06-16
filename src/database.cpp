@@ -127,14 +127,12 @@ bool DataBase::drinkFeasible(std::string& name){
 		for(auto it=ingredients.begin();it!=ingredients.end();it++){
 			std::tuple<std::string, int> temp=*it;
 			std::string ingredient_name=std::get<std::string>(temp);
-			std::cout<<"ingredient "<<ingredient_name<<std::endl;
 			int amount=std::get<int>(temp);
 			for(auto it1=levels.begin();it1!=levels.end();it1++){
 				std::tuple<std::string, int> temp_level=*it1;
 				std::string tank_ingredient=std::get<std::string>(temp_level);
 				int tank_amount=std::get<int>(temp_level);
 				if(tank_ingredient==ingredient_name){
-					std::cout<<"found tank with correct ingredient and it has amount "<<tank_amount<<std::endl;
 					amount-=tank_amount;
 				}
 			}
@@ -142,12 +140,6 @@ bool DataBase::drinkFeasible(std::string& name){
 				feasible=false;
 			}
 
-		}
-		if(feasible){
-			std::cout<<"drink "<<name<<" is feasible"<<std::endl;
-		}
-		else{
-			std::cout<<"drink "<<name<<" is not feasible"<<std::endl;
 		}
 		return feasible;
 	}
@@ -266,7 +258,6 @@ float DataBase::getPromille(std::string& name){
 		return promille;
 }
 void DataBase::setMale(std::string& name,bool male){
-	std::cout<<"settings male for "<<name<<std::endl;
 	if (users.find(name) != users.end()) {
 		users[name].male=male;
 	}
@@ -278,7 +269,6 @@ int DataBase::getWeight(std::string& name){
 	return 0;
 }
 void DataBase::setWeight(std::string& name,int weight){
-	std::cout<<"settings weight for "<<name<<" to "<<weight<<std::endl;
 	if (users.find(name) != users.end()) {
 		users[name].weight=weight;
 	}
