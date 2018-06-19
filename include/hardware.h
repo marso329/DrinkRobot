@@ -25,6 +25,7 @@
  * GPIO19: step
  * GPIO13: dir
  * GPIO6 : calibration button, pulled down, high when pressed
+ * GPIO5 : calibration button valve, pulled down, high when pressed
  */
 class Hardware : public QObject  {
 Q_OBJECT
@@ -35,6 +36,7 @@ public:
 	void pour(int tank, int amount);
 private:
 	bool calButtonPressed();
+	bool calButtonValvePressed();
 	void openValve();
 	void closeValve();
 	void goToPos(int _pos);
@@ -54,16 +56,19 @@ private:
 	std::string stepStr="/sys/class/gpio/gpio19";
 	int dir =13;
 	std::string dirStr="/sys/class/gpio/gpio13";
-	int cal_button=6;
 
-	int usecondsToChangeValve =1000000;
+	int cal_button=6;
 	std::string cal_buttonStr="/sys/class/gpio/gpio6";
+	int cal_button_valve=5;
+	std::string cal_buttonValveStr="/sys/class/gpio/gpio5";
+
+	int usecondsToChangeValve =2000000;
 	std::vector<int> gpios={in1_hbridge,in2_hbridge,in3_hbridge,in4_hbridge,step,dir,cal_button};
 	std::vector<std::string> outputs={in1_hbridgeStr,in2_hbridgeStr,in3_hbridgeStr,in4_hbridgeStr,stepStr,dirStr};
 	std::vector<std::string> inputs={cal_buttonStr};
 
 	//stepper
-	std::vector<int> stepsToTake={1000,2000,3000,4000,5000,6000,7000,8000,9000,10000};
+	std::vector<int> stepsToTake={250,500,750,1000,1250,1500,1750,2000,2250,2500};
 	int currentPos=0;
 	int runs=0;
 	int runsPerCalibration=10;

@@ -106,10 +106,10 @@ void Hardware::goToPos(int _pos) {
 	for (int i =0;i<stepsFromCurrentPos;i++){
 		stepgpio<<"1";
 		stepgpio.flush();
-		usleep(100);
+		usleep(1000);
 		stepgpio<<"0";
 		stepgpio.flush();
-		usleep(100);
+		usleep(1000);
 	}
 	stepgpio.close();
 	currentPos=posInSteps;
@@ -139,10 +139,10 @@ void Hardware::calibrate(){
 		for (int i =0;i<10;i++){
 			stepgpio<<"1";
 			stepgpio.flush();
-			usleep(100);
+			usleep(1000);
 			stepgpio<<"0";
 			stepgpio.flush();
-			usleep(100);
+			usleep(1000);
 		}
 		if(calButtonPressed()){
 			currentPos=0;
@@ -172,7 +172,10 @@ void Hardware::closeValve() {
 	setvalgpio.flush();
 	setvalgpio0 << "1"; //write value to value file
 	setvalgpio0.flush();
-	usleep(usecondsToChangeValve);
+	//usleep(usecondsToChangeValve);
+	while(!calButtonValvePressed()){
+
+	}
 	setvalgpio << "0";
 	setvalgpio.flush();
 	setvalgpio0 << "0";
@@ -182,6 +185,19 @@ void Hardware::closeValve() {
 }
 bool Hardware::calButtonPressed() {
 	std::ifstream getvalgpio((cal_buttonStr + "/value").c_str()); // open value file for gpio
+	if (!getvalgpio.is_open()) {
+		std::cout << " OPERATION FAILED: Unable to get value of GPIO"
+				<< std::endl;
+		return false;
+	}
+	bool val = false;
+	getvalgpio >> val;  //read gpio value
+	getvalgpio.close(); //close the value file
+	return val;
+}
+
+bool Hardware::calButtonValvePressed(){
+	std::ifstream getvalgpio((cal_buttonValveStr + "/value").c_str()); // open value file for gpio
 	if (!getvalgpio.is_open()) {
 		std::cout << " OPERATION FAILED: Unable to get value of GPIO"
 				<< std::endl;
