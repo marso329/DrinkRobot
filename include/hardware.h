@@ -70,7 +70,7 @@ private:
 	std::vector<std::string> inputs={cal_buttonStr};
 
 	//stepper
-	std::vector<int> stepsToTake={250,500,750,1000,1250,1500,1750,2000,2250,2500};
+	std::vector<int> stepsToTake={200,700,1190,1680,2180,450,950,1430,1930,2420};
 	int currentPos=0;
 	int runs=0;
 	int runsPerCalibration=10;
