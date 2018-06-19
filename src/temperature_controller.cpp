@@ -56,7 +56,6 @@ int TemperatureController::convert(int value) {
 	return value / 30;
 }
 
-
 void TemperatureController::power_on(int index) {
 	if (index < 8) {
 		char value = 'a';
@@ -67,8 +66,7 @@ void TemperatureController::power_on(int index) {
 		if (written < 1) {
 			std::cout << "writing to temp controller failed" << std::endl;
 		}
-	}
-	else if(index==8){
+	} else if (index == 8) {
 		char to_send[2];
 		to_send[0] = 'i';
 		to_send[1] = 'j';
@@ -76,8 +74,7 @@ void TemperatureController::power_on(int index) {
 		if (written < 1) {
 			std::cout << "writing to temp controller failed" << std::endl;
 		}
-	}
-	else if(index==9){
+	} else if (index == 9) {
 		char to_send[2];
 		to_send[0] = 'k';
 		to_send[1] = 'l';
@@ -99,8 +96,7 @@ void TemperatureController::power_off(int index) {
 		if (written < 1) {
 			std::cout << "writing to temp controller failed" << std::endl;
 		}
-	}
-	else if(index==8){
+	} else if (index == 8) {
 		char to_send[2];
 		to_send[0] = 'I';
 		to_send[1] = 'J';
@@ -108,8 +104,7 @@ void TemperatureController::power_off(int index) {
 		if (written < 1) {
 			std::cout << "writing to temp controller failed" << std::endl;
 		}
-	}
-	else if(index==9){
+	} else if (index == 9) {
 		char to_send[2];
 		to_send[0] = 'K';
 		to_send[1] = 'L';
@@ -122,11 +117,11 @@ void TemperatureController::power_off(int index) {
 }
 
 void TemperatureController::update() {
-	if(!enabled){
+	if (!enabled) {
 		return;
 	}
 	//update temperatures
-	union{
+	union {
 		short unsigned data;
 		char buf[2];
 	};
@@ -143,7 +138,10 @@ void TemperatureController::update() {
 		int n = read(fd, buf, sizeof(buf));
 		if (n >= 2) {
 			*(actual_temperaturs[i]) = convert((int) data);
-			std::cout<<"value for "<<i<<"  is "<<(int) data<<std::endl;
+			if (n == 0) {
+				std::cout << "value for " << i << "  is " << (int) data
+						<< std::endl;
+			}
 		}
 	}
 
@@ -151,21 +149,19 @@ void TemperatureController::update() {
 	for (int i = 0; i < 10; i++) {
 		if (actual_temperaturs[i]->load() > set_temperaturs[i]->load()) {
 			//just so we dont start all at the same time
-			if (on[i]){
+			if (on[i]) {
 				continue;
 			}
 			power_on(i);
-			on[i]=true;
-			Q_EMIT(updated());
-			return;
-		} else {
+			on[i] = true;
+			Q_EMIT (updated());return
+;		} else {
 			on[i]=false;
 			power_off(i);
 		}
 	}
 
-	Q_EMIT(updated());
-}
+	Q_EMIT (updated());}
 
 int TemperatureController::set_interface_attribs(int fd, int speed,
 		int parity) {
