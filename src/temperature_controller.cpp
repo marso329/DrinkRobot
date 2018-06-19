@@ -53,7 +53,9 @@ void TemperatureController::set_temperature(int index, int value) {
 
 //convert to real temperature
 int TemperatureController::convert(int value) {
-	return value / 30;
+	float temp=(float)value;
+	temp=70.706-0.092*temp;
+	return (int)temp;
 }
 
 void TemperatureController::power_on(int index) {
