@@ -34,46 +34,9 @@ digitalWrite(31, HIGH);
 digitalWrite(32, HIGH);
 digitalWrite(33, HIGH);
 
-//pwm
-//pinMode(2, OUTPUT); 
-//pwm25kHzBegin();
-//pwmDuty(39);
-
-   TCCR4A = 0;
-    TCCR4B = 0;
-    TCNT4  = 0;
-
-    // Mode 10: phase correct PWM with ICR4 as Top (= F_CPU/2/25000)
-    // OC4C as Non-Inverted PWM output
-    ICR4   = (F_CPU/25000)/2;
-    OCR4C  = ICR4/2;                    // default: about 50:50
-    TCCR4A = _BV(COM4C1) | _BV(WGM41);
-    TCCR4B = _BV(WGM43) | _BV(CS40);
-
-
-    // Set the PWM pin as output.
-    pinMode( 2, OUTPUT);
-    analogWrite25k(39);
 
 }
-void analogWrite25k(int value)
-{
-    OCR4C = value;
-}
 
-void pwm25kHzBegin() {
-  TCCR2A = 0;                               // TC2 Control Register A
-  TCCR2B = 0;                               // TC2 Control Register B
-  TIMSK2 = 0;                               // TC2 Interrupt Mask Register
-  TIFR2 = 0;                                // TC2 Interrupt Flag Register
-  TCCR2A |= (1 << COM2B1) | (1 << WGM21) | (1 << WGM20);  // OC2B cleared/set on match when up/down counting, fast PWM
-  TCCR2B |= (1 << WGM22) | (1 << CS21);     // prescaler 8
-  OCR2A = 79;                               // TOP overflow value (Hz)
-  OCR2B = 0;
-}
-void pwmDuty(byte ocrb) {
-  OCR2B = ocrb;                             // PWM Width (duty)
-}
 
 // the loop routine runs over and over again forever:
 void loop() {
@@ -86,7 +49,11 @@ void loop() {
       digitalWrite((int) incomingByte-43, HIGH);
     }
     if(incomingByte>=48&&incomingByte<=57){
-      short unsigned sensorValue = (short unsigned)analogRead(A0+int(incomingByte-48));
+	unsigned tempAvg=0;
+	for(int i =0;i<10;i++){
+	tempAvg+=(unsigned)analogRead(A0+int(incomingByte-48));
+	}
+      short unsigned sensorValue = (short unsigned)(tempAvg/10);
       unsigned char bytes[2];
       bytes[1] = (sensorValue >> 8) & 0xFF;
       bytes[0] = sensorValue & 0xFF;
