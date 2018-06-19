@@ -50,7 +50,8 @@ Hardware::Hardware(QObject* _parent) :
 		setdirgpio.close(); // close direction file
 
 	}
-
+	calibrate();
+	calibrateValve();
 }
 
 void Hardware::openValve() {
@@ -81,10 +82,73 @@ void Hardware::openValve() {
 	setvalgpio0.close();
 }
 
+void Hardware::calibrateValve(){
+	std::ofstream setvalgpio((in1_hbridgeStr + "/value").c_str()); // open value file for gpio
+	if (!setvalgpio.is_open()) {
+		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "<<in1_hbridgeStr
+				<< std::endl;
+		return;
+	}
+
+	std::ofstream setvalgpio0((in3_hbridgeStr + "/value").c_str()); // open value file for gpio
+	if (!setvalgpio0.is_open()) {
+		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "<<in3_hbridgeStr
+				<< std::endl;
+		return;
+	}
+
+	setvalgpio << "1"; //write value to value file
+	setvalgpio.flush();
+	setvalgpio0 << "1"; //write value to value file
+	setvalgpio0.flush();
+	usleep(usecondsToChangeValve/4);
+	setvalgpio << "0";
+	setvalgpio.flush();
+	setvalgpio0 << "0";
+	setvalgpio0.flush();
+	setvalgpio.close(); // close value file
+	setvalgpio0.close();
+	closeValve();
+}
+
+void Hardware::goRelPos(int _pos) {
+	int posInSteps = _pos;
+	bool direction = posInSteps > 0;
+
+	//set direction
+	std::ofstream dirgpio((dirStr + "/value").c_str()); // open value file for gpio
+	if (!dirgpio.is_open()) {
+		std::cout << " OPERATION FAILED: Unable to set the value of dir GPIO"
+				<< std::endl;
+		return;
+	}
+	dirgpio << direction;
+	dirgpio.flush();
+	dirgpio.close();
+	int stepsFromCurrentPos=abs(posInSteps);
+	std::ofstream stepgpio((stepStr + "/value").c_str()); // open value file for gpio
+	if (!stepgpio.is_open()) {
+		std::cout << " OPERATION FAILED: Unable to set the value of step GPIO"
+				<< std::endl;
+		return;
+	}
+	for (int i =0;i<stepsFromCurrentPos;i++){
+		stepgpio<<"1";
+		stepgpio.flush();
+		usleep(1000);
+		stepgpio<<"0";
+		stepgpio.flush();
+		usleep(1000);
+	}
+	stepgpio.close();
+	currentPos+=posInSteps;
+
+}
+
 void Hardware::goToPos(int _pos) {
 	int posInSteps = stepsToTake[_pos];
 	int stepsFromCurrentPos = posInSteps - currentPos;
-	bool direction = stepsFromCurrentPos < 0;
+	bool direction = stepsFromCurrentPos > 0;
 
 	//set direction
 	std::ofstream dirgpio((dirStr + "/value").c_str()); // open value file for gpio
@@ -117,7 +181,8 @@ void Hardware::goToPos(int _pos) {
 }
 
 void Hardware::calibrate(){
-	goToPos(0);
+	//goToPos(0);
+	goRelPos(100);
 	//set direction
 	std::ofstream dirgpio((dirStr + "/value").c_str()); // open value file for gpio
 	if (!dirgpio.is_open()) {
@@ -136,14 +201,14 @@ void Hardware::calibrate(){
 	dirgpio.flush();
 	dirgpio.close();
 	while (true){
-		for (int i =0;i<10;i++){
+
 			stepgpio<<"1";
 			stepgpio.flush();
 			usleep(1000);
 			stepgpio<<"0";
 			stepgpio.flush();
 			usleep(1000);
-		}
+
 		if(calButtonPressed()){
 			currentPos=0;
 			stepgpio.close();

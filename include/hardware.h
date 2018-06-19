@@ -40,7 +40,9 @@ private:
 	void openValve();
 	void closeValve();
 	void goToPos(int _pos);
+	void goRelPos(int _pos);
 	void calibrate();
+	void calibrateValve();
 	boost::thread* thr=NULL;
 	std::string export_str = "/sys/class/gpio/export";
 	std::string unexport_str = "/sys/class/gpio/unexport";
@@ -62,7 +64,7 @@ private:
 	int cal_button_valve=5;
 	std::string cal_buttonValveStr="/sys/class/gpio/gpio5";
 
-	int usecondsToChangeValve =2000000;
+	int usecondsToChangeValve =4000000;
 	std::vector<int> gpios={in1_hbridge,in2_hbridge,in3_hbridge,in4_hbridge,step,dir,cal_button};
 	std::vector<std::string> outputs={in1_hbridgeStr,in2_hbridgeStr,in3_hbridgeStr,in4_hbridgeStr,stepStr,dirStr};
 	std::vector<std::string> inputs={cal_buttonStr};
