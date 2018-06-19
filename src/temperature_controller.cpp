@@ -143,6 +143,7 @@ void TemperatureController::update() {
 		int n = read(fd, buf, sizeof(buf));
 		if (n >= 2) {
 			*(actual_temperaturs[i]) = convert((int) data);
+			std::cout<<"value for "<<i<<"  is "<<(int) data<<std::endl;
 		}
 	}
 
