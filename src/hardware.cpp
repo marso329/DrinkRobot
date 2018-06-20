@@ -287,7 +287,7 @@ void Hardware::run() {
 	}
 	goToPos(tank);
 	openValve();
-	usleep(clperusec*amount);
+	usleep(clperusec*(amount-1));
 	closeValve();
 	runs++;
 	if(runs>runsPerCalibration){
