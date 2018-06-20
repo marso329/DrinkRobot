@@ -74,7 +74,7 @@ private:
 	int currentPos=0;
 	int runs=0;
 	int runsPerCalibration=10;
-	int clperusec=1000000;
+	int clperusec=0;
 	int tank=0;
 	int amount=0;
 	void run();
