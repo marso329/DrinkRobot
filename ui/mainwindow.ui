@@ -65,7 +65,7 @@
 QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
       </property>
       <property name="currentIndex">
-       <number>10</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="startpage">
        <property name="styleSheet">
@@ -446,7 +446,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>42</width>
+                  <width>98</width>
                   <height>28</height>
                  </rect>
                 </property>
@@ -565,7 +565,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
              </item>
             </layout>
            </item>
-           <item row="3" column="0">
+           <item row="4" column="0">
             <widget class="QTableView" name="adduser_list"/>
            </item>
            <item row="1" column="0">
@@ -582,10 +582,17 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); }</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
+           <item row="5" column="0">
             <widget class="QPushButton" name="adduser_back">
              <property name="text">
               <string>Back</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="adduser_clear">
+             <property name="text">
+              <string>Clear amount</string>
              </property>
             </widget>
            </item>

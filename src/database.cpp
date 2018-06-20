@@ -360,6 +360,13 @@ void DataBase::removeUser(std::string& name) {
 		users.erase(name);
 	}
 }
+void DataBase::clearUser(std::string& name) {
+	if (users.find(name) != users.end()) {
+		users[name].vol=0;
+		users[name].cost=0;
+		users[name].amount.clear();
+	}
+}
 
 void DataBase::removeIngrediant(std::string& name) {
 	if (ingredients.find(name) != ingredients.end()) {

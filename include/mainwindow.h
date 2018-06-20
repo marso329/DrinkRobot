@@ -155,5 +155,6 @@ public Q_SLOTS:
 	void update_temperatures();
 	void setup_scoreboard();
 	void update_loading();
+	void clear_user();
 };
 #endif

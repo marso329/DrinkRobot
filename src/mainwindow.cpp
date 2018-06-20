@@ -4,9 +4,9 @@ MainWindow::MainWindow(QWidget* parent) :
 		QMainWindow(parent), ui(new Ui::MainWindow), statemachine(
 				new StateMachine()) {
 	ui->setupUi(this);
-	srand(time(NULL));
+	srand (time(NULL));
 	//QGridLayout* layout = new QGridLayout(ui->login_frame);
-	database = new DataBase();
+database	= new DataBase();
 	tempcontroller = new TemperatureController();
 	//tempcontroller->disable();
 	hardware = new Hardware(this);
@@ -130,6 +130,8 @@ MainWindow::MainWindow(QWidget* parent) :
 	connect(ui->adduser_back, SIGNAL(clicked()), this->statemachine,
 			SLOT(add_user_back()));
 	connect(ui->adduser_remove, SIGNAL(clicked()), this, SLOT(remove_user()));
+
+	connect(ui->adduser_clear, SIGNAL(clicked()), this, SLOT(clear_user()));
 
 	connect(ui->add_ingredient, SIGNAL(clicked()), this->statemachine,
 			SLOT(add_ingrediant()));
@@ -341,7 +343,7 @@ void MainWindow::setup_login() {
 	int row = 0;
 	for (auto it = users.begin(); it != users.end(); it++) {
 		QPushButton* button = new QPushButton(
-				QString::fromStdString(std::get<std::string>(*it)));
+				QString::fromStdString(std::get < std::string > (*it)));
 		button->setFixedSize(200, 200);
 		layout->addWidget(button, row, col);
 		connect(button, SIGNAL(clicked()), this, SLOT(user_pressed()));
@@ -354,7 +356,7 @@ void MainWindow::setup_login() {
 }
 
 void MainWindow::setup_make_drink() {
-	std::vector<std::string> drinks = database->getDrinks();
+	std::vector < std::string > drinks = database->getDrinks();
 	QLayoutItem* item;
 	//clear previous drinks
 	if (ui->drinkpage_frame->layout() != NULL) {
@@ -397,8 +399,8 @@ void MainWindow::update_loading() {
 	}
 	std::tuple<int, int> currenTankAmount = tanksAmount[0];
 	tanksAmount.erase(tanksAmount.begin());
-	int tank = std::get<0>(currenTankAmount);
-	int amount = std::get<1>(currenTankAmount);
+	int tank = std::get < 0 > (currenTankAmount);
+	int amount = std::get < 1 > (currenTankAmount);
 	std::ostringstream infotext;
 	infotext << "Pouring " << amount << " cl of"
 			<< database->getIngredientFromTank(tank);
@@ -518,7 +520,7 @@ void MainWindow::add_drink() {
 }
 
 void MainWindow::set_add_drink() {
-	std::vector<std::string> drinks = database->getDrinks();
+	std::vector < std::string > drinks = database->getDrinks();
 	ui->adddrink_drinkselect->clear();
 	for (auto it = drinks.begin(); it != drinks.end(); it++) {
 		ui->adddrink_drinkselect->addItem(QString::fromStdString(*it));
@@ -537,7 +539,7 @@ void MainWindow::drink_changed(const QString &text) {
 	std::vector<std::tuple<std::string, int>> ingredients =
 			database->getIngredientsInDrink(name);
 
-	std::vector<std::string> allingredients = database->getIngrediantsName();
+	std::vector < std::string > allingredients = database->getIngrediantsName();
 	drink_model->clear();
 	drink_model->setHorizontalHeaderItem(0,
 			new QStandardItem(QString("Ingredient")));
@@ -548,8 +550,8 @@ void MainWindow::drink_changed(const QString &text) {
 	int ind = 0;
 	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
 		std::tuple<std::string, int> ingrediant = (*it);
-		std::string ingredient_name = std::get<std::string>(ingrediant);
-		int amount = std::get<1>(ingrediant);
+		std::string ingredient_name = std::get < std::string > (ingrediant);
+		int amount = std::get < 1 > (ingrediant);
 		std::ostringstream temp;
 		temp << amount;
 		//add amount
@@ -589,7 +591,7 @@ void MainWindow::setup_scoreboard() {
 	std::vector<std::tuple<std::string, bool>> users = database->getUsers();
 	int counter = 0;
 	for (auto it = users.begin(); it != users.end(); it++) {
-		std::string name = std::get<std::string>(*it);
+		std::string name = std::get < std::string > (*it);
 
 		scoreboard_heighest_model->setItem(counter, 0,
 				new QStandardItem(QString::fromStdString(name)));
@@ -611,11 +613,11 @@ void MainWindow::setup_scoreboard() {
 				QString::number(database->getUserSpent(name)));
 		item2->setData(database->getUserSpent(name));
 		scoreboard_spent_model->setItem(counter, 1, item2);
-
-		scoreboard_heighest_model->sort(1, Qt::AscendingOrder);
-		scoreboard_most_model->sort(1, Qt::AscendingOrder);
-		scoreboard_spent_model->sort(1, Qt::AscendingOrder);
+		counter++;
 	}
+	scoreboard_heighest_model->sort(1, Qt::DescendingOrder);
+	scoreboard_most_model->sort(1, Qt::DescendingOrder);
+	scoreboard_spent_model->sort(1, Qt::DescendingOrder);
 
 	statemachine->scoreboard();
 }
@@ -630,9 +632,9 @@ void MainWindow::set_add_ingrediant() {
 	for (auto it = ingredients.begin(); it != ingredients.end(); it++) {
 		std::tuple<std::string, int, int> ingrediant = (*it);
 		QString name = QString::fromStdString(
-				std::get<std::string>(ingrediant));
-		int strength = std::get<1>(ingrediant);
-		int price = std::get<2>(ingrediant);
+				std::get < std::string > (ingrediant));
+		int strength = std::get < 1 > (ingrediant);
+		int price = std::get < 2 > (ingrediant);
 		QString strength_str = QString::fromStdString(std::to_string(strength));
 		QString price_str = QString::fromStdString(std::to_string(price));
 		ingrediants_model->setItem(counter, 0, new QStandardItem(name));
@@ -653,8 +655,8 @@ void MainWindow::set_add_user() {
 	int counter = 0;
 	for (auto it = users.begin(); it != users.end(); it++) {
 		std::tuple<std::string, bool> user = (*it);
-		std::string name_std = std::get<std::string>(user);
-		QString name = QString::fromStdString(std::get<std::string>(user));
+		std::string name_std = std::get < std::string > (user);
+		QString name = QString::fromStdString(std::get < std::string > (user));
 		bool admin = std::get<bool>(user);
 		QStandardItem* item0 = new QStandardItem(true);
 		if (name != "martin") {
@@ -785,6 +787,19 @@ void MainWindow::remove_ingrediant() {
 		}
 	}
 }
+void MainWindow::clear_user(){
+	QItemSelectionModel *select = ui->adduser_list->selectionModel();
+	if (select->hasSelection()) {
+		QModelIndexList list = select->selectedRows();
+		for (auto it = list.begin(); it != list.end(); it++) {
+			int row = it->row();
+			QModelIndex index = user_model->index(row, 0, QModelIndex());
+			std::string name = user_model->data(index).toString().toStdString();
+			database->clearUser(name);
+
+		}
+	}
+}
 
 void MainWindow::remove_user() {
 	QItemSelectionModel *select = ui->adduser_list->selectionModel();
@@ -806,7 +821,7 @@ void MainWindow::remove_user() {
 }
 
 void MainWindow::set_levels() {
-	std::vector<std::string> ingredients = database->getIngrediantsName();
+	std::vector < std::string > ingredients = database->getIngrediantsName();
 	QStandardItemModel* pModel = new QStandardItemModel();
 	QStandardItem* dummy = new QStandardItem("Choose ingredient");
 	dummy->setSelectable(false);
@@ -821,70 +836,70 @@ void MainWindow::set_levels() {
 	ui->setlevellist0->setModel(pModel);
 	ui->setlevellist0->setEditable(false);
 	ui->setlevellist0->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(1);
 	ui->setlevelindicator1->setValue(std::get<int>(temp));
 	ui->setlevellist1->setModel(pModel);
 	ui->setlevellist1->setEditable(false);
 	ui->setlevellist1->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(2);
 	ui->setlevelindicator2->setValue(std::get<int>(temp));
 	ui->setlevellist2->setModel(pModel);
 	ui->setlevellist2->setEditable(false);
 	ui->setlevellist2->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(3);
 	ui->setlevelindicator3->setValue(std::get<int>(temp));
 	ui->setlevellist3->setModel(pModel);
 	ui->setlevellist3->setEditable(false);
 	ui->setlevellist3->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(4);
 	ui->setlevelindicator4->setValue(std::get<int>(temp));
 	ui->setlevellist4->setModel(pModel);
 	ui->setlevellist4->setEditable(false);
 	ui->setlevellist4->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(5);
 	ui->setlevelindicator5->setValue(std::get<int>(temp));
 	ui->setlevellist5->setModel(pModel);
 	ui->setlevellist5->setEditable(false);
 	ui->setlevellist5->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(6);
 	ui->setlevelindicator6->setValue(std::get<int>(temp));
 	ui->setlevellist6->setModel(pModel);
 	ui->setlevellist6->setEditable(false);
 	ui->setlevellist6->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(7);
 	ui->setlevelindicator7->setValue(std::get<int>(temp));
 	ui->setlevellist7->setModel(pModel);
 	ui->setlevellist7->setEditable(false);
 	ui->setlevellist7->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(8);
 	ui->setlevelindicator8->setValue(std::get<int>(temp));
 	ui->setlevellist8->setModel(pModel);
 	ui->setlevellist8->setEditable(false);
 	ui->setlevellist8->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	temp = database->getLevel(9);
 	ui->setlevelindicator9->setValue(std::get<int>(temp));
 	ui->setlevellist9->setModel(pModel);
 	ui->setlevellist9->setEditable(false);
 	ui->setlevellist9->setCurrentText(
-			QString::fromStdString(std::get<std::string>(temp)));
+			QString::fromStdString(std::get < std::string > (temp)));
 
 	statemachine->set_levels();
 }

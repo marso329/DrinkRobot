@@ -147,6 +147,7 @@ public:
 	void addUser(std::string& name, std::string& pass, bool admin);
 	bool checkUser(std::string& name, std::string& pass);
 	void removeUser(std::string& name);
+	void clearUser(std::string& name);
 	bool isAdmin(std::string& name);
 	void changeAdmin(std::string& name,bool);
 	bool getMale(std::string& name);
