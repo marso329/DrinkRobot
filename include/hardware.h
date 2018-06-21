@@ -73,7 +73,7 @@ private:
 	std::vector<int> stepsToTake={200,700,1190,1680,2180,450,950,1430,1930,2420};
 	int currentPos=0;
 	int runs=0;
-	int runsPerCalibration=10;
+	int runsPerCalibration=1;
 	int clperusec=500000;
 	int tank=0;
 	int amount=0;
