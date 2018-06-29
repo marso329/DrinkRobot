@@ -304,16 +304,10 @@ bool Hardware::calButtonValvePressed() {
 				<< std::endl;
 		return false;
 	}
-	bool complete = true;
-	//we check 10 times just to be sure
-	for (int i = 0; i < 10; i++) {
 		bool val = false;
 		getvalgpio >> val;  //read gpio value
-		complete=complete&val;
-		usleep(10);
-	}
 	getvalgpio.close(); //close the value file
-	return complete;
+	return val;
 }
 
 Hardware::~Hardware() {
