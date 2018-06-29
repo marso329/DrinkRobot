@@ -6,6 +6,7 @@ TEMPLATE = app
 CONFIG += qt
 CONFIG += no_keywords
 CONFIG += disable-desktop
+CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 static {
     QT += svg
     QTPLUGIN += qtvirtualkeyboardplugin
