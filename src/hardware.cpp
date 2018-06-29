@@ -71,6 +71,7 @@ void Hardware::user_check_amount() {
 		goToPos(i);
 		openValve();
 		closeValve();
+		usleep(1000000);
 	}
 	running = false;
 }
