@@ -419,6 +419,7 @@ void DataBase::reducelevel(int tank,int amount){
 }
 int DataBase::getTemp(int tank){
 	if (levels.find(tank) != levels.end()) {
+		std::cout<<"getting temp for tank "<<tank<<" to "<<levels[tank].temp<<std::endl;
 		return levels[tank].temp;
 	}
 	return 50;
@@ -426,6 +427,7 @@ int DataBase::getTemp(int tank){
 
 void DataBase::setTemp(int tank,int temp){
 	if (levels.find(tank) != levels.end()) {
+		std::cout<<"setting temp for tank "<<tank<<" to "<<temp<<std::endl;
 		levels[tank].temp=temp;
 	}
 }
