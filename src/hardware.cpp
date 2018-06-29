@@ -51,7 +51,7 @@ Hardware::Hardware(QObject* _parent) :
 
 	}
 	calibrate();
-	calibrateValve();
+	//calibrateValve();
 }
 
 void Hardware::openValve() {
@@ -216,7 +216,7 @@ void Hardware::calibrate(){
 		}
 	}
 
-
+	calibrateValve();
 }
 void Hardware::closeValve() {
 	std::ofstream setvalgpio((in2_hbridgeStr + "/value").c_str()); // open value file for gpio

@@ -30,6 +30,7 @@ DataBase::~DataBase() {
 		boost::archive::text_oarchive ar(outfile);
 		ar << *this;
 		outfile.close();
+		std::cout<<"saved database"<<std::endl;
 	}
 
 }

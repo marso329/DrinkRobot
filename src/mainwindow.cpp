@@ -207,7 +207,10 @@ database	= new DataBase();
 			SLOT(remove_drink()));
 }
 void MainWindow::cleanup(){
-delete database;
+if(database!=0){
+	delete database;
+}
+	database=0;
 }
 
 void MainWindow::add_user() {
@@ -222,7 +225,10 @@ void MainWindow::add_user() {
 }
 
 MainWindow::~MainWindow() {
+	if (database!=0){
 	delete database;
+	}
+	database=0;
 	delete statemachine;
 
 }
