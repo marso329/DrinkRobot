@@ -212,7 +212,7 @@ void Hardware::calibrate(){
 		if(calButtonPressed()){
 			currentPos=0;
 			stepgpio.close();
-			return;
+			break;
 		}
 	}
 
