@@ -65,7 +65,7 @@ private:
 	std::string cal_buttonValveStr="/sys/class/gpio/gpio5";
 
 	//int usecondsToChangeValve =1500000;
-	std::vector<int> usecondsToChangeValve={1550000,1750000,1700000,2100000,1800000,1900000,1700000,1800000,1900000,1550000};
+	std::vector<int> usecondsToChangeValve={1550000,1750000,1700000,1700000,1850000,1900000,1700000,1800000,1900000,1550000};
 	std::vector<int> gpios={in1_hbridge,in2_hbridge,in3_hbridge,in4_hbridge,step,dir,cal_button};
 	std::vector<std::string> outputs={in1_hbridgeStr,in2_hbridgeStr,in3_hbridgeStr,in4_hbridgeStr,stepStr,dirStr};
 	std::vector<std::string> inputs={cal_buttonStr};
