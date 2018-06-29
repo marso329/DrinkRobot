@@ -10,6 +10,7 @@ database	= new DataBase();
 	tempcontroller = new TemperatureController();
 	//tempcontroller->disable();
 	hardware = new Hardware(this);
+	setup_temps_from_database();
 	next_stage = NextStage::none;
 	ingrediants_model = new QStandardItemModel(0, 3, this);
 	ingrediants_model->setHorizontalHeaderItem(0,
@@ -201,7 +202,6 @@ database	= new DataBase();
 
 	connect(hardware, SIGNAL(updated()), this, SLOT(update_loading()));
 	//so everything is set to max at start
-	setup_temps_from_database();
 	//set_temp_changed(0);
 	connect(ui->adddrink_remove, SIGNAL(clicked()), this,
 			SLOT(remove_drink()));
