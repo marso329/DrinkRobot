@@ -309,7 +309,7 @@ bool Hardware::calButtonValvePressed() {
 	getvalgpio.close(); //close the value file
 
 	usleep(10000);
-	getvalgpio((cal_buttonValveStr + "/value").c_str()); // open value file for gpio
+	getvalgpio=std::ifstream((cal_buttonValveStr + "/value").c_str()); // open value file for gpio
 	if (!getvalgpio.is_open()) {
 		std::cout << " OPERATION FAILED: Unable to get value of GPIO"
 				<< std::endl;
