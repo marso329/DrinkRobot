@@ -108,7 +108,7 @@ void Hardware::openValve() {
 	setvalgpio.flush();
 	setvalgpio0 << "1"; //write value to value file
 	setvalgpio0.flush();
-	usleep(usecondsToChangeValve);
+	usleep(usecondsToChangeValve[tank]);
 	setvalgpio << "0";
 	setvalgpio.flush();
 	setvalgpio0 << "0";
@@ -136,7 +136,7 @@ void Hardware::calibrateValve() {
 	setvalgpio.flush();
 	setvalgpio0 << "1"; //write value to value file
 	setvalgpio0.flush();
-	usleep(usecondsToChangeValve / 4);
+	usleep(usecondsToChangeValve[tank] / 4);
 	setvalgpio << "0";
 	setvalgpio.flush();
 	setvalgpio0 << "0";
