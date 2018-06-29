@@ -11,7 +11,8 @@ Hardware::Hardware(QObject* _parent) :
 	//export all gpios
 	std::ofstream exportgpio(export_str.c_str()); //Open export file
 	if (!exportgpio.is_open()) {
-		std::cout << " OPERATION FAILED: Unable to open export file" << std::endl;
+		std::cout << " OPERATION FAILED: Unable to open export file"
+				<< std::endl;
 		return;
 	}
 	for (auto it : gpios) {
@@ -25,8 +26,8 @@ Hardware::Hardware(QObject* _parent) :
 	for (auto it : outputs) {
 		std::ofstream setdirgpio((it + "/direction").c_str());
 		if (!setdirgpio.is_open()) {
-			std::cout << " OPERATION FAILED: Unable to set direction for GPIO "<<it
-					<< std::endl;
+			std::cout << " OPERATION FAILED: Unable to set direction for GPIO "
+					<< it << std::endl;
 			continue;
 		}
 
@@ -40,8 +41,8 @@ Hardware::Hardware(QObject* _parent) :
 	for (auto it : inputs) {
 		std::ofstream setdirgpio((it + "/direction").c_str());
 		if (!setdirgpio.is_open()) {
-			std::cout << " OPERATION FAILED: Unable to set direction for GPIO "<<it
-					<< std::endl;
+			std::cout << " OPERATION FAILED: Unable to set direction for GPIO "
+					<< it << std::endl;
 			continue;
 		}
 
@@ -53,52 +54,52 @@ Hardware::Hardware(QObject* _parent) :
 	calibrate();
 	//calibrateValve();
 }
-void Hardware::user_calibrate(){
-	if(running){
+void Hardware::user_calibrate() {
+	if (running) {
 		return;
 	}
-	running=true;
+	running = true;
 	calibrate();
-	running=false;
+	running = false;
 }
-void Hardware::user_check_amount(){
-	if(running){
+void Hardware::user_check_amount() {
+	if (running) {
 		return;
 	}
-	running=true;
-	for(int i=0;i<10;i++){
+	running = true;
+	for (int i = 0; i < 10; i++) {
 		goToPos(i);
 		openValve();
 		closeValve();
 	}
-	running=false;
+	running = false;
 }
-void Hardware::user_purge(){
-	if(running){
-			return;
-		}
-		running=true;
-		for(int i=0;i<10;i++){
-			goToPos(i);
-			openValve();
-			usleep(clperusec*75);
-			closeValve();
-		}
-		running=false;
+void Hardware::user_purge() {
+	if (running) {
+		return;
+	}
+	running = true;
+	for (int i = 0; i < 10; i++) {
+		goToPos(i);
+		openValve();
+		usleep(clperusec * 75);
+		closeValve();
+	}
+	running = false;
 }
 
 void Hardware::openValve() {
 	std::ofstream setvalgpio((in1_hbridgeStr + "/value").c_str()); // open value file for gpio
 	if (!setvalgpio.is_open()) {
-		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "<<in1_hbridgeStr
-				<< std::endl;
+		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "
+				<< in1_hbridgeStr << std::endl;
 		return;
 	}
 
 	std::ofstream setvalgpio0((in3_hbridgeStr + "/value").c_str()); // open value file for gpio
 	if (!setvalgpio0.is_open()) {
-		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "<<in3_hbridgeStr
-				<< std::endl;
+		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "
+				<< in3_hbridgeStr << std::endl;
 		return;
 	}
 
@@ -115,18 +116,18 @@ void Hardware::openValve() {
 	setvalgpio0.close();
 }
 
-void Hardware::calibrateValve(){
+void Hardware::calibrateValve() {
 	std::ofstream setvalgpio((in1_hbridgeStr + "/value").c_str()); // open value file for gpio
 	if (!setvalgpio.is_open()) {
-		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "<<in1_hbridgeStr
-				<< std::endl;
+		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "
+				<< in1_hbridgeStr << std::endl;
 		return;
 	}
 
 	std::ofstream setvalgpio0((in3_hbridgeStr + "/value").c_str()); // open value file for gpio
 	if (!setvalgpio0.is_open()) {
-		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "<<in3_hbridgeStr
-				<< std::endl;
+		std::cout << " OPERATION FAILED: Unable to set the value of GPIO "
+				<< in3_hbridgeStr << std::endl;
 		return;
 	}
 
@@ -134,7 +135,7 @@ void Hardware::calibrateValve(){
 	setvalgpio.flush();
 	setvalgpio0 << "1"; //write value to value file
 	setvalgpio0.flush();
-	usleep(usecondsToChangeValve/4);
+	usleep(usecondsToChangeValve / 4);
 	setvalgpio << "0";
 	setvalgpio.flush();
 	setvalgpio0 << "0";
@@ -158,23 +159,23 @@ void Hardware::goRelPos(int _pos) {
 	dirgpio << direction;
 	dirgpio.flush();
 	dirgpio.close();
-	int stepsFromCurrentPos=abs(posInSteps);
+	int stepsFromCurrentPos = abs(posInSteps);
 	std::ofstream stepgpio((stepStr + "/value").c_str()); // open value file for gpio
 	if (!stepgpio.is_open()) {
 		std::cout << " OPERATION FAILED: Unable to set the value of step GPIO"
 				<< std::endl;
 		return;
 	}
-	for (int i =0;i<stepsFromCurrentPos;i++){
-		stepgpio<<"1";
+	for (int i = 0; i < stepsFromCurrentPos; i++) {
+		stepgpio << "1";
 		stepgpio.flush();
 		usleep(usecperstep);
-		stepgpio<<"0";
+		stepgpio << "0";
 		stepgpio.flush();
 		usleep(usecperstep);
 	}
 	stepgpio.close();
-	currentPos+=posInSteps;
+	currentPos += posInSteps;
 
 }
 
@@ -193,27 +194,27 @@ void Hardware::goToPos(int _pos) {
 	dirgpio << direction;
 	dirgpio.flush();
 	dirgpio.close();
-	stepsFromCurrentPos=abs(stepsFromCurrentPos);
+	stepsFromCurrentPos = abs(stepsFromCurrentPos);
 	std::ofstream stepgpio((stepStr + "/value").c_str()); // open value file for gpio
 	if (!stepgpio.is_open()) {
 		std::cout << " OPERATION FAILED: Unable to set the value of step GPIO"
 				<< std::endl;
 		return;
 	}
-	for (int i =0;i<stepsFromCurrentPos;i++){
-		stepgpio<<"1";
+	for (int i = 0; i < stepsFromCurrentPos; i++) {
+		stepgpio << "1";
 		stepgpio.flush();
 		usleep(usecperstep);
-		stepgpio<<"0";
+		stepgpio << "0";
 		stepgpio.flush();
 		usleep(usecperstep);
 	}
 	stepgpio.close();
-	currentPos=posInSteps;
+	currentPos = posInSteps;
 
 }
 
-void Hardware::calibrate(){
+void Hardware::calibrate() {
 	//goToPos(0);
 	goRelPos(100);
 	//set direction
@@ -230,20 +231,20 @@ void Hardware::calibrate(){
 		return;
 	}
 	//go in
-	dirgpio<<0;
+	dirgpio << 0;
 	dirgpio.flush();
 	dirgpio.close();
-	while (true){
+	while (true) {
 
-			stepgpio<<"1";
-			stepgpio.flush();
-			usleep(usecperstep);
-			stepgpio<<"0";
-			stepgpio.flush();
-			usleep(usecperstep);
+		stepgpio << "1";
+		stepgpio.flush();
+		usleep(usecperstep);
+		stepgpio << "0";
+		stepgpio.flush();
+		usleep(usecperstep);
 
-		if(calButtonPressed()){
-			currentPos=0;
+		if (calButtonPressed()) {
+			currentPos = 0;
 			stepgpio.close();
 			break;
 		}
@@ -254,15 +255,15 @@ void Hardware::calibrate(){
 void Hardware::closeValve() {
 	std::ofstream setvalgpio((in2_hbridgeStr + "/value").c_str()); // open value file for gpio
 	if (!setvalgpio.is_open()) {
-		std::cout << " OPERATION FAILED: Unable to set the value of GPIO"<<in2_hbridgeStr
-				<< std::endl;
+		std::cout << " OPERATION FAILED: Unable to set the value of GPIO"
+				<< in2_hbridgeStr << std::endl;
 		return;
 	}
 
 	std::ofstream setvalgpio0((in4_hbridgeStr + "/value").c_str()); // open value file for gpio
 	if (!setvalgpio0.is_open()) {
-		std::cout << " OPERATION FAILED: Unable to set the value of GPIO"<<in4_hbridge
-				<< std::endl;
+		std::cout << " OPERATION FAILED: Unable to set the value of GPIO"
+				<< in4_hbridge << std::endl;
 		return;
 	}
 
@@ -271,8 +272,8 @@ void Hardware::closeValve() {
 	setvalgpio0 << "1"; //write value to value file
 	setvalgpio0.flush();
 	//usleep(usecondsToChangeValve);
-	while(!calButtonValvePressed()){
-		usleep(10000);
+	while (!calButtonValvePressed()) {
+		usleep(20000);
 
 	}
 	setvalgpio << "0";
@@ -295,17 +296,23 @@ bool Hardware::calButtonPressed() {
 	return val;
 }
 
-bool Hardware::calButtonValvePressed(){
+bool Hardware::calButtonValvePressed() {
 	std::ifstream getvalgpio((cal_buttonValveStr + "/value").c_str()); // open value file for gpio
 	if (!getvalgpio.is_open()) {
 		std::cout << " OPERATION FAILED: Unable to get value of GPIO"
 				<< std::endl;
 		return false;
 	}
-	bool val = false;
-	getvalgpio >> val;  //read gpio value
+	bool complete = true;
+	//we check 10 times just to be sure
+	for (int i = 0; i < 10; i++) {
+		bool val = false;
+		getvalgpio >> val;  //read gpio value
+		complete=complete&val;
+		usleep(10);
+	}
 	getvalgpio.close(); //close the value file
-	return val;
+	return complete;
 }
 
 Hardware::~Hardware() {
@@ -315,23 +322,22 @@ Hardware::~Hardware() {
 void Hardware::run() {
 	goToPos(tank);
 	openValve();
-	usleep(clperusec*(amount-1));
+	usleep(clperusec * (amount - 1));
 	closeValve();
 	runs++;
-	if(runs>=runsPerCalibration){
+	if (runs >= runsPerCalibration) {
 		calibrate();
-		runs=0;
+		runs = 0;
 	}
 
-	Q_EMIT(updated());
-}
+	Q_EMIT (updated());}
 
 void Hardware::pour(int _tank, int _amount) {
-	if(_amount<1){
-		_amount=1;
+	if (_amount < 1) {
+		_amount = 1;
 	}
-	tank=_tank;
-	amount=_amount;
+	tank = _tank;
+	amount = _amount;
 	if (thr != NULL) {
 		delete thr;
 	}
