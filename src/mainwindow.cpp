@@ -212,6 +212,14 @@ database	= new DataBase();
 					SLOT(user_check_amount()));
 	connect(ui->admin_purge, SIGNAL(clicked()), hardware,
 					SLOT(user_purge()));
+	connect(ui->admin_manual_ok, SIGNAL(clicked()), this,
+					SLOT(manual_pour()));
+}
+
+void MainWindow::manual_pour(){
+int tank= std::stoi(ui->admin_manual_tank->currentText().toStdString());
+int cl= std::stoi(ui->admin_manual_cl->currentText().toStdString());
+hardware->pour(tank,cl);
 }
 void MainWindow::cleanup(){
 if(database!=0){

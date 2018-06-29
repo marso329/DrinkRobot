@@ -128,6 +128,7 @@ void closeLoading(int);
 public Q_SLOTS:
 	void select_icon();
 	void select_icon_callback();
+	void manual_pour();
 	void drink_changed(const QString &text);
 	void setup_make_drink();
 	void drink_selected();
