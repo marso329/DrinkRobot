@@ -65,7 +65,7 @@
 QFrame {frameShape: NoFrame; frameShadow: Plain;lineWidth:0}</string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>9</number>
       </property>
       <widget class="QWidget" name="startpage">
        <property name="styleSheet">

@@ -184,6 +184,7 @@ public:
 	std::string getIngredientFromTank(int);
 	std::vector<std::tuple<int,std::string, int>> getLevelsWithTank();
 	void setTemp(int tank,int temp);
+	int getTemp(int tank);
 	void setlevel(int tank,std::string ingredient,int vol);
 	void reducelevel(int tank,int amount);
 	void print();

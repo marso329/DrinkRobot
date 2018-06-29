@@ -135,10 +135,10 @@ void Hardware::goRelPos(int _pos) {
 	for (int i =0;i<stepsFromCurrentPos;i++){
 		stepgpio<<"1";
 		stepgpio.flush();
-		usleep(1000);
+		usleep(2000);
 		stepgpio<<"0";
 		stepgpio.flush();
-		usleep(1000);
+		usleep(2000);
 	}
 	stepgpio.close();
 	currentPos+=posInSteps;
@@ -170,10 +170,10 @@ void Hardware::goToPos(int _pos) {
 	for (int i =0;i<stepsFromCurrentPos;i++){
 		stepgpio<<"1";
 		stepgpio.flush();
-		usleep(1000);
+		usleep(2000);
 		stepgpio<<"0";
 		stepgpio.flush();
-		usleep(1000);
+		usleep(2000);
 	}
 	stepgpio.close();
 	currentPos=posInSteps;
@@ -204,10 +204,10 @@ void Hardware::calibrate(){
 
 			stepgpio<<"1";
 			stepgpio.flush();
-			usleep(1000);
+			usleep(2000);
 			stepgpio<<"0";
 			stepgpio.flush();
-			usleep(1000);
+			usleep(2000);
 
 		if(calButtonPressed()){
 			currentPos=0;
@@ -290,7 +290,7 @@ void Hardware::run() {
 	usleep(clperusec*(amount-1));
 	closeValve();
 	runs++;
-	if(runs>runsPerCalibration){
+	if(runs>=runsPerCalibration){
 		calibrate();
 		runs=0;
 	}

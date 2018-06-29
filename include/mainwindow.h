@@ -149,6 +149,7 @@ public Q_SLOTS:
 	void set_add_drink();
 	void add_drink();
 	void set_temp_changed(int value);
+	void setup_temps_from_database();
 	void add_ingredient_to_drink();
 	void drinkDataChanged(const QModelIndex &topLeft,
 			const QModelIndex &bottomRight, const QVector<int> &roles);

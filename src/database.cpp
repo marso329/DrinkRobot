@@ -411,7 +411,12 @@ void DataBase::reducelevel(int tank,int amount){
 		levels[tank].vol-=amount;
 	}
 }
-
+int DataBase::getTemp(int tank){
+	if (levels.find(tank) != levels.end()) {
+		return levels[tank].temp;
+	}
+	return 50;
+}
 
 void DataBase::setTemp(int tank,int temp){
 	if (levels.find(tank) != levels.end()) {

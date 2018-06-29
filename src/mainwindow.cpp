@@ -201,7 +201,8 @@ database	= new DataBase();
 
 	connect(hardware, SIGNAL(updated()), this, SLOT(update_loading()));
 	//so everything is set to max at start
-	set_temp_changed(0);
+	setup_temps_from_database();
+	//set_temp_changed(0);
 }
 
 void MainWindow::add_user() {
@@ -233,6 +234,28 @@ void MainWindow::update_temperatures() {
 	ui->settemp_tank7_actual->setValue(temp[7]);
 	ui->settemp_tank8_actual->setValue(temp[8]);
 	ui->settemp_tank9_actual->setValue(temp[9]);
+}
+void MainWindow::setup_temps_from_database(){
+	 ui->settemp_tank0_set->setValue(database->getTemp(0));
+	 ui->settemp_tank1_set->setValue(database->getTemp(1));
+	 ui->settemp_tank2_set->setValue(database->getTemp(2));
+	 ui->settemp_tank3_set->setValue(database->getTemp(3));
+	 ui->settemp_tank4_set->setValue(database->getTemp(4));
+	 ui->settemp_tank5_set->setValue(database->getTemp(5));
+	 ui->settemp_tank6_set->setValue(database->getTemp(6));
+	 ui->settemp_tank7_set->setValue(database->getTemp(7));
+	 ui->settemp_tank8_set->setValue(database->getTemp(8));
+	 ui->settemp_tank9_set->setValue(database->getTemp(9));
+		tempcontroller->set_temperature(0, ui->settemp_tank0_set->value());
+		tempcontroller->set_temperature(1, ui->settemp_tank1_set->value());
+		tempcontroller->set_temperature(2, ui->settemp_tank2_set->value());
+		tempcontroller->set_temperature(3, ui->settemp_tank3_set->value());
+		tempcontroller->set_temperature(4, ui->settemp_tank4_set->value());
+		tempcontroller->set_temperature(5, ui->settemp_tank5_set->value());
+		tempcontroller->set_temperature(6, ui->settemp_tank6_set->value());
+		tempcontroller->set_temperature(7, ui->settemp_tank7_set->value());
+		tempcontroller->set_temperature(8, ui->settemp_tank8_set->value());
+		tempcontroller->set_temperature(9, ui->settemp_tank9_set->value());
 }
 
 void MainWindow::set_temp_changed(int value) {
