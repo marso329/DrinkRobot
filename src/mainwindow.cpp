@@ -212,6 +212,7 @@ database	= new DataBase();
 					SLOT(user_check_amount()));
 	connect(ui->admin_purge, SIGNAL(clicked()), hardware,
 					SLOT(user_purge()));
+
 	connect(ui->admin_manual_ok, SIGNAL(clicked()), this,
 					SLOT(manual_pour()));
 }
