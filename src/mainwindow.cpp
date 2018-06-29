@@ -203,6 +203,11 @@ database	= new DataBase();
 	//so everything is set to max at start
 	setup_temps_from_database();
 	//set_temp_changed(0);
+	connect(ui->adddrink_remove, SIGNAL(clicked()), this,
+			SLOT(remove_drink()));
+}
+void MainWindow::cleanup(){
+delete database;
 }
 
 void MainWindow::add_user() {
@@ -525,6 +530,12 @@ void MainWindow::drinkDataChanged(const QModelIndex &topLeft,
 		}
 		database->addIngredientToDrink(drink, ingredient, amountint);
 	}
+}
+
+void MainWindow::remove_drink(){
+	std::string selected_drink=ui->adddrink_drinkselect->currentText().toStdString();
+	database->removeDrink(selected_drink);
+	set_add_drink();
 }
 
 void MainWindow::add_drink() {

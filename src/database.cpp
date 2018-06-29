@@ -153,6 +153,11 @@ void DataBase::addDrink(std::string& name){
 		drinks[name] = Drink(name);
 	}
 }
+void DataBase::removeDrink(std::string& name){
+	if (drinks.find(name) != drinks.end()) {
+		drinks.erase(name);
+	}
+}
 void DataBase::setIcon(std::string& name,std::string& icon){
 	if(drinks.find(name)!=drinks.end()){
 		drinks[name].icon=icon;

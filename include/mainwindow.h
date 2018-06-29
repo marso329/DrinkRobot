@@ -143,6 +143,7 @@ public Q_SLOTS:
 	void ingrediantDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles );
 	void userDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles );
 	void remove_ingrediant();
+	void remove_drink();
 	void remove_user();
 	void set_levels();
 	void set_levels_done();
@@ -157,5 +158,6 @@ public Q_SLOTS:
 	void setup_scoreboard();
 	void update_loading();
 	void clear_user();
+	void cleanup();
 };
 #endif

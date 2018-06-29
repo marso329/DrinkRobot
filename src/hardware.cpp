@@ -135,10 +135,10 @@ void Hardware::goRelPos(int _pos) {
 	for (int i =0;i<stepsFromCurrentPos;i++){
 		stepgpio<<"1";
 		stepgpio.flush();
-		usleep(2000);
+		usleep(usecperstep);
 		stepgpio<<"0";
 		stepgpio.flush();
-		usleep(2000);
+		usleep(usecperstep);
 	}
 	stepgpio.close();
 	currentPos+=posInSteps;
@@ -170,10 +170,10 @@ void Hardware::goToPos(int _pos) {
 	for (int i =0;i<stepsFromCurrentPos;i++){
 		stepgpio<<"1";
 		stepgpio.flush();
-		usleep(2000);
+		usleep(usecperstep);
 		stepgpio<<"0";
 		stepgpio.flush();
-		usleep(2000);
+		usleep(usecperstep);
 	}
 	stepgpio.close();
 	currentPos=posInSteps;
@@ -204,10 +204,10 @@ void Hardware::calibrate(){
 
 			stepgpio<<"1";
 			stepgpio.flush();
-			usleep(2000);
+			usleep(usecperstep);
 			stepgpio<<"0";
 			stepgpio.flush();
-			usleep(2000);
+			usleep(usecperstep);
 
 		if(calButtonPressed()){
 			currentPos=0;
@@ -279,12 +279,6 @@ Hardware::~Hardware() {
 }
 
 void Hardware::run() {
-	if(calButtonPressed()){
-		std::cout<<"button pressed"<<std::endl;
-	}
-	else{
-		std::cout<<"button not pressed"<<std::endl;
-	}
 	goToPos(tank);
 	openValve();
 	usleep(clperusec*(amount-1));
@@ -299,6 +293,9 @@ void Hardware::run() {
 }
 
 void Hardware::pour(int _tank, int _amount) {
+	if(_amount<1){
+		_amount=1;
+	}
 	tank=_tank;
 	amount=_amount;
 	if (thr != NULL) {

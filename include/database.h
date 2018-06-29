@@ -164,6 +164,7 @@ public:
 	void addAmountToUser(std::string& name,float);
 	void addCostToUser(std::string& name,float);
 	void addDrink(std::string& name);
+	void removeDrink(std::string& name);
 	bool drinkFeasible(std::string& name);
 	std::vector<std::tuple<int,int>> getTanksAndAmountForDrink(std::string drink);
 	void setIcon(std::string& name,std::string& icon);
