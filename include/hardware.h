@@ -73,14 +73,19 @@ private:
 	std::vector<int> stepsToTake={200,700,1190,1680,2180,450,950,1430,1930,2420};
 	int currentPos=0;
 	int runs=0;
-	int runsPerCalibration=2;
-	int usecperstep=1500;
+	int runsPerCalibration=6;
+	int usecperstep=1000;
 	int clperusec=500000;
 	int tank=0;
 	int amount=0;
+	bool running=false;
 	void run();
 	Q_SIGNALS:
 	void updated();
+	public Q_SLOTS:
+	void user_calibrate();
+	void user_check_amount();
+	void user_purge();
 };
 
 

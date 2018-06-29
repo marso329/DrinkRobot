@@ -53,6 +53,39 @@ Hardware::Hardware(QObject* _parent) :
 	calibrate();
 	//calibrateValve();
 }
+void Hardware::user_calibrate(){
+	if(running){
+		return;
+	}
+	running=true;
+	calibrate();
+	running=false;
+}
+void Hardware::user_check_amount(){
+	if(running){
+		return;
+	}
+	running=true;
+	for(int i=0;i<10;i++){
+		goToPos(i);
+		openValve();
+		closeValve();
+	}
+	running=false;
+}
+void Hardware::user_purge(){
+	if(running){
+			return;
+		}
+		running=true;
+		for(int i=0;i<10;i++){
+			goToPos(i);
+			openValve();
+			usleep(clperusec*75);
+			closeValve();
+		}
+		running=false;
+}
 
 void Hardware::openValve() {
 	std::ofstream setvalgpio((in1_hbridgeStr + "/value").c_str()); // open value file for gpio

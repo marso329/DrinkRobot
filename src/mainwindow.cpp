@@ -205,6 +205,13 @@ database	= new DataBase();
 	//set_temp_changed(0);
 	connect(ui->adddrink_remove, SIGNAL(clicked()), this,
 			SLOT(remove_drink()));
+
+	connect(ui->admin_calibrate_pos, SIGNAL(clicked()), hardware,
+				SLOT(user_calibrate()));
+	connect(ui->admin_check_amount, SIGNAL(clicked()), hardware,
+					SLOT(user_check_amount()));
+	connect(ui->admin_purge, SIGNAL(clicked()), hardware,
+					SLOT(user_purge()));
 }
 void MainWindow::cleanup(){
 if(database!=0){
@@ -496,6 +503,7 @@ void MainWindow::user_pressed() {
 		statemachine->make_a_drink();
 	} else if (correct_pass && next_stage == NextStage::admin
 			&& database->isAdmin(user)) {
+		ui->tabWidget->setCurrentIndex(0);
 		statemachine->admin();
 	} else {
 		statemachine->admin_back();
