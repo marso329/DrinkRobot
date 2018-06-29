@@ -274,7 +274,7 @@ void Hardware::closeValve() {
 	setvalgpio0.flush();
 	//usleep(usecondsToChangeValve);
 	while (!calButtonValvePressed()) {
-		usleep(20000);
+		usleep(50000);
 
 	}
 	setvalgpio << "0";
@@ -307,7 +307,19 @@ bool Hardware::calButtonValvePressed() {
 		bool val = false;
 		getvalgpio >> val;  //read gpio value
 	getvalgpio.close(); //close the value file
-	return val;
+
+	usleep(10000);
+	getvalgpio((cal_buttonValveStr + "/value").c_str()); // open value file for gpio
+	if (!getvalgpio.is_open()) {
+		std::cout << " OPERATION FAILED: Unable to get value of GPIO"
+				<< std::endl;
+		return false;
+	}
+		bool val1 = false;
+		getvalgpio >> val1;  //read gpio value
+	getvalgpio.close(); //close the value file
+
+	return val&val1;
 }
 
 Hardware::~Hardware() {
