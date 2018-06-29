@@ -239,6 +239,7 @@ void Hardware::closeValve() {
 	setvalgpio0.flush();
 	//usleep(usecondsToChangeValve);
 	while(!calButtonValvePressed()){
+		usleep(10000);
 
 	}
 	setvalgpio << "0";
